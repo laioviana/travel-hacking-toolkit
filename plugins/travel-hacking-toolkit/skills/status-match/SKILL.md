@@ -76,7 +76,6 @@ A third-party service (Loyalty Status Co) operates statusmatch.com and partners 
 | Etihad Guest | Region-tiered, varies | Once per promotion |
 | Air Canada Aeroplan | varies; Aeroplan Visa cardholders may be discounted | Once per promotion |
 | Frontier | varies | Per promotion |
-| Spirit Free Spirit | varies | Per promotion |
 | Emirates Skywards | varies | Per promotion |
 | Vietnam Airlines, Royal Jordanian, Air Astana, Star Alliance multi (Singapore, Swiss, Thai, TAP, Turkish, etc.) | varies | Per promotion |
 | citizenM, GHA Discovery (hotels) | varies | Per promotion |
