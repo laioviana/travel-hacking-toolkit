@@ -9,7 +9,7 @@ license: MIT
 
 # Seats.aero Skill
 
-Search cached and live award flight availability across 27 mileage programs (including Spirit Free Spirit and Frontier Miles, added April 2026). Find the cheapest award flights, compare programs, and get booking links.
+Search cached and live award flight availability across 27 mileage programs (including Frontier Miles, added April 2026). Find the cheapest award flights, compare programs, and get booking links.
 
 **Source:** [seats.aero](https://seats.aero) | [API Docs](https://developers.seats.aero) | [Knowledge Base](https://docs.seats.aero)
 
@@ -161,7 +161,8 @@ Each result from Cached Search / Bulk Availability is a **summary** that groups 
 | `finnair` | Finnair Plus | Y/W/J/F | Yes | Yes | Yes |
 | `lufthansa` | Lufthansa Miles&More | Y/J/F | Yes | Yes | Yes |
 | `frontier` | Frontier Airlines | Y | No | Yes | Yes |
-| `spirit` | Spirit Airlines | Y | Yes | Yes | Yes |
+
+**Spirit (`spirit`) is dead.** Spirit Airlines ceased operations on 2026-05-02. Seats.aero still returns `spirit` rows for future dates, but none have been updated since then. Drop any `Source: "spirit"` result before ranking.
 
 \* AA provides seat counts only when remaining seats are low. Otherwise shows 0.
 \** Emirates connection flights may have missing fields.
