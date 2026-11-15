@@ -11,7 +11,7 @@ allowed-tools: Bash(curl *), Bash(jq *)
 
 Search [Bilt Rewards](https://www.bilt.com) travel portal via the public REST API. No authentication required for search. Returns both cash prices in USD and Bilt Points cost for hotels and flights.
 
-## Important: Bilt is Whitelabel Duffel
+## Important: Bilt's Flight Data Is GDS-Grade (Whitelabel Duffel)
 
 Bilt's travel search is built directly on top of [Duffel](https://duffel.com). All evidence points to a complete white-label arrangement, not a partial integration:
 
@@ -28,7 +28,7 @@ Bilt's travel search is built directly on top of [Duffel](https://duffel.com). A
 - A few Bilt-specific filter fields
 
 **What this means for the toolkit:**
-- For **cash-only flight searches**, prefer the [duffel skill](../duffel/SKILL.md). It uses an authenticated Duffel API key, returns the same data faster, and supports more parameters (multi-city, time windows, max connections, supplier_timeout tuning).
+- For **cash-only flight searches**, this endpoint is a free, keyless source of GDS-grade fares with fare classes. It is the toolkit's replacement for a direct GDS API key. Run it alongside [ignav](../ignav/SKILL.md).
 - For **Bilt Points context** (CPP, comparing portal cost to award alternatives, Bilt redemption math), use this skill. The points pricing is exclusive to Bilt's endpoint.
 - For **Home Away From Home property research**, use this skill. The `isHafh` flag is Bilt-specific and surfaces the $300+ benefits properties.
 
@@ -37,7 +37,7 @@ Bilt's travel search is built directly on top of [Duffel](https://duffel.com). A
 - **1.25 cpp** standard redemption rate on Bilt Points (1 USD = 80 points). One of the better fixed portal rates.
 - **Home Away From Home (HaFH)** is Bilt's premium hotel program. Gold and Platinum members get $300+ in benefits per stay (daily breakfast for two, $100 property credit, room upgrades on arrival, early check-in / late check-out, dedicated Virtuoso Travel Advisor).
 - **Bilt Points transfer 1:1** to Hyatt, Marriott, Hilton, IHG, United, AA, Air Canada Aeroplan, Air France/KLM, Virgin Atlantic, Cathay, Turkish, and more — so this portal is a 1.25 cpp "bottom-of-the-barrel" comparison point for transfer-partner award searches.
-- **Flights are Duffel-backed.** Same response shape as the [duffel skill](../duffel/SKILL.md). Same airlines, same fare classes, same segment structure.
+- **Flights are Duffel-backed.** Same airlines, same fare classes, same segment structure.
 - **No auth needed for search.** Browser automation, login, 2FA all unnecessary. Just curl.
 
 ## When to Use
@@ -50,7 +50,7 @@ Bilt's travel search is built directly on top of [Duffel](https://duffel.com). A
 
 ## When NOT to Use
 
-- **Cash-only flight searches without Bilt Points context.** Use [duffel](../duffel/SKILL.md) instead. Bilt is whitelabel-Duffel, so Duffel returns the same cash prices and offer shape, faster, with more parameters supported.
+- **Cash-only flight searches without Bilt Points context.** Still fine to use for cash prices (no key needed), but cross-check with [ignav](../ignav/SKILL.md), since Bilt does not support multi-city or market selection.
 - **Booking flights or hotels.** This skill finds offers only. Booking requires login + Bilt Mastercard. Out of scope.
 - **Award flight search.** Use [seats-aero](../seats-aero/SKILL.md) for award availability across loyalty programs.
 - **Hotel research outside Bilt's program.** Use [premium-hotels](../premium-hotels/SKILL.md) for Amex FHR/THC, [serpapi](../serpapi/SKILL.md) for general Google Hotels metasearch.

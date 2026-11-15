@@ -1,6 +1,6 @@
 ---
 name: compare-flights
-description: Unified flight comparison across cash (Duffel, Ignav), award (seats.aero), and portal (Amex) sources in parallel. Outputs one table with transfer partner optimization and recommendations.
+description: Unified flight comparison across cash (Ignav, Bilt portal), award (seats.aero), and portal (Amex) sources in parallel. Outputs one table with transfer partner optimization and recommendations.
 category: orchestration
 summary: Unified flight comparison across ALL sources in parallel. Auto-applies transfer optimization.
 api_key: Uses individual skill keys
@@ -39,8 +39,8 @@ Run these in parallel where possible. **Never fail silently.** If a source error
 
 | Source | Skill | Speed | Notes |
 |--------|-------|-------|-------|
-| Duffel | `duffel` | ~3s | Primary. Real GDS fares with fare classes. |
-| Ignav | `ignav` | ~2s | Fast REST API. Good for price comparison. Booking links. |
+| Ignav | `ignav` | ~2s | Primary. Fast REST API, verified fares, booking links. |
+| Bilt portal | `bilt` | ~10s | Free, no key. GDS fares with fare classes (flights endpoint). |
 | Google Flights | `google-flights` | ~10s | Browser-automated. All airlines cash. Good cross-check. |
 | Skiplagged | web search | ~5s | Hidden city ticketing. Often finds significantly cheaper fares. Search `skiplagged.com/flights/{origin}/{dest}/{date}`. |
 | Kiwi.com | web search | ~5s | Creative routings, self-transfer combos, multi-city. Search `kiwi.com`. |
@@ -74,8 +74,8 @@ Run searches in parallel. Track which sources succeeded and which failed.
 
 ```
 PARALLEL GROUP 1 (fast, ~3-5s):
-  - Duffel: cash prices with fare classes
   - Ignav: cash prices with booking links
+  - Bilt portal: GDS cash prices with fare classes
   - Seats.aero: award availability by program
   - Skiplagged: hidden city fares (web search)
   - Kiwi.com: creative routings (web search)
@@ -121,25 +121,25 @@ IAP: $4,381 = 438,100 MR points (saves 66,300 MR)
 
 | # | Option | Source | Price | Points | Currency | CPP | Rating |
 |---|--------|--------|-------|--------|----------|-----|--------|
-| 1 | Cash (lowest) | Duffel | $4,200 | — | — | — | — |
+| 1 | Cash (lowest) | Ignav | $4,200 | — | — | — | — |
 | 2 | Flying Blue via Chase UR | seats.aero | $120 tax | 55,000 | Chase UR | 7.4 | Excellent |
 | 3 | Aeroplan via Chase UR | seats.aero | $200 tax | 70,000 | Chase UR | 5.7 | Excellent |
 | 6 | Amex Portal (IAP) | amex-travel | $5,044 portal | 438,100 | Amex MR | 1.15 | Poor |
 | 7 | Amex Portal (standard) | amex-travel | $5,044 portal | 504,400 | Amex MR | 1.0 | Poor |
 
-Note: CPP for portal rows uses the portal's own quote ($5,400 / $5,044) as the anchor since that's the actual cash price the portal would charge. Award rows use the Duffel market price ($4,200) as the anchor since that's the cash equivalent the user is foregoing by burning miles. The two anchors differ because portals add a markup, so portal-CPP and award-CPP aren't directly comparable. Better comparison: total cash out-of-pocket (taxes + cash component) per option.
+Note: CPP for portal rows uses the portal's own quote ($5,400 / $5,044) as the anchor since that's the actual cash price the portal would charge. Award rows use the Ignav market price ($4,200) as the anchor since that's the cash equivalent the user is foregoing by burning miles. The two anchors differ because portals add a markup, so portal-CPP and award-CPP aren't directly comparable. Better comparison: total cash out-of-pocket (taxes + cash component) per option.
 
 #### Example: SFO → LAX Economy, Aug 11
 
 | # | Option | Source | Price | Points | Currency | CPP | Rating |
 |---|--------|--------|-------|--------|----------|-----|--------|
-| 2 | Cash (lowest) | Duffel | $89 | — | — | — | — |
+| 2 | Cash (lowest) | Ignav | $89 | — | — | — | — |
 | 4 | United via Chase UR | seats.aero | $5.60 tax | 5,000 | Chase UR | 1.67 | Good |
 
 
 **Sources checked:**
-- ✅ Duffel: 45 results
-- ✅ Ignav: 38 results
+- ✅ Ignav: 45 results
+- ✅ Bilt portal: 38 results
 - ✅ Skiplagged: 3 hidden city options
 - ✅ Kiwi.com: 12 creative routings
 - ✅ Seats.aero: 12 award options
@@ -164,7 +164,7 @@ After the table, always provide:
 
 If a source fails:
 ```
-- ❌ Duffel: API error (rate limit exceeded). Cash prices from Ignav only.
+- ❌ Ignav: API error (rate limit exceeded). Cash prices from Bilt portal only.
 ```
 
 If ALL cash sources fail, say so explicitly. Don't present award-only results without noting the missing cash comparison.

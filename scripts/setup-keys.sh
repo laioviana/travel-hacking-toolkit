@@ -162,12 +162,8 @@ prompt_key SEATS_AERO_API_KEY \
   "Award flight search across 27 mileage programs. The main event." \
   "https://seats.aero/profile (Pro ~\$8/mo)"
 
-prompt_key DUFFEL_API_KEY_LIVE \
-  "Real GDS cash flight prices. Free to search, pay per booking." \
-  "https://duffel.com (use the LIVE key, not test)"
-
 prompt_key IGNAV_API_KEY \
-  "Backup cash flight prices. Fast REST API." \
+  "Primary cash flight prices. Fast REST API." \
   "https://ignav.com (1,000 free requests/month)"
 
 prompt_key AWARDWALLET_API_KEY \

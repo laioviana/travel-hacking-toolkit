@@ -397,7 +397,7 @@ Load this skill when:
 
 Do not:
 - Use for booking (search/schedule only)
-- Use for flights (use Seats.aero, SerpAPI, or Duffel)
+- Use for flights (use Seats.aero, SerpAPI, or Ignav)
 - Expect pricing from Entur or ResRobot (only Rejseplanen has pricing)
 
 ---

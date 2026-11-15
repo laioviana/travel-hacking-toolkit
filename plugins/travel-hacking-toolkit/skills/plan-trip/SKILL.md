@@ -31,7 +31,7 @@ Once you have the inputs:
 1. **Load lessons-learned** first. Non-optional. Other skills depend on it.
 2. **Load flight-search-strategy** for the canonical parallel search plan.
 3. **Pull balances** via the awardwallet skill if the user's intent is points or "best of both" AND if balances aren't already in this session's context. Skip the pull if you already know them.
-4. **Run cash search in parallel** via duffel, ignav, google-flights, and the relevant free MCPs (Skiplagged, Kiwi).
+4. **Run cash search in parallel** via ignav, bilt, google-flights, and the relevant free MCPs (Skiplagged, Kiwi).
 5. **Run award search in parallel** via seats-aero across ALL programs (never filter to one program upfront — see lessons-learned).
 6. **Cross-reference** with transfer-partners and transfer-bonuses to find the cheapest currency you actually have.
 7. **Apply points-valuations** to compute cents-per-point on each award option.

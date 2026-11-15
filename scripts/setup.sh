@@ -71,8 +71,7 @@ setup_api_keys() {
   echo "  The 6 free MCP servers work without any keys."
   echo "  For the full experience, add at minimum:"
   echo "    SEATS_AERO_API_KEY     Award flight search (the main event)"
-  echo "    DUFFEL_API_KEY_LIVE    Primary cash flight prices (search free, pay per booking)"
-  echo "    IGNAV_API_KEY          Secondary cash flight prices (1,000 free requests)"
+  echo "    IGNAV_API_KEY          Primary cash flight prices (1,000 free requests)"
   echo ""
 }
 

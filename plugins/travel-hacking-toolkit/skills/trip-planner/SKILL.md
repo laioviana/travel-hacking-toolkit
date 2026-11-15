@@ -71,7 +71,7 @@ PARALLEL:
   3. compare-hotels: destination, checkin = departure, checkout = return
 ```
 
-Each of these internally runs their own parallel sub-searches (Duffel, Ignav, seats.aero, Amex, SerpAPI, Trivago, Airbnb, etc).
+Each of these internally runs their own parallel sub-searches (Ignav, Bilt, seats.aero, Amex, SerpAPI, Trivago, Airbnb, etc).
 
 ### Step 3: Combine into Trip Cost Matrix
 
@@ -114,14 +114,14 @@ Trip CPP: $8,205 / 110,000 × 100 = 7.5 cpp
 
 | Option | Source | Price/Points | Currency |
 |--------|--------|-------------|----------|
-| Cash (lowest) | Duffel | $4,200 | — |
+| Cash (lowest) | Ignav | $4,200 | — |
 | Flying Blue | seats.aero | 55,000 + $120 tax | Chase UR (1:1) |
 
 **✈️ Return: CDG → SFO, Aug 15**
 
 | Option | Source | Price/Points | Currency |
 |--------|--------|-------------|----------|
-| Cash (lowest) | Duffel | $3,800 | — |
+| Cash (lowest) | Ignav | $3,800 | — |
 | Aeroplan | seats.aero | 70,000 + $200 tax | Chase UR (1:1) |
 
 **🏨 Hotels: Paris, Aug 11-15 (4 nights)**
@@ -152,7 +152,7 @@ Award flights via Flying Blue (out) + Aeroplan (return) = 125,000 Chase UR for $
 Always report which sources succeeded and which failed:
 
 ```
-✅ Duffel: 45 outbound, 38 return
+✅ Ignav: 45 outbound, 38 return
 ✅ Ignav: 40 outbound, 35 return
 ✅ Seats.aero: 12 award options outbound, 8 return
 ✅ Amex Travel: 292 outbound flights, 17 hotels
@@ -179,7 +179,7 @@ If ALL sources fail for one component, say so:
 
 ## Limitations
 
-- Round-trip cash prices from Duffel/Ignav may be cheaper than two one-ways. Note when this is the case.
+- Round-trip cash prices from Ignav/Bilt may be cheaper than two one-ways. Note when this is the case.
 - Award pricing is one-way. The combined outbound + return award cost is the correct comparison against a round-trip cash fare.
 - Hotel pricing may vary between portal and direct booking. Note significant differences.
 - Trip totals are estimates. Taxes, fees, and exchange rates can change actual booking costs.
