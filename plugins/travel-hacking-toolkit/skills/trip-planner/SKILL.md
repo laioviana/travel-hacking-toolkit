@@ -71,7 +71,7 @@ PARALLEL:
   3. compare-hotels: destination, checkin = departure, checkout = return
 ```
 
-Each of these internally runs their own parallel sub-searches (Duffel, Ignav, seats.aero, Chase, Amex, SerpAPI, Trivago, LiteAPI, Airbnb, etc).
+Each of these internally runs their own parallel sub-searches (Duffel, Ignav, seats.aero, Chase, Amex, SerpAPI, Trivago, Airbnb, etc).
 
 ### Step 3: Combine into Trip Cost Matrix
 
@@ -165,7 +165,6 @@ Always report which sources succeeded and which failed:
 ✅ Amex Travel: 292 outbound flights, 17 hotels
 ✅ SerpAPI: 25 hotels
 ✅ Trivago: 30 hotels
-✅ LiteAPI: 22 hotels
 ✅ Airbnb: 18 listings
 ✅ Google Flights: 52 outbound
 ⏭️ Southwest: skipped (no SFO-CDG service)

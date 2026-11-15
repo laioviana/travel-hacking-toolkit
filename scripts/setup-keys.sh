@@ -180,7 +180,7 @@ prompt_key AWARDWALLET_USER_ID \
   3
 
 echo ""
-printf "Continue with Tier 2 (SerpAPI, RapidAPI, LiteAPI, TripAdvisor)? [y/N] "
+printf "Continue with Tier 2 (SerpAPI, RapidAPI, TripAdvisor)? [y/N] "
 read -r more
 case "$more" in
   [Yy]*)
@@ -190,9 +190,6 @@ case "$more" in
     prompt_key RAPIDAPI_KEY \
       "Booking.com Live + Google Flights Live as fallback sources." \
       "https://rapidapi.com"
-    prompt_key LITEAPI_API_KEY \
-      "Hotel rate inventory via LiteAPI MCP." \
-      "https://liteapi.travel"
     prompt_key TRIPADVISOR_API_KEY \
       "Hotel ratings, reviews, and rankings." \
       "https://tripadvisor-content-api.readme.io (5K calls/mo free)"

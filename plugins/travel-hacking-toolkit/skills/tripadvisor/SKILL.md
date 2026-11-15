@@ -276,7 +276,7 @@ curl -s "https://api.content.tripadvisor.com/api/v1/location/nearby_search?key=$
 
 ## When NOT to Use
 
-- **Pricing or availability.** TripAdvisor Content API has no pricing data. Use `serpapi`, `liteapi`, `chase-travel`, `amex-travel`, or `rapidapi` for prices.
+- **Pricing or availability.** TripAdvisor Content API has no pricing data. Use `serpapi`, `chase-travel`, `amex-travel`, or `rapidapi` for prices.
 - **Booking.** This is read-only data. No booking capability.
 - **Bulk scraping.** 5,000 calls/month. Be deliberate.
 

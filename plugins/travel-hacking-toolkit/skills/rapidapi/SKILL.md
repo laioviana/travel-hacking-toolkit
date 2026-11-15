@@ -74,7 +74,7 @@ curl -s -X POST "https://google-flights-live-api.p.rapidapi.com/api/v1/searchFli
 
 ## Booking.com Live API
 
-Search hotels and vacation rentals with real Booking.com pricing. Good complement to SerpAPI Hotels and LiteAPI.
+Search hotels and vacation rentals with real Booking.com pricing. Good complement to SerpAPI Hotels.
 
 ### Search Hotels
 
@@ -111,7 +111,7 @@ curl -s "https://booking-live-api.p.rapidapi.com/api/v1/getHotelDetails?hotelId=
 ## Rate Limits
 
 Free tier: 100 requests/month across all RapidAPI APIs.
-Use sparingly. Prefer SerpAPI for flights and LiteAPI/SerpAPI for hotels as primary sources.
+Use sparingly. Prefer SerpAPI for flights and SerpAPI/Trivago for hotels as primary sources.
 
 ## When to Use
 

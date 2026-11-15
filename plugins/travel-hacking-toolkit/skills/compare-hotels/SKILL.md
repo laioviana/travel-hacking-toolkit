@@ -43,7 +43,6 @@ Run these in parallel where possible. **Never fail silently.**
 |--------|------------|-------|---------------|
 | SerpAPI | `serpapi` | ~3s | Google Hotels cash prices and direct booking links. |
 | Trivago | web search | ~5s | Metasearch across many OTAs. Use tavily/exa to search `trivago.com`. Finds the absolute cheapest OTA rate. |
-| LiteAPI | web search | ~5s | Hotel API aggregator with negotiated rates. Check `liteapi.travel`. Can find rates below public OTA pricing. |
 | RapidAPI | `rapidapi` | ~3s | Booking.com inventory and pricing. Optional, use when user asks for Booking.com specifically. |
 
 ### Quality and Ratings
@@ -53,7 +52,7 @@ Run these in parallel where possible. **Never fail silently.**
 | Google Reviews | `serpapi` (Google Reviews section) | ~3s | Google rating, review count, location rating (free with the Google Hotels price search). Star distribution and per-topic sentiment for finalists via `property_token`. |
 | TripAdvisor | `tripadvisor` | ~2s | Optional. Rankings and subratings. Only when the user asks for TripAdvisor specifically. |
 
-**SerpAPI, Trivago, and LiteAPI are all default.** Always search all three. Only add RapidAPI if the user asks for Booking.com specifically. **Google Reviews is the default quality source.** Show Google rating + review count for every hotel in the table, then pull the property details (star distribution, topic sentiment) for the top 2-3 finalists only.
+**SerpAPI and Trivago are both default.** Always search both. Only add RapidAPI if the user asks for Booking.com specifically. **Google Reviews is the default quality source.** Show Google rating + review count for every hotel in the table, then pull the property details (star distribution, topic sentiment) for the top 2-3 finalists only.
 
 ### Vacation Rentals
 
@@ -78,7 +77,6 @@ Run these in parallel where possible. **Never fail silently.**
 PARALLEL GROUP 1 (fast — HTTP/API/MCP calls, no browser, ~3-5s):
   - SerpAPI: Google Hotels cash prices
   - Trivago: metasearch across OTAs (web search)
-  - LiteAPI: negotiated hotel rates (web search)
   - Airbnb: vacation rentals in the area (npx MCP — lightweight scrape, not a browser)
   - Local data: check premium-hotels databases for the city
 
@@ -142,14 +140,13 @@ Edit adjusted = total_price - $100 credit - (breakfast_value × nights)
 | 4 | Marriott Champs-Élysées | — | 4★ | 4.3 (3,105) | $289 | $1,156 | — | — | $1,156 |
 | 5 | Airbnb: Marais 2BR | — | — | 4.9 (Airbnb, 64) | $195 | $780 | — | Kitchen, washing machine | $780 |
 
-The Google column is `overall_rating (reviews)` from SerpAPI. Hotels from other sources (Chase, Amex, LiteAPI) get their Google rating by matching names against the SerpAPI results. Airbnb listings show their own Airbnb rating, labeled as such.
+The Google column is `overall_rating (reviews)` from SerpAPI. Hotels from other sources (Chase, Amex) get their Google rating by matching names against the SerpAPI results. Airbnb listings show their own Airbnb rating, labeled as such.
 
 **Sources checked:**
 - ✅ Chase Travel: 21 hotels (15 Edit, 6 standard)
 - ✅ Amex Travel: 17 hotels (13 FHR, 4 THC)
 - ✅ SerpAPI: 25 hotels
 - ✅ Trivago: 30 hotels (cheapest OTA per hotel)
-- ✅ LiteAPI: 22 hotels (negotiated rates)
 - ✅ Airbnb: 18 listings
 - ✅ Premium databases: 8 FHR, 3 THC, 15 Edit properties in Paris
 - ⏭️ RapidAPI/Booking.com: skipped (not requested)

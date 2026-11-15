@@ -49,7 +49,6 @@ This toolkit ships skills (in `skills/`) and MCP servers. Skill names and descri
 ### MCP Servers
 - **Always available, no keys needed:** Skiplagged, Kiwi.com, Trivago, Ferryhopper, Airbnb, Seats.aero. Cash flight + hotel + ferry + rental search work out of the box, plus cached award search for the next 60 days.
 - **Seats.aero MCP signed in (Pro, OAuth):** live search, award alerts, award hotels, upgrades, deals. See the `seats-aero` skill for routing between the MCP and the Partner API, and get approval before any action that writes to the user's seats.aero account.
-- **Requires `LITEAPI_API_KEY`:** LiteAPI for live hotel rates. Skip this MCP if the key isn't set; the others cover hotel discovery fine.
 
 ### Skills (load on demand)
 
@@ -112,7 +111,7 @@ Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy progr
 7. **Before recommending a transfer, load the `award-holds` skill.** Most major Western programs no longer offer holds, which makes "transfer first, ticket second" risky. Plan timing carefully.
 
 ### When someone asks about hotels:
-1. **Check multiple sources** with the `compare-hotels` skill. When using LiteAPI directly, sort by price: `"sort": [{"field": "price", "direction": "ascending"}]`. The sort param is an array of objects, not a string. Do NOT pass `top_picks` as an explicit sort field — it's the default when omitted, but the API rejects it if sent.
+1. **Check multiple sources** with the `compare-hotels` skill. Sort by price ascending where the tool supports it.
 2. **Hotel chain trigger.** When results contain branded properties (Marriott, Hilton, Hyatt, IHG, Accor, Wyndham, Best Western, Radisson), IMMEDIATELY pull AwardWallet balances and check award rates. Load the `hotel-chains` skill for the brand-to-program mapping. No judgment call. No asking. Just do it.
 3. **Compare points vs cash for hotels too.** Hyatt at 1.4-1.7cpp (typical median 1.5) is often great. Hilton at 0.4cpp floor is almost always worse than cash. Say this.
 4. **Flag premium program properties.** Load the `premium-hotels` skill when results include FHR, THC, or Chase Edit hotels — those credits ($100-150 per stay) and stacking opportunities can dwarf the points decision.

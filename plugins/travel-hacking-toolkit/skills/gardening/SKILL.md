@@ -97,7 +97,7 @@ This is the user's #1 interest. For each booking:
 - For dynamic-pricing programs (United, Delta, Aeroplan on some partners), prices fluctuate — a drop is rebookable
 
 **Hotels:**
-- Search current rates on the same hotel via LiteAPI, Trivago, Skiplagged Hotels
+- Search current rates on the same hotel via Trivago, Skiplagged Hotels
 - Check portal pricing (Chase UR, Amex) if the user has those currencies
 - For award hotel stays, check if the points price dropped
 - Flag cash rate drops and compare against the award value (cpp math)
@@ -184,7 +184,7 @@ Recommend the user gardens their reservations:
 Invoke these in parallel for each reservation:
 - **Duffel / Ignav / Google Flights / Skiplagged / Kiwi** — current cash prices
 - **Seats.aero** — current award availability
-- **LiteAPI / Trivago / Skiplagged Hotels** — hotel price checks
+- **Trivago / Skiplagged Hotels** — hotel price checks
 - **AwardWallet** — pull latest itineraries and detect changes automatically
 - **Seatmaps** — verify seat assignments after aircraft swaps
 

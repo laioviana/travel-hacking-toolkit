@@ -21,8 +21,7 @@ Tools go down. APIs break. Have a backup plan for every search.
 | Seats.aero (either) | Stale data (`ComputedLastSeen` / `minutes_old` too old) | Check airline website directly, use Duffel for GDS inventory |
 | Southwest | SW rate limiting or bot detection | Wait a few minutes and retry. Use Docker (`ghcr.io/borski/sw-fares`) if running locally fails. Google Flights skill for SW cash prices as a fast fallback. |
 | SerpAPI | Rate limit (100/mo free) | Trivago for hotels, web search for destination discovery |
-| Trivago | Server error | LiteAPI for hotels, SerpAPI Google Hotels |
-| LiteAPI | Auth error (401) | Trivago MCP, SerpAPI Google Hotels |
+| Trivago | Server error | SerpAPI Google Hotels, Skiplagged Hotels |
 | Airbnb | Scraping blocked | Suggest user check airbnb.com directly |
 | AwardWallet | API error | Ask user for their balances directly |
 | Ferryhopper | Server error | SerpAPI or web search for ferry routes |

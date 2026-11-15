@@ -69,7 +69,7 @@ docker build -t sutochno skills/sutochno/
   Do not attempt to complete a purchase or contact the owner.
 - **Non-CIS destinations.** For Western destinations Airbnb (MCP), the `vrbo`
   skill, and Booking have far deeper inventory and card support — use those.
-- **Hotels / branded chains.** Use compare-hotels / serpapi / liteapi / the
+- **Hotels / branded chains.** Use compare-hotels / serpapi / the
   portal skills.
 
 ## Usage

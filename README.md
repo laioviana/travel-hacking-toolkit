@@ -19,7 +19,7 @@ Inside Claude Code, run:
 /plugin install travel-hacker@borski
 ```
 
-Done. 42 skills, 7 MCP servers (6 free + LiteAPI which needs a key), and the `travel-hacker` subagent are installed. Run `claude` from anywhere and ask it to plan a trip.
+Done. 42 skills, 6 MCP servers (all free), and the `travel-hacker` subagent are installed. Run `claude` from anywhere and ask it to plan a trip.
 
 To verify the install, run `/travel-hacker:getting-started` inside Claude Code. It tells you which API keys are configured and points at the local setup script for the missing ones. Or in your shell: `claude plugin list | grep travel-hacker` should show the plugin.
 
@@ -74,7 +74,7 @@ The 4 highest-value keys:
 | `IGNAV_API_KEY` | Backup cash flight prices. Fast REST API. | 1,000 free requests/month |
 | `AWARDWALLET_API_KEY` + `AWARDWALLET_USER_ID` | Auto-pull your loyalty balances, elite status, transfer ratios. | Business account required |
 
-Other keys (SerpAPI, RapidAPI, LiteAPI, TripAdvisor, RESROBOT, Rejseplanen, Entur) extend specific skills. The setup skill covers them too. See the [full API key reference](#api-keys--signup-links) for signup links.
+Other keys (SerpAPI, RapidAPI, TripAdvisor, RESROBOT, Rejseplanen, Entur) extend specific skills. The setup skill covers them too. See the [full API key reference](#api-keys--signup-links) for signup links.
 
 Five Docker-based skills (Southwest, American Airlines, Chase, Amex, TicketsAtWork) handle sites that don't have public APIs, plus a shared base image. They auto-pull on first use. See the [Docker Images](#docker-images) section for credentials and configuration.
 
@@ -150,7 +150,6 @@ source .env && codex
 | [Ferryhopper](https://ferryhopper.github.io/fh-mcp/) | Ferry routes across 33 countries, 190+ operators | None (free) |
 | [Airbnb](https://github.com/openbnb-org/mcp-server-airbnb) | Search Airbnb listings, property details, pricing. Includes geocoding fix, property type filter, and DISABLE_GEOCODING opt-out. | None (free) |
 | [Seats.aero](https://seats.aero/mcp) | Official award search MCP. Cached availability for the next 60 days with no sign-in. Pro sign-in (OAuth) adds live search, alerts, award hotels, upgrades, and deals. | None for 60 days. Seats.aero Pro for the rest |
-| [LiteAPI](https://mcp.liteapi.travel) | Hotel search with live rates and booking | [LiteAPI](https://liteapi.travel) |
 
 ### Skills (API knowledge for your AI)
 
@@ -361,7 +360,7 @@ MCP (Model Context Protocol) servers give your AI real-time tools it can call di
 - `.mcp.json` for Claude Code (auto-discovered from the repo root)
 - `plugins/travel-hacking-toolkit/.mcp.json` for Codex plugin installs
 
-Skiplagged, Kiwi.com, Trivago, Ferryhopper, and Airbnb need no setup at all. LiteAPI is also a remote server but needs an API key configured in your settings.
+Skiplagged, Kiwi.com, Trivago, Ferryhopper, Airbnb, and Seats.aero need no setup at all.
 
 **Why Codex needs a plugin:** OpenCode and Claude Code both auto-discover MCP servers from a repo-local config file. Codex doesn't. It only loads MCP servers from `~/.codex/config.toml` or from an installed plugin. The toolkit ships a Codex plugin (under `plugins/travel-hacking-toolkit/`) that bundles the MCP config so Codex users get the same out-of-the-box experience as the other two tools. `setup.sh` wires this up automatically when you select the Codex option.
 

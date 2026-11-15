@@ -54,7 +54,7 @@ docker build -t vrbo skills/vrbo/
 
 - **Completing a booking.** This skill finds rentals and returns links only. Do
   not attempt to complete a purchase.
-- **Hotels.** Use compare-hotels / serpapi / liteapi / the portal skills.
+- **Hotels.** Use compare-hotels / serpapi / the portal skills.
 - **Single rooms / shared rooms.** VRBO is whole-property only; for private
   rooms in a shared home use the Airbnb MCP (`private_room`).
 
