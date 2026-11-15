@@ -68,7 +68,7 @@ The tie goes to cash because points maintain optionality.
 ```
 Duffel API → exact bookable fares
 Ignav API → fast comparison prices
-Google Flights → browser-based, includes Southwest
+Google Flights → browser-based, all airlines
 ```
 
 **Award prices** (use seats.aero):
@@ -201,29 +201,14 @@ Hotel redemptions vary more than flights. Use `points-valuations.json` hotel sec
 - Hilton: floor 0.4 cpp (high point costs, low per-point value)
 - Marriott: floor 0.6 cpp
 
-For premium hotel programs (FHR, THC, Chase Edit), factor in the additional benefits (breakfast, upgrade, credit, late checkout) when comparing cash vs points. A $500/night FHR rate with $100 breakfast credit and potential suite upgrade might be worth more than the sticker price.
-
-## Chase Travel Portal vs Transfer
-
-Chase Sapphire Reserve uses dynamic Points Boost pricing in the Chase travel portal: roughly 1.5-2.0 cpp on select bookings, but **not a guaranteed floor on every booking**. The historical 1.5 cpp fixed multiplier is gone — current redemptions vary by route, date, and inventory. Always check the actual portal price before assuming a rate.
-
-Rough decision rule, with the caveat that you must verify the actual portal quote:
-
-```
-If actual portal CPP > award CPP → portal wins
-If award CPP > actual portal CPP → transfer to partner wins
-```
-
-Sapphire Preferred is similar (1.5-1.75 cpp typical via Points Boost). Amex portal is ~1.0 cpp for flights (1 cent per MR point). Capital One portal is ~0.75-1.0 cpp.
-
-**Always pull the real portal quote** via the `chase-travel` or `amex-travel` skills before making a points-vs-portal recommendation. Don't assume the headline rate applies to your specific booking.
+For premium hotel programs (FHR, THC), factor in the additional benefits (breakfast, upgrade, credit, late checkout) when comparing cash vs points. A $500/night FHR rate with $100 breakfast credit and potential suite upgrade might be worth more than the sticker price.
 
 ## Common Pitfalls
 
 - **Ignoring taxes/fees on awards.** Some airlines (especially BA, Lufthansa, Singapore on own metal) add $500+ in fuel surcharges to award tickets. Always subtract taxes before calculating CPP.
 - **Comparing one-way award to round-trip cash.** Make sure denominators match.
 - **Forgetting transfer ratios.** 50K miles via Amex → Emirates at 5:4 costs 62,500 MR, not 50,000.
-- **Not checking portal pricing.** Sometimes Chase/Amex portal pricing beats the transfer math.
+- **Not checking portal pricing.** Sometimes Amex portal pricing beats the transfer math.
 - **Over-optimizing small differences.** If two options are within 0.5 cpp of each other, pick the one with better routing, lower taxes, or more flexibility.
 
 ## Notes

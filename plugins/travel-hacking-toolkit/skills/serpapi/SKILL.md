@@ -25,7 +25,7 @@ https://serpapi.com/search
 
 ## Google Flights (Cash Prices)
 
-Search for flight prices and schedules. Essential for comparing: "Is 88,000 United miles better than paying $900 cash through the Chase portal?" (Chase portal pricing is now dynamic via Points Boost, ~1.5-2.0 cpp on select bookings; verify the actual quote.)
+Search for flight prices and schedules. Essential for comparing: "Is 88,000 United miles better than paying $900 cash through a travel portal?"
 
 ### One-Way Search
 

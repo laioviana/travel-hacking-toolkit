@@ -19,15 +19,14 @@ cabins that don't always appear on Airbnb.
 Bot Manager** — plain HTTP, standard Playwright, `@playwright/mcp`, and
 agent-browser all get a `429 Too Many Requests` ("Provisioned request rate has
 been exceeded") bot wall. Patchright passes Akamai's sensor and earns the
-`_abck` cookie. This is the same wall — and the same fix — as the chase-travel /
-amex-travel / southwest skills.
+`_abck` cookie. This is the same wall — and the same fix — as the amex-travel
+skill.
 
 **Must run headed (`headless=False`).** Akamai flags headless browsers. On macOS
 a Chrome window briefly appears. For background / unattended runs, use Docker
 (Xvfb provides the virtual display).
 
-**No login required.** VRBO search results are public — unlike chase-travel /
-amex-travel, there are no credentials. The persistent profile only caches the
+**No login required.** VRBO search results are public — unlike amex-travel, there are no credentials. The persistent profile only caches the
 Akamai cookie so repeat searches re-challenge less.
 
 ## Prerequisites
@@ -54,7 +53,7 @@ docker build -t vrbo skills/vrbo/
 
 - **Completing a booking.** This skill finds rentals and returns links only. Do
   not attempt to complete a purchase.
-- **Hotels.** Use compare-hotels / serpapi / liteapi / the portal skills.
+- **Hotels.** Use compare-hotels / serpapi / the portal skills.
 - **Single rooms / shared rooms.** VRBO is whole-property only; for private
   rooms in a shared home use the Airbnb MCP (`private_room`).
 

@@ -112,29 +112,26 @@ install_optional_tools() {
 
   echo ""
 
-  # Southwest: Docker or Patchright
-  echo "  Southwest skill: searches southwest.com for fare classes and points pricing."
+  # American Airlines / Amex: Docker or Patchright
+  echo "  American Airlines and Amex skills: browser automation for balance checks and portal pricing."
   echo "  Requires either Docker (recommended) or Patchright (Python)."
   echo ""
 
   if command -v docker &>/dev/null; then
     echo "  Docker detected. Pulling pre-built images..."
-    docker pull ghcr.io/borski/sw-fares:latest 2>/dev/null && echo "  ✓ Southwest Docker image ready." || echo "  Could not pull SW image. Build locally: docker build -t sw-fares skills/southwest/"
     docker pull ghcr.io/borski/aa-miles-check:latest 2>/dev/null && echo "  ✓ American Airlines Docker image ready." || echo "  Could not pull AA image. Build locally: docker build -t aa-check skills/american-airlines/"
-    docker pull ghcr.io/borski/ticketsatwork:latest 2>/dev/null && echo "  ✓ TicketsAtWork Docker image ready." || echo "  Could not pull TaW image. Build locally: docker build -t ticketsatwork skills/ticketsatwork/"
-    docker pull ghcr.io/borski/chase-travel:latest 2>/dev/null && echo "  ✓ Chase Travel Docker image ready." || echo "  Could not pull Chase image. Build locally: docker build -t chase-travel skills/chase-travel/"
     docker pull ghcr.io/borski/amex-travel:latest 2>/dev/null && echo "  ✓ Amex Travel Docker image ready." || echo "  Could not pull Amex image. Build locally: docker build -t amex-travel skills/amex-travel/"
   else
     echo "  Docker not found."
     if python3 -c "import patchright" 2>/dev/null; then
-      echo "  ✓ Patchright already installed (southwest skill, headed mode)"
+      echo "  ✓ Patchright already installed (AA/Amex skills, headed mode)"
     else
-      read -rp "  Install Patchright for Southwest skill? [y/N]: " PR_CHOICE
+      read -rp "  Install Patchright for AA/Amex skills? [y/N]: " PR_CHOICE
       if [[ "$PR_CHOICE" == "y" || "$PR_CHOICE" == "Y" ]]; then
         pip install patchright && patchright install chromium
-        echo "  ✓ Patchright installed. Southwest skill will open a Chrome window briefly."
+        echo "  ✓ Patchright installed. AA/Amex skills will open a Chrome window briefly."
       else
-        echo "  Skipped. Southwest skill won't work without Docker or Patchright."
+        echo "  Skipped. AA/Amex skills won't work without Docker or Patchright."
       fi
     fi
   fi

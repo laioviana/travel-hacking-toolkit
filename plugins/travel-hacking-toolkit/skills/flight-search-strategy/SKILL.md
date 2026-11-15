@@ -1,6 +1,6 @@
 ---
 name: flight-search-strategy
-description: Canonical multi-source flight search strategy. Source priority (Duffel, Ignav, Google Flights, Skiplagged, Kiwi, Seats.aero, Southwest), parallel workflow, market selection for international price arbitrage.
+description: Canonical multi-source flight search strategy. Source priority (Duffel, Ignav, Google Flights, Skiplagged, Kiwi, Seats.aero), parallel workflow, market selection for international price arbitrage.
 category: reference
 summary: The canonical multi-source search workflow. Source priority (Duffel > Ignav > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes.
 ---
@@ -13,14 +13,13 @@ This is not a pick-one list. Each source returns different results, different pr
 
 | Priority | Source | Strengths | Blind Spots |
 |----------|--------|-----------|-------------|
-| 1 | **Duffel** (skill) | Most accurate cash prices. Real GDS per-fare-class data. Bookable. | No Southwest. No award pricing. Offers expire in 15-30 min. |
-| 2 | **Ignav** (skill) | Fast REST API. Market selection for price arbitrage. Free. | No Southwest. No award pricing. |
-| 3 | **Google Flights** (skill, agent-browser) | Covers ALL airlines including Southwest cash prices. Free. Economy/business comparison. | Prices can be inflated vs GDS. No points pricing. |
-| 4 | **Skiplagged** (MCP) | Hidden city fares. Zero config. | No Southwest. Can be noisy on small markets. |
-| 5 | **Kiwi.com** (MCP) | Virtual interlining (creative cross-airline routings). Zero config. | Returns garbage on small markets. No Southwest. |
-| 6 | **Seats.aero** (skill + MCP) | Award flight availability across 25+ programs. The crown jewel for points. Partner API with a key, official MCP without one. | Cached data, not live. No cash prices. No Southwest. Keyless MCP only covers the next 60 days. |
+| 1 | **Duffel** (skill) | Most accurate cash prices. Real GDS per-fare-class data. Bookable. | No award pricing. Offers expire in 15-30 min. |
+| 2 | **Ignav** (skill) | Fast REST API. Market selection for price arbitrage. Free. | No award pricing. |
+| 3 | **Google Flights** (skill, agent-browser) | Covers ALL airlines cash prices. Free. Economy/business comparison. | Prices can be inflated vs GDS. No points pricing. |
+| 4 | **Skiplagged** (MCP) | Hidden city fares. Zero config. | Can be noisy on small markets. |
+| 5 | **Kiwi.com** (MCP) | Virtual interlining (creative cross-airline routings). Zero config. | Returns garbage on small markets. |
+| 6 | **Seats.aero** (skill + MCP) | Award flight availability across 25+ programs. The crown jewel for points. Partner API with a key, official MCP without one. | Cached data, not live. No cash prices. Keyless MCP only covers the next 60 days. |
 | 7 | **SerpAPI** (skill, optional) | Google Hotels search. Destination discovery (Google Travel Explore). | NOT for flights (inflated prices). Hotels and "where should I go?" only. |
-| 8 | **Southwest** (skill, Patchright) | Fare classes, points pricing, Companion Pass. All 4 fare classes, cash + points. | Pre-built Docker image: `ghcr.io/borski/sw-fares`. Or local Patchright (headed mode). ~20s per search. |
 
 ## The Standard Flight Search Workflow
 
@@ -46,37 +45,10 @@ Run all of it in the same parallel batch; it's two extra searches, not a second 
 Which wins is route-dependent, so never assume:
 
 - **Round trips often win internationally** on legacy carriers, where return fares are discounted relative to two one-ways.
-- **One-way pairs often win domestically**, on ULCCs, and anywhere Southwest flies (SW prices every leg as a one-way). They also buy flexibility: each leg can be changed or canceled independently.
+- **One-way pairs often win domestically**, on ULCCs. They also buy flexibility: each leg can be changed or canceled independently.
 - **Mixed-carrier pairs** frequently beat both when outbound and return are priced by different airlines' sale calendars.
 
 Present the verdict explicitly with the delta: "Round trip $842 vs best one-way pair $918 — book the round trip, saves $76" (or the reverse). If the gap is under ~$50, mention the flexibility advantage of separate tickets before recommending the round trip.
-
-## For Southwest Specifically
-
-Use the southwest skill:
-
-```bash
-docker run --rm ghcr.io/borski/sw-fares --origin SJC --dest DEN --depart 2026-05-15 --points
-```
-
-Or:
-
-```bash
-python3 skills/southwest/scripts/search_fares.py --origin SJC --dest DEN --depart 2026-05-15 --points
-```
-
-Returns all 4 fare classes (Wanna Get Away, WGA+, Anytime, Business Select), cash and points pricing.
-
-The google-flights skill is a faster fallback for SW cash prices only (no fare class breakdown, no points pricing).
-
-## Monitoring Existing Southwest Reservations
-
-```bash
-docker run --rm -e SW_USERNAME -e SW_PASSWORD \
-  ghcr.io/borski/sw-fares change --conf ABC123 --first Jane --last Doe --json
-```
-
-Logs in, selects both legs, and shows fare diffs for every available flight. Negative diffs = savings opportunity. Use `--list` to discover all upcoming confirmation numbers. Read-only. Never modifies reservations.
 
 ## Market Selection Strategy
 
@@ -108,6 +80,5 @@ When sources disagree on cash prices:
 
 - Running only one source and missing better options on others.
 - Trusting SerpAPI prices as bookable (they're often inflated).
-- Skipping Southwest because "no GDS has it" — exactly why you need the SW skill.
 - Skipping Seats.aero because the user "doesn't have those points" — they may have them via transfer, see the `partner-awards` skill.
 - Single-market search on international routes (always try at least 2 markets).

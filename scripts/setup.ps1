@@ -232,21 +232,15 @@ function Install-OptionalTools {
 
     Write-Host ""
 
-    # Southwest / AA: Docker or Patchright
-    Write-Host "  Southwest skill: searches southwest.com for fare classes and points pricing."
+    # AA / Amex: Docker or Patchright
+    Write-Host "  American Airlines and Amex skills: browser automation for balance checks and portal pricing."
     Write-Host "  Requires either Docker Desktop (recommended) or Patchright (Python)."
     Write-Host ""
 
     if (Has-Command 'docker') {
         Write-Host "  Docker detected. Pulling pre-built images..."
-        Invoke-DockerPull -Image 'ghcr.io/borski/sw-fares:latest' -Label 'Southwest' `
-            -BuildContext 'skills\southwest' -LocalTag 'sw-fares'
         Invoke-DockerPull -Image 'ghcr.io/borski/aa-miles-check:latest' -Label 'American Airlines' `
             -BuildContext 'skills\american-airlines' -LocalTag 'aa-check'
-        Invoke-DockerPull -Image 'ghcr.io/borski/ticketsatwork:latest' -Label 'TicketsAtWork' `
-            -BuildContext 'skills\ticketsatwork' -LocalTag 'ticketsatwork'
-        Invoke-DockerPull -Image 'ghcr.io/borski/chase-travel:latest' -Label 'Chase Travel' `
-            -BuildContext 'skills\chase-travel' -LocalTag 'chase-travel'
         Invoke-DockerPull -Image 'ghcr.io/borski/amex-travel:latest' -Label 'Amex Travel' `
             -BuildContext 'skills\amex-travel' -LocalTag 'amex-travel'
     } else {
@@ -254,7 +248,7 @@ function Install-OptionalTools {
         $pythonCmd = Resolve-PythonCommand
 
         if (-not $pythonCmd) {
-            Write-Host "  Python 3 not found either. Install Python (https://www.python.org/downloads/ or 'winget install Python.Python.3.12') or Docker to use the Southwest skill." -ForegroundColor Yellow
+            Write-Host "  Python 3 not found either. Install Python (https://www.python.org/downloads/ or 'winget install Python.Python.3.12') or Docker to use the AA/Amex skills." -ForegroundColor Yellow
         } else {
             $patchrightInstalled = $false
             try {
@@ -263,19 +257,19 @@ function Install-OptionalTools {
             } catch { }
 
             if ($patchrightInstalled) {
-                Write-Host "  [ok] Patchright already installed (southwest skill, headed mode)"
+                Write-Host "  [ok] Patchright already installed (AA/Amex skills, headed mode)"
             } else {
-                $prChoice = Read-Host "  Install Patchright for Southwest skill? [y/N]"
+                $prChoice = Read-Host "  Install Patchright for AA/Amex skills? [y/N]"
                 if ($prChoice -match '^[Yy]$') {
                     & $pythonCmd -m pip install patchright
                     if ($LASTEXITCODE -eq 0) {
                         & $pythonCmd -m patchright install chromium
-                        Write-Host "  [ok] Patchright installed. Southwest skill will open a Chrome window briefly."
+                        Write-Host "  [ok] Patchright installed. AA/Amex skills will open a Chrome window briefly."
                     } else {
                         Write-Host "  pip install failed." -ForegroundColor Yellow
                     }
                 } else {
-                    Write-Host "  Skipped. Southwest skill won't work without Docker or Patchright."
+                    Write-Host "  Skipped. AA/Amex skills won't work without Docker or Patchright."
                 }
             }
         }
