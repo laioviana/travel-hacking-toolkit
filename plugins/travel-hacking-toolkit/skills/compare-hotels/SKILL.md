@@ -1,6 +1,6 @@
 ---
 name: compare-hotels
-description: Unified hotel comparison across Chase Edit, Amex FHR/THC, metasearch, and Airbnb. Highlights premium program benefits, stacking opportunities, and benefit-adjusted pricing.
+description: Unified hotel comparison across Amex FHR/THC, metasearch, and Airbnb. Highlights premium program benefits, stacking opportunities, and benefit-adjusted pricing.
 category: orchestration
 summary: Unified hotel comparison across portals, metasearch, and Airbnb. FHR/Edit stacking detection.
 api_key: Uses individual skill keys
@@ -8,21 +8,21 @@ api_key: Uses individual skill keys
 
 **Companion reference skills.** Load these for deeper context:
 - `hotel-chains` — branded property to loyalty program mapping
-- `premium-hotels` — FHR / THC / Chase Edit credits and stacking strategy
+- `premium-hotels` — FHR / THC credits and stacking strategy
 - `points-valuations` — CPP floor/ceiling for hotel programs (Hyatt 1.4-1.7cpp, Hilton 0.4cpp floor, etc.)
 - `fallback-and-resilience` — recovery when a hotel source fails
 
 
 # Compare Hotels
 
-Search every available source for accommodation and present one unified comparison. Combines portal premium programs (Chase Edit, Amex FHR/THC), cash pricing, and Airbnb alternatives into a single view.
+Search every available source for accommodation and present one unified comparison. Combines portal premium programs (Amex FHR/THC), cash pricing, and Airbnb alternatives into a single view.
 
 **This is an orchestration skill.** It tells the agent which tools to run and how to combine results. No standalone script.
 
 ## When to Use
 
 - "Find me a hotel in Paris for Aug 11-15"
-- "Should I book through Chase or Amex for this hotel?"
+- "Should I book through Amex or a transfer partner for this hotel?"
 - "Compare hotels vs Airbnb in Oslo"
 - Any accommodation search where the user wants the full picture
 
@@ -34,7 +34,6 @@ Run these in parallel where possible. **Never fail silently.**
 
 | Source | Skill | Speed | What It Finds |
 |--------|-------|-------|---------------|
-| Chase Travel | `chase-travel` | ~45s | Edit hotels ($100 credit, breakfast, upgrade), Points Boost, standard hotels |
 | Amex Travel | `amex-travel` | ~45s | FHR ($100+ credit, breakfast, upgrade, late checkout), THC ($100 credit on 2+ nights) |
 
 ### Cash Prices and Metasearch
@@ -67,7 +66,6 @@ Run these in parallel where possible. **Never fail silently.**
 |--------|-----------|---------------|
 | FHR properties | `data/fhr-properties.json` | Check if a hotel is FHR before booking |
 | THC properties | `data/thc-properties.json` | Check if a hotel is THC |
-| Chase Edit properties | `data/chase-edit-properties.json` | Check if a hotel is in Chase's Edit program |
 
 ## Workflow
 
@@ -82,7 +80,6 @@ PARALLEL GROUP 1 (fast — HTTP/API/MCP calls, no browser, ~3-5s):
 
 PARALLEL GROUP 2 (slow — headed browser via Patchright/Xvfb in Docker, ~20-45s):
   - VRBO: whole homes / condos / cabins — vrbo skill (~20s, headed/Docker, behind Akamai; run for whole-home comparisons alongside Airbnb)
-  - Chase Travel: --hotel --dest "City" --checkin YYYY-MM-DD --checkout YYYY-MM-DD --json
   - Amex Travel: --hotel --dest "City" --checkin YYYY-MM-DD --checkout YYYY-MM-DD --json
 ```
 
@@ -94,24 +91,18 @@ For each source, capture:
 
 ### Step 2: Identify Stacking Opportunities
 
-Cross-reference results with `data/fhr-properties.json`, `data/thc-properties.json`, and `data/chase-edit-properties.json`:
+Cross-reference results with `data/fhr-properties.json`, `data/thc-properties.json`:
 
 ```
 For each hotel in results:
   - Is it in FHR? → Tag [FHR]
   - Is it in THC? → Tag [THC]
-  - Is it in Chase Edit? → Tag [EDIT]
   - Is it in multiple? → Tag [FHR+EDIT] and note stacking potential
 ```
 
 Stacking means: book through one portal, pay with the other card separately. For example, book FHR through Amex (get breakfast + credit + upgrade), then use CSR $300 travel credit on something else at the property.
 
 ### Step 3: Calculate Points Value
-
-**Chase:**
-- Chase portal pricing on CSR/CSP is dynamic Points Boost. Each booking quotes a specific points price; effective cpp typically falls in the 1.5-2.0 cpp range on CSR but is not a guaranteed floor on every booking. Pull the actual portal quote.
-- Points Boost offers are dynamic and vary by route/date/inventory.
-- The portal quote IS the actual UR cost. Don't divide by 1.5 — the listed points already reflect the dynamic Boost rate at quote time.
 
 **Amex:**
 - Hotel portal pricing is variable (NOT always 1 cpp like flights).
@@ -140,10 +131,9 @@ Edit adjusted = total_price - $100 credit - (breakfast_value × nights)
 | 4 | Marriott Champs-Élysées | — | 4★ | 4.3 (3,105) | $289 | $1,156 | — | — | $1,156 |
 | 5 | Airbnb: Marais 2BR | — | — | 4.9 (Airbnb, 64) | $195 | $780 | — | Kitchen, washing machine | $780 |
 
-The Google column is `overall_rating (reviews)` from SerpAPI. Hotels from other sources (Chase, Amex) get their Google rating by matching names against the SerpAPI results. Airbnb listings show their own Airbnb rating, labeled as such.
+The Google column is `overall_rating (reviews)` from SerpAPI. Hotels from other sources (Amex) get their Google rating by matching names against the SerpAPI results. Airbnb listings show their own Airbnb rating, labeled as such.
 
 **Sources checked:**
-- ✅ Chase Travel: 21 hotels (15 Edit, 6 standard)
 - ✅ Amex Travel: 17 hotels (13 FHR, 4 THC)
 - ✅ SerpAPI: 25 hotels
 - ✅ Trivago: 30 hotels (cheapest OTA per hotel)
@@ -157,7 +147,7 @@ After the table, always provide:
 
 1. **Best luxury value:** Which premium hotel gives the most benefit-adjusted savings
 2. **Best budget option:** Cheapest option (often Airbnb for longer stays)
-3. **Stacking opportunities:** Hotels in both FHR/THC AND Chase Edit
+3. **Stacking opportunities:** Hotels in both FHR AND THC
 4. **Credit usage:** Which card credits apply ($600 Amex FHR, $300 CSR travel, $250 Select Hotels)
 5. **Points vs cash:** Is using points worthwhile for any of these? (Calculate CPP)
 6. **Direct booking comparison:** Note if direct booking is significantly cheaper than portal price
@@ -199,7 +189,6 @@ For each Airbnb result, extract:
 **NEVER fail silently.** Every source must report its status.
 
 ```
-- ❌ Chase Travel: Login failed. No Chase portal pricing available.
 - ❌ Airbnb: No results for this location/dates.
 - ⚠️ Amex Travel: Only 3 results (some hotels may not be available for these dates).
 ```
@@ -212,7 +201,6 @@ If premium databases show FHR/Edit properties in the city but the portal search 
 |------|---------|
 | `data/fhr-properties.json` | FHR property lookup by city/coordinates |
 | `data/thc-properties.json` | THC property lookup |
-| `data/chase-edit-properties.json` | Chase Edit property lookup |
 | `data/hotel-chains.json` | Hotel chain to loyalty program mapping |
 | `data/points-valuations.json` | CPP valuations for points calculations |
 
@@ -222,5 +210,4 @@ If premium databases show FHR/Edit properties in the city but the portal search 
 - Airbnb MCP must be available. Skip gracefully if not.
 - FHR/THC/Edit databases are updated periodically. Properties may have been added or removed.
 - Amex hotel points pricing is variable (not 1 cpp). Use the actual points price from the portal.
-- Chase portal pricing is dynamic Points Boost (~1.5-2.0 cpp on select bookings, not a guaranteed floor). The historical static 1.5x multiplier is gone.
 - Direct booking prices (via SerpAPI) may differ from portal prices for the same hotel.

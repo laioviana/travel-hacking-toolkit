@@ -53,7 +53,7 @@ Bilt's travel search is built directly on top of [Duffel](https://duffel.com). A
 - **Cash-only flight searches without Bilt Points context.** Use [duffel](../duffel/SKILL.md) instead. Bilt is whitelabel-Duffel, so Duffel returns the same cash prices and offer shape, faster, with more parameters supported.
 - **Booking flights or hotels.** This skill finds offers only. Booking requires login + Bilt Mastercard. Out of scope.
 - **Award flight search.** Use [seats-aero](../seats-aero/SKILL.md) for award availability across loyalty programs.
-- **Hotel research outside Bilt's program.** Use [premium-hotels](../premium-hotels/SKILL.md) for Amex FHR/THC + Chase Edit, [serpapi](../serpapi/SKILL.md) for general Google Hotels metasearch.
+- **Hotel research outside Bilt's program.** Use [premium-hotels](../premium-hotels/SKILL.md) for Amex FHR/THC, [serpapi](../serpapi/SKILL.md) for general Google Hotels metasearch.
 
 ## Bilt Points Valuation
 
@@ -362,7 +362,7 @@ For a complete trip cost analysis:
 1. **Bilt Points balance** via [awardwallet](../awardwallet/SKILL.md). Note: Bilt is in AwardWallet.
 2. **Award alternatives** via [seats-aero](../seats-aero/SKILL.md). Compare to portal price at 1.25 cpp.
 3. **Transfer partners** via [transfer-partners](../transfer-partners/SKILL.md). If a partner program redeems Bilt Points at >1.25 cpp, transfer instead of using portal.
-4. **Other portals** via [chase-travel](../chase-travel/SKILL.md) (dynamic Points Boost on CSR/CSP, ~1.5-2.0 cpp on select bookings, not a guaranteed floor) and [amex-travel](../amex-travel/SKILL.md) (~1.0 cpp on flights). Pull actual portal quotes, not assumed rates.
+4. **Other portals** via [amex-travel](../amex-travel/SKILL.md) (~1.0 cpp on flights). Pull actual portal quotes, not assumed rates.
 5. **HaFH benefits** add ~$300+ in value per stay if the user has Bilt Gold or Platinum status. Apply this when computing effective rate.
 
 ## Important Notes

@@ -117,4 +117,3 @@ After the table, highlight cheapest, fastest, and best value. Call out tradeoffs
 - Default to round-trip and economy if not specified
 - Use airport search endpoint for city name lookups
 - **Market affects prices.** Same route can cost significantly less from a different market. Try departure country first, then destination country.
-- **Does NOT include Southwest.** Use google-flights skill for SW.

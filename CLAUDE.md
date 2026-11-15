@@ -52,13 +52,13 @@ This toolkit ships skills (in `skills/`) and MCP servers. Skill names and descri
 
 ### Skills (load on demand)
 
-**Flight search:** `duffel`, `google-flights`, `ignav`, `southwest`, `seats-aero`, `compare-flights`, `award-calendar`, `flight-search-strategy`
+**Flight search:** `duffel`, `google-flights`, `ignav`, `seats-aero`, `compare-flights`, `award-calendar`, `flight-search-strategy`
 
-**Hotels:** `premium-hotels`, `compare-hotels`, `hotel-chains`, `ticketsatwork`
+**Hotels:** `premium-hotels`, `compare-hotels`, `hotel-chains`
 
 **Loyalty / points:** `awardwallet`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `american-airlines`, `wheretocredit`, `transfer-bonuses`, `status-match`
 
-**Portals:** `chase-travel`, `amex-travel`, `bilt`
+**Portals:** `amex-travel`, `bilt`
 
 **Trip planning:** `trip-planner`, `plan-trip`, `atlas-obscura`, `scandinavia-transit`, `deutsche-bahn`, `seatmaps`, `round-the-world`, `wikipedia-airports`
 
@@ -91,16 +91,16 @@ The reference skills carry the deep knowledge that used to live in this file. Ea
 4. **Flag expiring points or status.** If AwardWallet shows points expiring soon or status up for renewal, mention it.
 
 ### When someone asks about a trip:
-1. **ALWAYS load `lessons-learned` first, then `flight-search-strategy`.** This is not optional. Skipping `lessons-learned` is the most common cause of bad recommendations. It contains the mandatory Seats.aero workflow (pull ALL programs first, never filter by source upfront), source-accuracy rankings, and Southwest specifics that prevent silent failure modes. `flight-search-strategy` then gives you the canonical parallel search plan.
+1. **ALWAYS load `lessons-learned` first, then `flight-search-strategy`.** This is not optional. Skipping `lessons-learned` is the most common cause of bad recommendations. It contains the mandatory Seats.aero workflow (pull ALL programs first, never filter by source upfront), and source-accuracy rankings that prevent silent failure modes. `flight-search-strategy` then gives you the canonical parallel search plan.
 2. **Gather context.** Where, when, how flexible on dates, how many travelers, cabin preference. If they didn't specify, ask once. Don't pepper them with questions.
-3. **Search the sources you have keys for, in parallel.** Duffel + Ignav + Google Flights require keys. Skiplagged + Kiwi work without. Seats.aero uses the Partner API with a key and the MCP without one. If a key is missing, skip that source silently and continue. Don't fail the search because Duffel returned a 401. Add Southwest if SW flies the route.
+3. **Search the sources you have keys for, in parallel.** Duffel + Ignav + Google Flights require keys. Skiplagged + Kiwi work without. Seats.aero uses the Partner API with a key and the MCP without one. If a key is missing, skip that source silently and continue. Don't fail the search because Duffel returned a 401.
 4. **Pull their balances if AwardWallet is configured.** If `AWARDWALLET_API_KEY` and `AWARDWALLET_USER_ID` are both set, call AwardWallet to learn what currencies they have. If not configured, skip the auto-pull; either ask the user to share their balances, or use sweet-spot reasoning that doesn't depend on knowing their inventory.
 5. **Gate every award option against reachable programs.** For each program showing availability on Seats.aero, verify the user can actually access those miles. Either a sufficient direct balance or a confirmed transfer path in `data/transfer-partners.json`. If a program isn't reachable, drop it before computing cpp. Load the `partner-awards` skill when alliance and bilateral partnerships matter.
 6. **Calculate the value of each option.** Use the `points-valuations` skill to compute cpp for every award option. Cross-reference with `award-sweet-spots` to flag legendary redemptions.
 7. **Present a clear recommendation.** Not a data dump. "Use 60K United miles for this business class flight. That's 2.1cpp against the $1,260 cash price, well above the 1.1cpp floor. You have 87K United miles, so you're covered with 27K to spare."
 
 ### When comparing points vs cash:
-Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy programs to avoid, transfer bonus considerations, portal rate dynamics (Chase Points Boost), and opportunity cost rules. The short version:
+Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy programs to avoid, transfer bonus considerations, portal rate dynamics, and opportunity cost rules. The short version:
 
 1. **Always compute cpp on the TOTAL out-of-pocket cost** including taxes, surcharges, and fees you still pay on the award.
 2. **Verify transfer paths in `data/transfer-partners.json`** before recommending. Not all transfers are 1:1.
@@ -114,14 +114,13 @@ Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy progr
 1. **Check multiple sources** with the `compare-hotels` skill. Sort by price ascending where the tool supports it.
 2. **Hotel chain trigger.** When results contain branded properties (Marriott, Hilton, Hyatt, IHG, Accor, Wyndham, Best Western, Radisson), IMMEDIATELY pull AwardWallet balances and check award rates. Load the `hotel-chains` skill for the brand-to-program mapping. No judgment call. No asking. Just do it.
 3. **Compare points vs cash for hotels too.** Hyatt at 1.4-1.7cpp (typical median 1.5) is often great. Hilton at 0.4cpp floor is almost always worse than cash. Say this.
-4. **Flag premium program properties.** Load the `premium-hotels` skill when results include FHR, THC, or Chase Edit hotels — those credits ($100-150 per stay) and stacking opportunities can dwarf the points decision.
+4. **Flag premium program properties.** Load the `premium-hotels` skill when results include FHR or THC hotels — those credits ($100-150 per stay) and stacking opportunities can dwarf the points decision.
 
 ### When comparing portal pricing:
-1. **Check BOTH portals if available.** Chase and Amex often have different prices. Use the `chase-travel` and `amex-travel` skills.
-2. **Compare portal vs transfer.** If Chase portal shows 300K UR but United shows 60K miles (transferable 1:1 from Chase), the transfer wins. Always compare.
+1. **Check the portals available to you.** Use the `amex-travel` and `bilt` skills.
+2. **Compare portal vs transfer.** If the Amex portal shows 300K MR but a transfer partner shows 60K miles, the transfer wins. Always compare.
 3. **Check for IAP on Amex.** Platinum holders get International Airline Program discounts (10-15% off business/first) that no other portal offers.
-4. **Flag Edit hotels on Chase.** $100 property credit + breakfast + upgrade can offset $200+ of stay cost.
-5. **Flag FHR/THC on Amex.** Platinum $600/yr hotel credit. A $300/night FHR stay that triggers the semi-annual credit is effectively $200/night.
+4. **Flag FHR/THC on Amex.** Platinum $600/yr hotel credit. A $300/night FHR stay that triggers the semi-annual credit is effectively $200/night.
 
 ### When someone is flexible on dates:
 1. **Use Skiplagged's flex calendar** to find the cheapest departure dates.
@@ -176,7 +175,7 @@ If you change skills, CLAUDE.md, or MCP config, run `bash scripts/smoke-test.sh`
 - Skiplagged, Kiwi.com, Trivago, and Ferryhopper need no setup. They just work.
 - Ferryhopper focuses on European/Mediterranean routes. Great for Greek islands, Croatia, Scandinavia.
 - For tool failure recovery, load the `fallback-and-resilience` skill.
-- For institutional knowledge from past searches (Seats.aero workflow, Southwest specifics, Companion Pass math, source accuracy hierarchy, small-market caveats, Duffel limitations), load the `lessons-learned` skill.
+- For institutional knowledge from past searches (Seats.aero workflow, source accuracy hierarchy, small-market caveats, Duffel limitations), load the `lessons-learned` skill.
 - For booking flow, phone numbers, and the "hold before transfer" rule, load the `booking-guidance` skill.
 - For current credit card transfer bonuses (live, weekly-refreshed), load the `transfer-bonuses` skill before recommending any transfer.
 - For per-program stopover rules (Iceland 7-day free stopover, Aeroplan, Alaska Atmos, Flying Blue free, Singapore tiers, plus the negative space of programs that don't allow stopovers), load the `stopovers` skill.

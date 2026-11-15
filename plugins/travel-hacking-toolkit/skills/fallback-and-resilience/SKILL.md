@@ -19,14 +19,12 @@ Tools go down. APIs break. Have a backup plan for every search.
 | Seats.aero (Partner API) | API error, 401, or daily cap | `seats-aero` MCP (`get_flights`). Same cached data, keyless within 60 days. Then the airline website directly. |
 | Seats.aero (MCP) | Server error, or dates beyond the 60-day anonymous window | Partner API skill if `SEATS_AERO_API_KEY` is set. Otherwise check the airline website directly, and use Duffel for GDS inventory |
 | Seats.aero (either) | Stale data (`ComputedLastSeen` / `minutes_old` too old) | Check airline website directly, use Duffel for GDS inventory |
-| Southwest | SW rate limiting or bot detection | Wait a few minutes and retry. Use Docker (`ghcr.io/borski/sw-fares`) if running locally fails. Google Flights skill for SW cash prices as a fast fallback. |
 | SerpAPI | Rate limit (100/mo free) | Trivago for hotels, web search for destination discovery |
 | Trivago | Server error | SerpAPI Google Hotels, Skiplagged Hotels |
 | Airbnb | Scraping blocked | Suggest user check airbnb.com directly |
 | AwardWallet | API error | Ask user for their balances directly |
 | Ferryhopper | Server error | SerpAPI or web search for ferry routes |
 | Atlas Obscura | Script error | Web search for "unusual things to do in [destination]" |
-| Chase Travel | Login failure or CSRF issues | Use Duffel/Ignav for cash prices. Note that Points Boost and Edit detection are Chase-only. |
 | Amex Travel | Login failure or form changes | Use Duffel/Ignav for cash prices. Note that IAP fares and FHR/THC detection are Amex-only. |
 | Deutsche Bahn (db-vendo) | Library error or bahn.de outage | SerpAPI Google Travel Explore, web search for "DB train [origin] [dest]", or fall back to confirming flight options instead. |
 | Wikipedia airports | API rate limit (rare) or page missing | Web search "[airport name] airlines destinations" returns the same data via Google. |
@@ -66,7 +64,7 @@ Diagnostic flow when an API call fails with an auth-shaped error on first use:
 
 When Seats.aero returns no results for a route + program combination, that means Seats.aero has not scraped it recently. It does NOT mean the award is unbookable. When a reachable program shows no cached results, search the airline's website directly before declaring awards dead.
 
-## Patchright-Based Skills (Southwest, AA, Chase, Amex, TaW)
+## Patchright-Based Skills (AA, Amex)
 
 These hit websites directly with an undetected browser. Common failure modes:
 - **Login form changed.** The site updated its DOM. Selectors break. Update the skill.

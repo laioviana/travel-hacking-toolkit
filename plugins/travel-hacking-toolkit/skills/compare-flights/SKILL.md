@@ -1,6 +1,6 @@
 ---
 name: compare-flights
-description: Unified flight comparison across cash (Duffel, Ignav), award (seats.aero), and portal (Chase, Amex) sources in parallel. Outputs one table with transfer partner optimization and recommendations.
+description: Unified flight comparison across cash (Duffel, Ignav), award (seats.aero), and portal (Amex) sources in parallel. Outputs one table with transfer partner optimization and recommendations.
 category: orchestration
 summary: Unified flight comparison across ALL sources in parallel. Auto-applies transfer optimization.
 api_key: Uses individual skill keys
@@ -16,7 +16,7 @@ Search every available source for a route and present one unified comparison. Co
 - `flight-search-strategy` — full source priority, market selection, source accuracy hierarchy
 - `points-valuations` — CPP rules, floor/ceiling, surcharge programs, transfer bonuses
 - `partner-awards` — alliance + bilateral partnership reachability
-- `lessons-learned` — Seats.aero workflow, Southwest specifics, Companion Pass math
+- `lessons-learned` — Seats.aero workflow, source accuracy
 - `fallback-and-resilience` — what to do when a source fails
 - `transfer-bonuses` — current active transfer bonuses (live data); changes effective ratios when computing options 4-7 of the comparison table
 - `stopovers` — when an itinerary has a long layover or multi-city, check if a stopover-allowing program priced lower than separate one-ways
@@ -39,16 +39,14 @@ Run these in parallel where possible. **Never fail silently.** If a source error
 
 | Source | Skill | Speed | Notes |
 |--------|-------|-------|-------|
-| Duffel | `duffel` | ~3s | Primary. Real GDS fares with fare classes. No Southwest. |
+| Duffel | `duffel` | ~3s | Primary. Real GDS fares with fare classes. |
 | Ignav | `ignav` | ~2s | Fast REST API. Good for price comparison. Booking links. |
-| Google Flights | `google-flights` | ~10s | Browser-automated. All airlines including Southwest cash. Good cross-check. |
+| Google Flights | `google-flights` | ~10s | Browser-automated. All airlines cash. Good cross-check. |
 | Skiplagged | web search | ~5s | Hidden city ticketing. Often finds significantly cheaper fares. Search `skiplagged.com/flights/{origin}/{dest}/{date}`. |
 | Kiwi.com | web search | ~5s | Creative routings, self-transfer combos, multi-city. Search `kiwi.com`. |
-| Southwest | `southwest` | ~20s | Patchright, Docker only. Points + cash for all 4 fare classes. Only needed when SW flies the route. |
 
 **Skiplagged and Kiwi:** Use web search (tavily or exa) to find their prices. They don't have MCP skills but their URLs are predictable. Always note that Skiplagged fares have restrictions (can't check bags, must use the "missed" connection city as destination).
 
-**Southwest:** Run the `southwest` skill if SW flies the route. Include SW Rapid Rewards points in the comparison table as a separate currency. The `lessons-learned` skill has the full details on SW specifics (fare class requirements, Companion Pass math, GDS gap).
 
 **SerpAPI is optional.** Only use if the user asks for Google Hotels or destination discovery.
 
@@ -62,12 +60,11 @@ Run these in parallel where possible. **Never fail silently.** If a source error
 
 | Source | Skill | Speed | Notes |
 |--------|-------|-------|-------|
-| Chase UR | `chase-travel` | ~45s | Dynamic Points Boost pricing (~1.5-2.0 cpp on select bookings, not a guaranteed floor). |
 | Amex MR | `amex-travel` | ~45s | IAP discount detection on Platinum. |
 
 Portal searches are slower (require browser login). Run them in parallel with each other, but don't block on them. Start cash + award searches first, present those results, then append portal results when ready.
 
-**Only run portal searches if the user has the relevant card or asks for portal pricing.** Don't run Chase if they don't have a Sapphire card.
+**Only run portal searches if the user has the relevant card or asks for portal pricing.** Don't run Amex if they don't have a Platinum card.
 
 ## Workflow
 
@@ -84,9 +81,7 @@ PARALLEL GROUP 1 (fast, ~3-5s):
   - Kiwi.com: creative routings (web search)
 
 PARALLEL GROUP 2 (browser-automated, ~10-45s, Docker):
-  - Google Flights: all airlines including Southwest cash
-  - Southwest: points + cash for all fare classes (if SW flies the route)
-  - Chase Travel: UR portal pricing + Points Boost
+  - Google Flights: all airlines cash
   - Amex Travel: MR portal pricing + IAP discounts
 ```
 
@@ -112,16 +107,6 @@ For each award (e.g., United business at 88,000 miles):
 
 ### Step 3: Calculate Portal CPP
 
-Chase portal uses dynamic Points Boost pricing on CSR/CSP. **The historical static 1.5x multiplier is gone.** Each booking now quotes a specific points price; the effective cpp typically falls in the 1.5-2.0 cpp range on CSR but is not a guaranteed floor on every booking. Always pull the actual portal quote rather than computing from a multiplier.
-
-Worked example with a Points Boost quote (verify the actual price):
-```
-Portal quote: 269,841 points for a $5,397 flight
-True CPP: $5,397 / 269,841 = 2.0 cpp (excellent)
-```
-
-For lower-boost or non-boost bookings, the same flight might quote at 1.5 cpp or worse. Always use the real quote in the comparison.
-
 Amex portal is ~1 cpp for flights (1 MR = 1 cent). IAP fares are discounted cash prices:
 ```
 Standard: $5,044 = 504,400 MR points
@@ -139,8 +124,6 @@ IAP: $4,381 = 438,100 MR points (saves 66,300 MR)
 | 1 | Cash (lowest) | Duffel | $4,200 | — | — | — | — |
 | 2 | Flying Blue via Chase UR | seats.aero | $120 tax | 55,000 | Chase UR | 7.4 | Excellent |
 | 3 | Aeroplan via Chase UR | seats.aero | $200 tax | 70,000 | Chase UR | 5.7 | Excellent |
-| 4 | Chase Portal (Boost offer) | chase-travel | $5,400 portal | 180,000 | Chase UR | 3.0 | Excellent (when offered) |
-| 5 | Chase Portal (no Boost) | chase-travel | $5,400 portal | 360,000 | Chase UR | varies (~1.5 typical) | Pull live quote |
 | 6 | Amex Portal (IAP) | amex-travel | $5,044 portal | 438,100 | Amex MR | 1.15 | Poor |
 | 7 | Amex Portal (standard) | amex-travel | $5,044 portal | 504,400 | Amex MR | 1.0 | Poor |
 
@@ -150,14 +133,9 @@ Note: CPP for portal rows uses the portal's own quote ($5,400 / $5,044) as the a
 
 | # | Option | Source | Price | Points | Currency | CPP | Rating |
 |---|--------|--------|-------|--------|----------|-----|--------|
-| 1 | SW Wanna Get Away | southwest | $79 | 5,200 | SW RR | 1.52 | Good |
 | 2 | Cash (lowest) | Duffel | $89 | — | — | — | — |
-| 3 | SW WGA+ | southwest | $119 | 8,400 | SW RR | 1.42 | Fair |
 | 4 | United via Chase UR | seats.aero | $5.60 tax | 5,000 | Chase UR | 1.67 | Good |
-| 5 | Chase Portal | chase-travel | — | 8,900 | Chase UR | varies (~1.5 typical) | Pull live quote |
-| 6 | SW Anytime | southwest | $219 | 16,800 | SW RR | 1.30 | Fair |
 
-Note: SW points values shown use direct redemption CPP. If the user has Companion Pass, effective CPP doubles (two tickets for the points price of one).
 
 **Sources checked:**
 - ✅ Duffel: 45 results
@@ -165,8 +143,6 @@ Note: SW points values shown use direct redemption CPP. If the user has Companio
 - ✅ Skiplagged: 3 hidden city options
 - ✅ Kiwi.com: 12 creative routings
 - ✅ Seats.aero: 12 award options
-- ✅ Southwest: 4 fare classes (WGA $79/5.2K, WGA+ $119/8.4K, Anytime $219/16.8K, BizSelect $289/22.1K)
-- ✅ Chase Travel: 300 results (3 with Points Boost)
 - ✅ Amex Travel: 292 results (IAP available)
 - ✅ Google Flights: 52 results
 
@@ -189,7 +165,6 @@ After the table, always provide:
 If a source fails:
 ```
 - ❌ Duffel: API error (rate limit exceeded). Cash prices from Ignav only.
-- ❌ Chase Travel: Login failed (2FA timeout). No portal pricing available.
 ```
 
 If ALL cash sources fail, say so explicitly. Don't present award-only results without noting the missing cash comparison.
@@ -209,5 +184,3 @@ If seats.aero returns no availability, say "No award availability found" instead
 - Portal searches require Docker and login credentials. Skip if not configured.
 - Seats.aero shows cached availability (up to 24h old). Live search via seats-aero-web is local only.
 - Transfer ratios are from `transfer-partners.json`. Verify against issuer before large transfers.
-- Chase portal pricing is dynamic Points Boost (~1.5-2.0 cpp on select bookings, not a guaranteed floor). The historical static 1.5x multiplier is gone. Pull the actual portal quote rather than computing from a multiplier.
-- Southwest is NOT in Duffel, Ignav, or seats.aero. Use Google Flights skill if SW pricing needed.

@@ -141,7 +141,7 @@ def wait_for_2fa_code(timeout=120):
 
     # File-based code exchange. Poll both the Docker bind-mount path
     # (/tmp/host, via -v /tmp:/tmp/host) and the local path, matching the
-    # chase-travel skill so the host can feed the code into the container.
+    # AA skill so the host can feed the code into the container.
     code_files = ["/tmp/host/amex-2fa-code.txt", "/tmp/amex-2fa-code.txt"]
     for status_path in ("/tmp/host/amex-2fa-status.txt", "/tmp/amex-2fa-status.txt"):
         try:

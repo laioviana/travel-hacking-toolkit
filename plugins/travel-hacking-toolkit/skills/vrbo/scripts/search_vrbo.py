@@ -6,8 +6,8 @@ VRBO sits behind Akamai Bot Manager ("Provisioned request rate has been
 exceeded" / obfuscated sensor script). Standard Playwright, agent-browser, and
 plain HTTP all get a 429 bot wall. Patchright (undetected Playwright fork),
 running *headed* with a persistent profile, passes Akamai's sensor and earns
-the `_abck` cookie — the same approach the chase-travel / amex-travel /
-southwest skills use for their bot walls.
+the `_abck` cookie — the same approach the amex-travel
+skill uses for its bot wall.
 
 No login is required: VRBO search results are public. The persistent profile
 just lets the Akamai cookie survive between runs so repeat searches are faster

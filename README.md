@@ -76,7 +76,7 @@ The 4 highest-value keys:
 
 Other keys (SerpAPI, RapidAPI, TripAdvisor, RESROBOT, Rejseplanen, Entur) extend specific skills. The setup skill covers them too. See the [full API key reference](#api-keys--signup-links) for signup links.
 
-Five Docker-based skills (Southwest, American Airlines, Chase, Amex, TicketsAtWork) handle sites that don't have public APIs, plus a shared base image. They auto-pull on first use. See the [Docker Images](#docker-images) section for credentials and configuration.
+Two Docker-based skills (American Airlines, Amex) handle sites that don't have public APIs, plus a shared base image. They auto-pull on first use. See the [Docker Images](#docker-images) section for credentials and configuration.
 
 #### Manual setup (if you'd rather not use the skill)
 
@@ -179,11 +179,10 @@ Start here: the **orchestration skills** call everything else automatically.
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
 | **duffel** | Primary cash prices. Real GDS per-fare-class data. | Duffel |
-| **google-flights** | Browser-automated Google Flights. All airlines including Southwest. | None (requires agent-browser) |
+| **google-flights** | Browser-automated Google Flights. All airlines. | None (requires agent-browser) |
 | **ignav** | Fast REST API cash prices. Market selection for arbitrage. | Ignav (1,000 free) |
 | **seatmaps** | Aircraft seat maps, cabin dimensions, seat recommendations. | None (requires agent-browser) |
 | **seats-aero** | Award availability across 27 mileage programs. Partner API, plus the official MCP (keyless for the next 60 days, Pro sign-in for live search and alerts). | Seats.aero Pro/Partner (MCP free for 60 days) |
-| **southwest** | SW fare classes, points pricing, Companion Pass. Change flight price drop monitor. Docker: `ghcr.io/borski/sw-fares`. | None (requires Patchright) |
 | **wikipedia-airports** | Route discovery and airline-service sanity check via Wikipedia airport pages. Answers "does carrier X fly A→B" and "what airports serve destination Y" when fare tools disagree or miss obscure regional service. No API key. | None |
 <!-- END: readme:flights -->
 
@@ -194,7 +193,6 @@ Start here: the **orchestration skills** call everything else automatically.
 |-------|-------------|---------|
 | **amex-travel** | Amex MR portal for flights, hotels, IAP discounts, FHR/THC benefits. Requires Platinum. Docker: `ghcr.io/borski/amex-travel`. | None (requires Patchright) |
 | **bilt** | Bilt Rewards travel portal for hotels and flights. 1.25 cpp on Bilt Points. Home Away From Home properties give $300+ in benefits to Gold/Platinum members. | None (public API) |
-| **chase-travel** | Chase UR portal for flights, hotels, Points Boost, Edit benefits. Requires Sapphire. Docker: `ghcr.io/borski/chase-travel`. | None (requires Patchright) |
 <!-- END: readme:portals -->
 
 #### Hotels and Accommodation
@@ -202,11 +200,10 @@ Start here: the **orchestration skills** call everything else automatically.
 <!-- BEGIN: readme:hotels -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
-| **premium-hotels** | Search 4,659 Amex FHR/THC + Chase Edit hotels by city. Stacking opportunities. | None (local data) |
+| **premium-hotels** | Search 4,659 Amex FHR/THC hotels by city. Stacking opportunities. | None (local data) |
 | **rapidapi** | Booking.com hotel prices. | RapidAPI |
 | **serpapi** | Google Hotels search and destination discovery. | SerpAPI |
 | **sutochno** | Sutochno.ru Russian apartment search via Patchright. Ruble / Mir payment for Georgia / CIS stays. Docker: `ghcr.io/borski/sutochno`. | None |
-| **ticketsatwork** | TicketsAtWork (EBG) corporate-perks portal. Hotels, theme park tickets, attractions, live events. Often beats portals by 10-30%. Docker: `ghcr.io/borski/ticketsatwork`. | None (requires TaW account + Patchright) |
 | **vrbo** | VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays. Docker: `ghcr.io/borski/vrbo`. | None (requires Patchright) |
 <!-- END: readme:hotels -->
 
@@ -249,7 +246,7 @@ These skills carry the deep institutional knowledge that used to live in CLAUDE.
 | **fallback-and-resilience** | What to do when each tool fails. Tool-by-tool fallback paths. |
 | **flight-search-strategy** | The canonical multi-source search workflow. Source priority (Duffel > Ignav > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes. |
 | **hotel-chains** | Maps brand names (Westin, Holiday Inn, etc.) to chain families and loyalty programs. |
-| **lessons-learned** | Hard-won knowledge from real searches. The mandatory Seats.aero workflow, Southwest specifics, Companion Pass math, source accuracy, small-market caveats, Duffel limitations. Load before any award flight search. |
+| **lessons-learned** | Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Duffel limitations. Load before any award flight search. |
 | **partner-awards** | Which programs ticket which airlines (alliance + bilateral). Cross-references credit card currencies to booking programs. Reachability workflow. |
 | **points-valuations** | CPP formula, floor/ceiling rules, surcharge-heavy programs to avoid, transfer bonus considerations, Chase Points Boost dynamics, opportunity cost. |
 | **round-the-world** | RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued. |
@@ -272,7 +269,6 @@ These skills require an external account or API key signup. See [`.env.example`]
 | `serpapi` | SerpAPI | [serpapi.com](https://serpapi.com) | Google Flights, Google Hotels, Travel Explore. |
 | `tripadvisor` | TripAdvisor | [www.tripadvisor.com/developers](https://www.tripadvisor.com/developers) | Hotel/restaurant/attraction data. 5K calls/month free. |
 | `awardwallet` | AwardWallet | [business.awardwallet.com](https://business.awardwallet.com) | Loyalty program balance aggregator. Business tier required. |
-| `ticketsatwork` | TicketsAtWork | [www.ticketsatwork.com](https://www.ticketsatwork.com) | Corporate-perks portal. Account requires employer affiliation. Same credentials work for Working Advantage, Plum, Beneplace (shared EBG backend). |
 | `scandinavia-transit` | Trafiklab (Sweden) | [www.trafiklab.se](https://www.trafiklab.se) | Sweden transit. Free API key. 30,000 calls/month. |
 | `scandinavia-transit` | Rejseplanen (Denmark) | [labs.rejseplanen.dk](https://labs.rejseplanen.dk) | Denmark transit. Free API key (application required). 50,000 calls/month, non-commercial only. |
 <!-- END: readme:signup-links -->
@@ -287,32 +283,16 @@ Five skills run as Docker containers (browser-automated via Patchright), plus a 
 | [`ghcr.io/borski/patchright-docker`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/patchright-docker) | (base) | Patchright + Chromium + xvfb base layer that all other browser-skill images build on. | [external](https://github.com/borski/patchright-docker) |
 | [`ghcr.io/borski/aa-miles-check`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/aa-miles-check) | `american-airlines` | AAdvantage balance and elite status. AwardWallet does not support AA. | [skills/american-airlines](skills/american-airlines/Dockerfile) |
 | [`ghcr.io/borski/amex-travel`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/amex-travel) | `amex-travel` | Amex MR portal for flights, hotels, IAP discounts, FHR/THC benefits. Requires Platinum. | [skills/amex-travel](skills/amex-travel/Dockerfile) |
-| [`ghcr.io/borski/chase-travel`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/chase-travel) | `chase-travel` | Chase UR portal for flights, hotels, Points Boost, Edit benefits. Requires Sapphire. | [skills/chase-travel](skills/chase-travel/Dockerfile) |
-| [`ghcr.io/borski/sw-fares`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/sw-fares) | `southwest` | SW fare classes, points pricing, Companion Pass. Change flight price drop monitor. | [skills/southwest](skills/southwest/Dockerfile) |
 | [`ghcr.io/borski/sutochno`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/sutochno) | `sutochno` | Sutochno.ru Russian apartment search via Patchright. Ruble / Mir payment for Georgia / CIS stays. | [skills/sutochno](skills/sutochno/Dockerfile) |
-| [`ghcr.io/borski/ticketsatwork`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/ticketsatwork) | `ticketsatwork` | TicketsAtWork (EBG) corporate-perks portal. Hotels, theme park tickets, attractions, live events. Often beats portals by 10-30%. | [skills/ticketsatwork](skills/ticketsatwork/Dockerfile) |
 | [`ghcr.io/borski/vrbo`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/vrbo) | `vrbo` | VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays. | [skills/vrbo](skills/vrbo/Dockerfile) |
 <!-- END: readme:docker -->
 
 ### Usage
 
 ```bash
-# Southwest: fare search + price drop monitoring
-docker pull ghcr.io/borski/sw-fares:latest
-docker run --rm ghcr.io/borski/sw-fares --origin SJC --dest DEN --depart 2026-05-15 --points --json
-docker run --rm -e SW_USERNAME -e SW_PASSWORD ghcr.io/borski/sw-fares \
-    change --conf ABC123 --first Jane --last Doe --json
-
 # American Airlines: AAdvantage balance + elite status (not in AwardWallet)
 docker pull ghcr.io/borski/aa-miles-check:latest
 docker run --rm -e AA_USERNAME=your_number -e AA_PASSWORD=your_pass ghcr.io/borski/aa-miles-check --json
-
-# Chase Travel: UR portal pricing, Points Boost, Edit hotels
-docker pull ghcr.io/borski/chase-travel:latest
-docker run --rm -v ~/.chase-travel-profiles:/profiles -v /tmp:/tmp/host \
-    -e CHASE_USERNAME -e CHASE_PASSWORD \
-    ghcr.io/borski/chase-travel script /scripts/search_flights.py \
-    --origin SFO --dest CDG --depart 2026-08-11 --cabin business --json
 
 # Amex Travel: MR portal pricing, IAP discounts, FHR/THC hotels
 docker pull ghcr.io/borski/amex-travel:latest
@@ -320,11 +300,6 @@ docker run --rm -v ~/.amex-travel-profiles:/profiles \
     -e AMEX_USERNAME -e AMEX_PASSWORD \
     ghcr.io/borski/amex-travel script /app/search_flights.py \
     --origin SFO --dest NRT --depart 2026-08-15 --cabin business --json
-
-# TicketsAtWork (also covers Working Advantage / Plum / Beneplace)
-docker pull ghcr.io/borski/ticketsatwork:latest
-docker run --rm -e TAW_USER -e TAW_PASS ghcr.io/borski/ticketsatwork \
-    hotels --location "Carlsbad, CA" --checkin 2027-03-04 --checkout 2027-03-07 --json
 ```
 
 ### Building Locally
@@ -343,7 +318,7 @@ The `Dockerfile` in each skill directory shows exactly what's in the image. All 
 
 Skills are markdown files that give your AI specialized travel-hacking capabilities. They come in two flavors:
 
-- **Tool skills** (`duffel`, `seats-aero`, `southwest`, etc.) wrap APIs, browser automation, and external tools. They contain endpoint documentation, curl examples, useful jq filters, and step-by-step usage instructions.
+- **Tool skills** (`duffel`, `seats-aero`, etc.) wrap APIs, browser automation, and external tools. They contain endpoint documentation, curl examples, useful jq filters, and step-by-step usage instructions.
 - **Reference skills** (`flight-search-strategy`, `points-valuations`, `alliances`, `lessons-learned`, etc.) carry the institutional knowledge that decides when and how to use the tool skills. They contain the workflow rules, lookup tables, and hard-won lessons that prevent common mistakes.
 
 OpenCode, Claude Code, and Codex can all load them. Skills use **progressive disclosure**: each one's name and short description are loaded into context at session start. The agent reads the full SKILL.md only when it decides to use a skill. This keeps the always-loaded context small and lets the toolkit grow without bloating the agent's prompt.
@@ -376,8 +351,7 @@ Skiplagged, Kiwi.com, Trivago, Ferryhopper, Airbnb, and Seats.aero need no setup
 
 "Find hotels in Paris"
   ├─ Best overall      → compare-hotels (portals + metasearch + Airbnb)
-  ├─ Premium programs  → premium-hotels (FHR/THC/Edit)
-  └─ Discount pricing  → ticketsatwork (often beats portals 10-30%)
+  └─ Premium programs  → premium-hotels (FHR/THC)
 
 "Should I use points or cash?"
   └─→ trip-calculator (CPP analysis + opportunity cost)
@@ -398,9 +372,6 @@ Skiplagged, Kiwi.com, Trivago, Ferryhopper, Airbnb, and Seats.aero need no setup
 
 "How do I actually book this?"
   └─→ booking-guidance (booking flow, phone numbers, hold-before-transfer rule)
-
-"Check my SW reservations for price drops"
-  └─→ southwest (change flight monitor)
 ```
 
 The **orchestration skills** (`trip-planner`, `compare-flights`, `compare-hotels`) call the individual source skills automatically. Start with those unless you need a specific source.
@@ -411,7 +382,7 @@ The **reference skills** (`flight-search-strategy`, `points-valuations`, `partne
 
 The core question: **"Should I burn points or pay cash?"**
 
-1. **Search ALL flight sources** — Duffel + Ignav + Google Flights + Skiplagged + Kiwi for cash. Seats.aero for awards. Southwest for SW points. Chase + Amex portals for pay-with-points.
+1. **Search ALL flight sources** — Duffel + Ignav + Google Flights + Skiplagged + Kiwi for cash. Seats.aero for awards. Amex portal for pay-with-points.
 2. **Optimize transfers** — `transfer-partners` finds the cheapest path from your credit card points to the loyalty program offering the best deal.
 3. **Compare** — `trip-calculator` shows CPP for each option. Higher CPP = better use of points. Below floor valuation = pay cash instead.
 4. **Check balances** — AwardWallet confirms you have enough points.
@@ -427,7 +398,6 @@ The core question: **"Should I burn points or pay cash?"**
 "Find hotels in Stockholm, include Airbnb"
 "Compare points vs cash for a round trip JFK to London next March"
 "What are my United miles and Chase UR balances?"
-"Check my Southwest reservations for price drops"
 "Find hidden gems near Lisbon"
 "How do I get from Oslo to Bergen by train?"
 "What's the seat pitch on Air France 83 in business class?"
@@ -489,13 +459,6 @@ travel-hacking-toolkit/
 │   ├── ignav/SKILL.md              # Secondary cash prices (REST API)
 │   ├── seatmaps/SKILL.md           # Aircraft seat maps
 │   ├── seats-aero/SKILL.md         # Award flight availability
-│   ├── southwest/                  # Southwest fares + change monitoring
-│   │   ├── SKILL.md
-│   │   ├── Dockerfile
-│   │   └── scripts/
-│   │       ├── search_fares.py
-│   │       ├── check_change.py
-│   │       └── entrypoint.sh
 │   │
 │   │  # ── Credit Card Portals ──
 │   ├── amex-travel/                # Amex MR portal (flights + hotels)
@@ -503,26 +466,11 @@ travel-hacking-toolkit/
 │   │   ├── Dockerfile
 │   │   └── scripts/
 │   │       └── search_flights.py
-│   ├── chase-travel/               # Chase UR portal (flights + hotels)
-│   │   ├── SKILL.md
-│   │   ├── Dockerfile
-│   │   └── scripts/
-│   │       ├── search_flights.py
-│   │       └── record_search.py
 │   │
 │   │  # ── Hotels ──
-│   ├── premium-hotels/SKILL.md     # FHR/THC/Chase Edit local database
+│   ├── premium-hotels/SKILL.md     # FHR/THC local database
 │   ├── rapidapi/SKILL.md           # Booking.com prices
 │   ├── serpapi/SKILL.md            # Google Hotels + destination discovery
-│   ├── ticketsatwork/              # TaW corporate-perks portal (hotels + tickets)
-│   │   ├── SKILL.md
-│   │   ├── Dockerfile
-│   │   └── scripts/
-│   │       ├── search_hotels.py
-│   │       ├── search_cars.py
-│   │       ├── browse_tickets.py
-│   │       ├── taw_common.py
-│   │       └── entrypoint.sh
 │   │
 │   │  # ── Loyalty ──
 │   ├── american-airlines/          # AA AAdvantage balance

@@ -1,8 +1,8 @@
 ---
 name: google-flights
-description: Browser-automated Google Flights search via agent-browser. All airlines including Southwest. Cash prices, schedules, economy/business comparison, market selection.
+description: Browser-automated Google Flights search via agent-browser. All airlines. Cash prices, schedules, economy/business comparison, market selection.
 category: flights
-summary: Browser-automated Google Flights. All airlines including Southwest.
+summary: Browser-automated Google Flights. All airlines.
 api_key: None (requires agent-browser)
 allowed-tools: Bash(agent-browser:*)
 ---
@@ -24,7 +24,6 @@ npm install -g agent-browser && agent-browser install
 - User wants to know flight prices between cities
 - User asks about flight schedules or availability
 - User wants to find the cheapest flight for specific dates
-- **Southwest flights**: Google Flights is one of the only sources for SW cash prices. No GDS or API returns Southwest.
 
 ## When NOT to Use
 

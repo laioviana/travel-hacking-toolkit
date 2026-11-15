@@ -150,7 +150,7 @@ If you see a "DRIFT" failure in CI or local smoke test, run `bash scripts/gen-sk
 
 ### Docker Images Must Build on `patchright-docker` (when applicable)
 
-Skills that need browser automation should base on `ghcr.io/borski/patchright-docker` (Patchright + Chromium + xvfb). Don't roll your own Chromium install. See `skills/southwest/Dockerfile` for the pattern.
+Skills that need browser automation should base on `ghcr.io/borski/patchright-docker` (Patchright + Chromium + xvfb). Don't roll your own Chromium install. See `skills/amex-travel/Dockerfile` for the pattern.
 
 If you add a new Docker-based skill, the image must be public on ghcr.io and listed in `setup.sh` and `setup.ps1` so users get auto-pulls.
 
