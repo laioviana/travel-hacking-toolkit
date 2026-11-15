@@ -6,7 +6,6 @@ gardening	orchestration	Audit existing reservations for price drops, better cabi
 trip-calculator	orchestration	Cash vs points decision answered with math. Transfer ratios, taxes, opportunity cost.	None (free, local data)	
 trip-log	orchestration	Opt-in trip journal. Save searches and booked trips to trips/logs/ for future reference.	None	
 trip-planner	orchestration	Full trip planning. Flights + hotels + points in one shot.	Uses individual skill keys	
-duffel	flights	Primary cash prices. Real GDS per-fare-class data.	Duffel	
 google-flights	flights	Browser-automated Google Flights. All airlines.	None (requires agent-browser)	
 ignav	flights	Fast REST API cash prices. Market selection for arbitrage.	Ignav (1,000 free)	
 seats-aero	flights	Award availability across 27 mileage programs. Partner API, plus the official MCP (keyless for the next 60 days, Pro sign-in for live search and alerts).	Seats.aero Pro/Partner (MCP free for 60 days)	
@@ -24,7 +23,7 @@ wheretocredit	loyalty	Mileage earning rates by airline and booking class across 
 atlas-obscura	destinations	Hidden gems and unusual attractions near any destination.	None (free)	
 scandinavia-transit	destinations	Trains, buses, ferries in Norway, Sweden, and Denmark. Includes Danish fare/zone pricing.	Entur + Trafiklab + Rejseplanen	
 tripadvisor	destinations	Hotel ratings, restaurant search, attraction reviews, nearby search. 5K calls/month.	TripAdvisor	
-flight-search-strategy	reference	The canonical multi-source search workflow. Source priority (Duffel > Ignav > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes.		
+flight-search-strategy	reference	The canonical multi-source search workflow. Source priority (Ignav > Bilt portal > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes.		
 transfer-bonuses	reference	Active credit card transfer bonuses with primary-source citations. Tells the agent the real effective ratio when transferring points during a promotion.		
 stopovers	reference	Per-program stopover rules for award redemptions. Includes Icelandair free stopover, Aeroplan, Alaska Atmos, Flying Blue, Singapore tiers, plus the negative space (BA, AA, Delta, JetBlue) that have no stopover programs.		
 award-holds	reference	Per-program rules for placing award flight tickets on hold. Covers 9 programs with holds (AA 24h online, LH 5 days, FB 3 days, CX 2 days, Turkish 2 days, Virgin Atlantic 1-2 days, ANA 2 days, Emirates 1 day, EVA online), Singapore as agent-discretionary, and the negative space (UA/AS/DL/Aeroplan/BA/Qatar/Korean/Etihad - many programs still do not allow holds).		
@@ -36,7 +35,7 @@ cabin-codes	reference	IATA cabin codes (F/J/W/Y) and saver fare class codes (X/I
 hotel-chains	reference	Maps brand names (Westin, Holiday Inn, etc.) to chain families and loyalty programs.		
 fallback-and-resilience	reference	What to do when each tool fails. Tool-by-tool fallback paths.		
 booking-guidance	reference	The booking flow, hold-before-transfer rule, phone numbers for major programs.		
-lessons-learned	reference	Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Duffel limitations. Load before any award flight search.		
+lessons-learned	reference	Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Ignav limitations. Load before any award flight search.		
 round-the-world	reference	RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued.		
 status-match	reference	Per-program status match rules with lifetime / once-per-N-years warnings, free vs paid concierge distinction, real fees, plus card-granted renewable status as the alternative.		
 vrbo	hotels	VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays.	None (requires Patchright)	ghcr.io/borski/vrbo

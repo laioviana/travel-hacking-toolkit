@@ -1,8 +1,8 @@
 ---
 name: lessons-learned
-description: Mandatory pre-flight-search reference. Contains the Seats.aero workflow (pull ALL programs first), source accuracy hierarchy, small-market caveats, and Duffel limitations.
+description: Mandatory pre-flight-search reference. Contains the Seats.aero workflow (pull ALL programs first), source accuracy hierarchy, small-market caveats, and Bilt portal limitations.
 category: reference
-summary: Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Duffel limitations. Load before any award flight search.
+summary: Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Bilt portal limitations. Load before any award flight search.
 ---
 
 # Lessons Learned
@@ -41,9 +41,9 @@ Data files are reference material, not gospel. Airline partnerships change const
 
 ## Source Accuracy Hierarchy
 
-**Duffel > Airline website > SerpAPI > Skiplagged/Kiwi**
+**Bilt portal / Ignav > Airline website > SerpAPI > Skiplagged/Kiwi**
 
-1. **Duffel returns real GDS prices per fare class.** These are bookable. Tested: Duffel showed $271 basic / $325 main. SerpAPI showed $541 for the same flight. The gap was consistent across multiple itineraries.
+1. **The Bilt portal (Duffel-backed) returns real GDS prices per fare class.** These are bookable. Tested with Duffel directly: it showed $271 basic / $325 main. SerpAPI showed $541 for the same flight. The gap was consistent across multiple itineraries.
 2. **SerpAPI (Google Flights) inflates prices.** Google Flights often shows "main cabin" or bundled fares, not the cheapest bookable fare class. Useful for Google Hotels and destination discovery, but do not trust it as the sole source for flight cash prices.
 3. **Kiwi returns garbage on small markets.** Filter hard or skip Kiwi for domestic routes to small airports.
 
@@ -51,7 +51,7 @@ Data files are reference material, not gospel. Airline partnerships change const
 
 Small airports have limited award availability. Seats.aero cached data will be sparse. When searching small markets:
 
-1. **Duffel for cash prices** (works fine, GDS has the inventory)
+1. **Ignav and the Bilt portal for cash prices** (work fine, GDS has the inventory)
 2. **Don't bother with Seats.aero cached search** (data too sparse)
 3. **Check airline-specific award pricing** via the program's website if needed
 
@@ -66,11 +66,11 @@ Ask the user for their preferences on the first search. Key questions:
 
 Store their answers and apply to all subsequent searches in the session.
 
-## Duffel Limitations
+## Bilt Portal Limitations
 
-- **No award pricing.** Duffel shows cash fares only. Use Seats.aero for award availability.
-- **Offers expire in 15-30 minutes.** Don't cache Duffel results across sessions.
-- **60 requests per 60 seconds rate limit.** Parallel searches are fine but don't go crazy.
+- **No award pricing.** The Bilt flights endpoint shows cash fares only. Use Seats.aero for award availability.
+- **Offers expire in 15-30 minutes.** Don't cache Bilt results across sessions.
+- **Unofficial public endpoint.** No documented rate limit, so keep request volume polite and fall back to Ignav if it errors.
 - **Returns multiple fare classes for the same flight.** This is a feature. You'll see basic economy at one price and main cabin at another for the same routing. Use the cheapest bookable class for cpp comparison unless the user specifies a fare preference.
 
 ## Related Reference Skills (Load When Relevant)

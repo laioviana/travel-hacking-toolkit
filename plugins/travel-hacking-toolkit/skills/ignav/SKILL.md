@@ -1,6 +1,6 @@
 ---
 name: ignav
-description: Fast REST API flight search via ignav.com. Cash prices, booking links, market selection for price arbitrage. Include in every flight search alongside Duffel and other sources.
+description: Fast REST API flight search via ignav.com. Cash prices, booking links, market selection for price arbitrage. Include in every flight search alongside the Bilt portal and other sources.
 category: flights
 summary: Fast REST API cash prices. Market selection for arbitrage.
 api_key: Ignav (1,000 free)

@@ -1,9 +1,9 @@
 # Travel Hacking Toolkit
 
-> A comprehensive toolkit for searching flights, hotels, and award availability across multiple sources. Combines cash pricing (Duffel, Ignav), award search (seats.aero), portal pay-with-points (Amex MR), and transfer partner optimization into unified comparison tools. Designed for use by AI coding assistants and agents (OpenCode, Claude Code, Codex).
+> A comprehensive toolkit for searching flights, hotels, and award availability across multiple sources. Combines cash pricing (Ignav, Bilt portal), award search (seats.aero), portal pay-with-points (Amex MR), and transfer partner optimization into unified comparison tools. Designed for use by AI coding assistants and agents (OpenCode, Claude Code, Codex).
 
 Key concepts:
-- **Cash prices** come from GDS feeds (Duffel, Ignav) and are bookable fares
+- **Cash prices** come from GDS feeds (Ignav, Bilt portal) and are bookable fares
 - **Award prices** come from loyalty program availability (seats.aero) and require transferring credit card points
 - **Portal prices** come from the Amex travel portal and let you pay with MR points directly
 - **Transfer partners** map credit card points to airline/hotel loyalty programs at various ratios
@@ -28,7 +28,6 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 ## Flights
 
 <!-- BEGIN: llms:flights -->
-- [Duffel](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/duffel/SKILL.md): Primary cash prices. Real GDS per-fare-class data.
 - [Google Flights](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/google-flights/SKILL.md): Browser-automated Google Flights. All airlines.
 - [Ignav](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/ignav/SKILL.md): Fast REST API cash prices. Market selection for arbitrage.
 - [Seatmaps](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/seatmaps/SKILL.md): Aircraft seat maps, cabin dimensions, seat recommendations.
@@ -82,9 +81,9 @@ These skills carry institutional knowledge that the agent loads when triggered. 
 - [Booking Guidance](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/booking-guidance/SKILL.md): The booking flow, hold-before-transfer rule, phone numbers for major programs.
 - [Cabin Codes](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/cabin-codes/SKILL.md): IATA cabin codes (F/J/W/Y) and saver fare class codes (X/I/O) for partner-bookable inventory.
 - [Fallback And Resilience](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/fallback-and-resilience/SKILL.md): What to do when each tool fails. Tool-by-tool fallback paths.
-- [Flight Search Strategy](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/flight-search-strategy/SKILL.md): The canonical multi-source search workflow. Source priority (Duffel > Ignav > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes.
+- [Flight Search Strategy](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/flight-search-strategy/SKILL.md): The canonical multi-source search workflow. Source priority (Ignav > Bilt portal > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes.
 - [Hotel Chains](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/hotel-chains/SKILL.md): Maps brand names (Westin, Holiday Inn, etc.) to chain families and loyalty programs.
-- [Lessons Learned](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/lessons-learned/SKILL.md): Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Duffel limitations. Load before any award flight search.
+- [Lessons Learned](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/lessons-learned/SKILL.md): Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Bilt portal limitations. Load before any award flight search.
 - [Partner Awards](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/partner-awards/SKILL.md): Which programs ticket which airlines (alliance + bilateral). Cross-references credit card currencies to booking programs. Reachability workflow.
 - [Points Valuations](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/points-valuations/SKILL.md): CPP formula, floor/ceiling rules, surcharge-heavy programs to avoid, transfer bonus considerations, Chase Points Boost dynamics, opportunity cost.
 - [Round The World](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/round-the-world/SKILL.md): RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued.

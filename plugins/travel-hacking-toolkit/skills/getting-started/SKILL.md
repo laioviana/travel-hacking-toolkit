@@ -22,7 +22,7 @@ Don't print the values; only report SET vs MISSING.
 Use `printenv` so the loop works in both bash and zsh (Claude Code's bash tool may use either):
 
 ```bash
-for var in SEATS_AERO_API_KEY DUFFEL_API_KEY_LIVE IGNAV_API_KEY AWARDWALLET_API_KEY AWARDWALLET_USER_ID SERPAPI_API_KEY RAPIDAPI_KEY TRIPADVISOR_API_KEY ENTUR_CLIENT_NAME RESROBOT_API_KEY REJSEPLANEN_API_KEY; do
+for var in SEATS_AERO_API_KEY IGNAV_API_KEY AWARDWALLET_API_KEY AWARDWALLET_USER_ID SERPAPI_API_KEY RAPIDAPI_KEY TRIPADVISOR_API_KEY ENTUR_CLIENT_NAME RESROBOT_API_KEY REJSEPLANEN_API_KEY; do
   if [ -n "$(printenv "$var")" ]; then echo "SET: $var"; else echo "MISSING: $var"; fi
 done
 ```
@@ -30,7 +30,7 @@ done
 ### PowerShell (native Windows)
 
 ```powershell
-$keys = @('SEATS_AERO_API_KEY','DUFFEL_API_KEY_LIVE','IGNAV_API_KEY','AWARDWALLET_API_KEY','AWARDWALLET_USER_ID','SERPAPI_API_KEY','RAPIDAPI_KEY','TRIPADVISOR_API_KEY','ENTUR_CLIENT_NAME','RESROBOT_API_KEY','REJSEPLANEN_API_KEY')
+$keys = @('SEATS_AERO_API_KEY','IGNAV_API_KEY','AWARDWALLET_API_KEY','AWARDWALLET_USER_ID','SERPAPI_API_KEY','RAPIDAPI_KEY','TRIPADVISOR_API_KEY','ENTUR_CLIENT_NAME','RESROBOT_API_KEY','REJSEPLANEN_API_KEY')
 foreach ($k in $keys) {
     $v = [Environment]::GetEnvironmentVariable($k)
     if ([string]::IsNullOrEmpty($v)) { Write-Host "MISSING: $k" } else { Write-Host "SET: $k" }
@@ -39,7 +39,7 @@ foreach ($k in $keys) {
 
 Group the results:
 
-**Tier 1 (high-value, missing matters most):** SEATS_AERO_API_KEY, DUFFEL_API_KEY_LIVE, IGNAV_API_KEY, AWARDWALLET_API_KEY + AWARDWALLET_USER_ID
+**Tier 1 (high-value, missing matters most):** SEATS_AERO_API_KEY, IGNAV_API_KEY, AWARDWALLET_API_KEY + AWARDWALLET_USER_ID
 
 **Tier 2 (extra sources):** SERPAPI_API_KEY, RAPIDAPI_KEY,, TRIPADVISOR_API_KEY
 
@@ -87,7 +87,6 @@ If keys are missing and the user wants to add them, give them the right command 
 >
 > ```
 > setx SEATS_AERO_API_KEY \"your-key-here\"
-> setx DUFFEL_API_KEY_LIVE \"your-key-here\"
 > ```
 >
 > Open a new cmd window for the variables to take effect. Note that `setx` writes to the registry permanently."

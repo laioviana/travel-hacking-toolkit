@@ -75,7 +75,7 @@ After frontmatter, write the skill instructions in markdown. Show:
 - Output format expectations (typically markdown tables)
 - Common failure modes and how to handle them
 
-Look at `skills/duffel/SKILL.md` or `skills/seats-aero/SKILL.md` for reference patterns.
+Look at `skills/ignav/SKILL.md` or `skills/seats-aero/SKILL.md` for reference patterns.
 
 ### 4. Update the metadata TSV
 

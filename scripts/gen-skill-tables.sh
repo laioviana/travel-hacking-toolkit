@@ -247,7 +247,6 @@ HEADER
 # Format: skill_name|Display Name|URL|optional notes
 signup_links_data() {
   cat <<'DATA'
-duffel|Duffel|https://duffel.com|Real GDS flight search. Free tier available.
 ignav|Ignav|https://ignav.com|Fast flight search REST API. 1,000 free requests, no credit card.
 seats-aero|Seats.aero|https://seats.aero|Award flight availability across 27 mileage programs. Pro tier ($99/yr) includes API access.
 rapidapi|RapidAPI|https://rapidapi.com|Marketplace; subscribe to Booking.com Live + Google Flights Live.

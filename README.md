@@ -70,8 +70,7 @@ The 4 highest-value keys:
 | Key | What it unlocks | Cost |
 |-----|------|-----------|
 | `SEATS_AERO_API_KEY` | Award flight search across 27 mileage programs. The main event. | Pro ~$8/mo |
-| `DUFFEL_API_KEY_LIVE` | Real GDS cash flight prices. | Free to search, pay per booking |
-| `IGNAV_API_KEY` | Backup cash flight prices. Fast REST API. | 1,000 free requests/month |
+| `IGNAV_API_KEY` | Primary cash flight prices. Fast REST API. | 1,000 free requests/month |
 | `AWARDWALLET_API_KEY` + `AWARDWALLET_USER_ID` | Auto-pull your loyalty balances, elite status, transfer ratios. | Business account required |
 
 Other keys (SerpAPI, RapidAPI, TripAdvisor, RESROBOT, Rejseplanen, Entur) extend specific skills. The setup skill covers them too. See the [full API key reference](#api-keys--signup-links) for signup links.
@@ -84,7 +83,6 @@ Add to your shell rc (`~/.zshrc`, `~/.bashrc`, etc.):
 
 ```bash
 export SEATS_AERO_API_KEY="your-key-here"
-export DUFFEL_API_KEY_LIVE="your-key-here"
 export IGNAV_API_KEY="your-key-here"
 export AWARDWALLET_API_KEY="your-key-here"
 export AWARDWALLET_USER_ID="your-user-id"
@@ -178,7 +176,6 @@ Start here: the **orchestration skills** call everything else automatically.
 <!-- BEGIN: readme:flights -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
-| **duffel** | Primary cash prices. Real GDS per-fare-class data. | Duffel |
 | **google-flights** | Browser-automated Google Flights. All airlines. | None (requires agent-browser) |
 | **ignav** | Fast REST API cash prices. Market selection for arbitrage. | Ignav (1,000 free) |
 | **seatmaps** | Aircraft seat maps, cabin dimensions, seat recommendations. | None (requires agent-browser) |
@@ -244,9 +241,9 @@ These skills carry the deep institutional knowledge that used to live in CLAUDE.
 | **booking-guidance** | The booking flow, hold-before-transfer rule, phone numbers for major programs. |
 | **cabin-codes** | IATA cabin codes (F/J/W/Y) and saver fare class codes (X/I/O) for partner-bookable inventory. |
 | **fallback-and-resilience** | What to do when each tool fails. Tool-by-tool fallback paths. |
-| **flight-search-strategy** | The canonical multi-source search workflow. Source priority (Duffel > Ignav > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes. |
+| **flight-search-strategy** | The canonical multi-source search workflow. Source priority (Ignav > Bilt portal > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes. |
 | **hotel-chains** | Maps brand names (Westin, Holiday Inn, etc.) to chain families and loyalty programs. |
-| **lessons-learned** | Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Duffel limitations. Load before any award flight search. |
+| **lessons-learned** | Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Bilt portal limitations. Load before any award flight search. |
 | **partner-awards** | Which programs ticket which airlines (alliance + bilateral). Cross-references credit card currencies to booking programs. Reachability workflow. |
 | **points-valuations** | CPP formula, floor/ceiling rules, surcharge-heavy programs to avoid, transfer bonus considerations, Chase Points Boost dynamics, opportunity cost. |
 | **round-the-world** | RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued. |
@@ -262,7 +259,6 @@ These skills require an external account or API key signup. See [`.env.example`]
 
 | Skill | Service | Link | Notes |
 |-------|---------|------|-------|
-| `duffel` | Duffel | [duffel.com](https://duffel.com) | Real GDS flight search. Free tier available. |
 | `ignav` | Ignav | [ignav.com](https://ignav.com) | Fast flight search REST API. 1,000 free requests, no credit card. |
 | `seats-aero` | Seats.aero | [seats.aero](https://seats.aero) | Award flight availability across 27 mileage programs. Pro tier ($99/yr) includes API access. |
 | `rapidapi` | RapidAPI | [rapidapi.com](https://rapidapi.com) | Marketplace; subscribe to Booking.com Live + Google Flights Live. |
@@ -318,7 +314,7 @@ The `Dockerfile` in each skill directory shows exactly what's in the image. All 
 
 Skills are markdown files that give your AI specialized travel-hacking capabilities. They come in two flavors:
 
-- **Tool skills** (`duffel`, `seats-aero`, etc.) wrap APIs, browser automation, and external tools. They contain endpoint documentation, curl examples, useful jq filters, and step-by-step usage instructions.
+- **Tool skills** (`ignav`, `seats-aero`, etc.) wrap APIs, browser automation, and external tools. They contain endpoint documentation, curl examples, useful jq filters, and step-by-step usage instructions.
 - **Reference skills** (`flight-search-strategy`, `points-valuations`, `alliances`, `lessons-learned`, etc.) carry the institutional knowledge that decides when and how to use the tool skills. They contain the workflow rules, lookup tables, and hard-won lessons that prevent common mistakes.
 
 OpenCode, Claude Code, and Codex can all load them. Skills use **progressive disclosure**: each one's name and short description are loaded into context at session start. The agent reads the full SKILL.md only when it decides to use a skill. This keeps the always-loaded context small and lets the toolkit grow without bloating the agent's prompt.
@@ -382,11 +378,11 @@ The **reference skills** (`flight-search-strategy`, `points-valuations`, `partne
 
 The core question: **"Should I burn points or pay cash?"**
 
-1. **Search ALL flight sources** — Duffel + Ignav + Google Flights + Skiplagged + Kiwi for cash. Seats.aero for awards. Amex portal for pay-with-points.
+1. **Search ALL flight sources** — Ignav + Bilt portal + Google Flights + Skiplagged + Kiwi for cash. Seats.aero for awards. Amex portal for pay-with-points.
 2. **Optimize transfers** — `transfer-partners` finds the cheapest path from your credit card points to the loyalty program offering the best deal.
 3. **Compare** — `trip-calculator` shows CPP for each option. Higher CPP = better use of points. Below floor valuation = pay cash instead.
 4. **Check balances** — AwardWallet confirms you have enough points.
-5. **Book it** — Use booking links from Seats.aero, Duffel, or Ignav. Don't transfer points until you've confirmed availability on the airline's site.
+5. **Book it** — Use booking links from Seats.aero or Ignav. Don't transfer points until you've confirmed availability on the airline's site.
 
 ### Example Prompts
 
@@ -454,7 +450,6 @@ travel-hacking-toolkit/
 │   ├── trip-planner/SKILL.md       # Full trip planning in one shot
 │   │
 │   │  # ── Flights ──
-│   ├── duffel/SKILL.md             # Primary cash prices (GDS)
 │   ├── google-flights/SKILL.md     # Browser-automated Google Flights
 │   ├── ignav/SKILL.md              # Secondary cash prices (REST API)
 │   ├── seatmaps/SKILL.md           # Aircraft seat maps

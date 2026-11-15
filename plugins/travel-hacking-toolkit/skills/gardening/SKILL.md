@@ -77,7 +77,7 @@ For **every reservation** in the file, run through this checklist. Parallelize s
 This is the user's #1 interest. For each booking:
 
 **Cash bookings:**
-- Search current cash prices on the SAME flights/dates using Duffel, Ignav, Google Flights, Skiplagged, and Kiwi
+- Search current cash prices on the SAME flights/dates using Ignav, Bilt portal, Google Flights, Skiplagged, and Kiwi
 - Search **nearby airports** (within ~100 miles / reasonable driving distance) for the same dates
   - SFO → also check OAK, SJC
   - LAX → also check BUR, SNA, LGB, ONT
@@ -182,7 +182,7 @@ Recommend the user gardens their reservations:
 ## Tools to Use
 
 Invoke these in parallel for each reservation:
-- **Duffel / Ignav / Google Flights / Skiplagged / Kiwi** — current cash prices
+- **Ignav / Bilt portal / Google Flights / Skiplagged / Kiwi** — current cash prices
 - **Seats.aero** — current award availability
 - **Trivago / Skiplagged Hotels** — hotel price checks
 - **AwardWallet** — pull latest itineraries and detect changes automatically
