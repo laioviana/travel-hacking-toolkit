@@ -47,7 +47,7 @@ Seats.aero source names map to `transfer-partners.json` keys:
 |-------------------|---------------------|---------------------------|
 | `united` | `united` | Chase UR (1:1), Bilt (1:1) |
 | `aeroplan` | `aeroplan` | Chase UR (1:1), Amex MR (1:1), Bilt (1:1), Capital One (1:1) |
-| `flyingblue` | `flying_blue` | Chase UR (1:1), Amex MR (1:1), Bilt (1:1), Capital One (1:1), Citi TY (1:1), Wells Fargo (1:1) |
+| `flyingblue` | `flying_blue` | Chase UR (1:1), Amex MR (1:1), Bilt (1:1), Capital One (1:1), Citi TY (1:1), Wells Fargo (1:1), Amex NL MR (2:1), Livelo (3.5:1), Esfera (3.5:1), Rove (1:1) |
 | `american` | `american` | Citi TY (1:1) |
 | `alaska` | `alaska_hawaiian` | Bilt (1:1) |
 | `virginatlantic` | `virgin_atlantic` | Chase UR (1:1), Amex MR (1:1), Bilt (1:1), Citi TY (1:1), Wells Fargo (1:1 via Virgin Red) |
@@ -56,11 +56,14 @@ Seats.aero source names map to `transfer-partners.json` keys:
 | `etihad` | `etihad` | Bilt (1:1), Capital One (1:1), Citi TY (1:1) |
 | `singapore` | `singapore` | Chase UR (1:1), Amex MR (1:1), Capital One (1:1), Citi TY (1:1) |
 | `jetblue` | `jetblue` | Chase UR (1:1), Citi TY (1:1), Wells Fargo (1:1), Amex MR (250:200), Capital One (5:3) |
-| `qatar` | `qatar` | Amex MR (1:1), Bilt (1:1), Capital One (1:1), Citi TY (1:1) |
+| `qatar` | `qatar` | Amex MR (1:1), Bilt (1:1), Capital One (1:1), Citi TY (1:1), Livelo (3:1), Rove (1:1). Qatar Avios combine 1:1 into Iberia/BA (see `data/avios-family.json`) |
 | `turkish` | `turkish` | Bilt (1:1), Capital One (1:1), Citi TY (1:1) |
 | `eurobonus` | (no direct transfer) | N/A |
 | `aeromexico` | `aeromexico` | Amex MR (1:1.6), Capital One (1:1), Citi TY (1:1) |
-| `smiles` | (no direct transfer) | N/A |
+| `smiles` | `smiles` | Livelo (1:1), Esfera (1:1), plus frequent bonificadas |
+| `azul` | `azul` | Livelo (1:1), Esfera (1:1), plus frequent bonificadas |
+| (not on Seats.aero) | `latam_pass` | Livelo (1:1), Esfera (1:1) |
+| (not on Seats.aero) | `iberia` | Esfera (2:1), Amex NL MR (3:2, or 5:4 via BA), Livelo (3.5:1, or 3:1 via Qatar) |
 | `finnair` | `finnair` | Capital One (1:1) |
 | `lufthansa` | (no direct transfer) | N/A |
 | `ethiopian` | (no direct transfer) | N/A |

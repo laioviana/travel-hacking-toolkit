@@ -1,0 +1,80 @@
+{
+  "_meta": {
+    "last_updated": "2026-11-16",
+    "staleness_days": 90,
+    "description": "Rules for booking awards for a family: child and lap-infant pricing, booking for people other than the account holder (beneficiaries), and household pooling. Use whenever the party has more than one traveller or includes a child.",
+    "confidence_levels": "VERIFIED = primary source + 1 secondary; LIKELY = single primary or multiple secondaries agree; UNVERIFIED = single secondary or dated source.",
+    "age_rule": "Infant = under 2 on the travel date (LATAM: under 2 on every segment, including the return). Child = 2-11. Compute age from the birth month for each segment date."
+  },
+  "child_award_pricing": {
+    "flying_blue": {
+      "child_2_11": "25% off the adult award, any cabin, including partners. Not on Promo Rewards. May now require the child to be in a Flying Blue Family pool.",
+      "infant": "Book through Flying Blue customer service.",
+      "confidence": "LIKELY",
+      "sources": ["https://onemileatatime.com/insights/flying-blue-award-discount-children/", "https://skystatus.pro/guide/flying-blue-family-account"]
+    },
+    "iberia": {
+      "child_2_11": "No published Avios child rate found. Cash child discounts exist and vary by fare. Check the booking engine fare breakdown.",
+      "infant": "10% of the adult Avios price, economy only. Add infants through the Iberia app (website blocks it).",
+      "confidence": "UNVERIFIED",
+      "sources": ["https://www.iberia.com/es/faqs/fares/", "https://www.headforpoints.com/2022/03/06/book-avios-tickets-by-iberia-for-baby-infant/comment-page-1"]
+    },
+    "latam_pass": {
+      "child_2_11": "Full miles assumed (no child discount found).",
+      "infant": "About 10% of the adult miles on international flights, plus taxes.",
+      "confidence": "UNVERIFIED",
+      "sources": ["https://flypass.ai/post/passagem-aerea-crianca-de-colo"]
+    },
+    "smiles": {
+      "child_2_11": "No child discount on award redemptions.",
+      "infant": "Infant fee paid in cash, not miles.",
+      "confidence": "UNVERIFIED",
+      "sources": ["https://flypass.ai/post/passagem-aerea-crianca-de-colo"]
+    },
+    "azul": {
+      "child_2_11": "No child discount on award redemptions (older source).",
+      "confidence": "UNVERIFIED",
+      "sources": []
+    },
+    "tap": {
+      "child_2_11": "Not researched yet.",
+      "confidence": "UNVERIFIED",
+      "sources": []
+    }
+  },
+  "booking_for_others": {
+    "latam_pass": {
+      "limit": "24-25 distinct third parties per rolling 12 months (sources disagree on whether each ticket counts).",
+      "fee": "None reported.",
+      "confidence": "LIKELY",
+      "sources": ["https://www.cartoesdecredito.me/milhas/limite-de-cpf-azul-fidelidade-latam-pass-e-smiles-2026/", "https://faq.blackpilado.com.br/2026/07/qual-o-limite-de-cpf-na-latam.html"]
+    },
+    "smiles": {
+      "limit": "25 people per calendar year, resets 1 January.",
+      "fee": "None reported.",
+      "confidence": "LIKELY",
+      "sources": ["https://www.cartoesdecredito.me/milhas/limite-de-cpf-azul-fidelidade-latam-pass-e-smiles-2026/"]
+    },
+    "azul": {
+      "limit": "Passenger must be on a pre-registered beneficiary list; 5-15 slots depending on tier (sources disagree).",
+      "fee": "R$ 69.90-189.90 when booking under 120 days out without the account holder on the reservation.",
+      "confidence": "UNVERIFIED",
+      "sources": ["https://pontospravoar.com/como-funciona-limitacao-cpf-emissao-passagens-pontos/"]
+    },
+    "flying_blue": {
+      "limit": "Awards can be booked for anyone. Family pooling lets the family leader move members' miles into their account.",
+      "confidence": "LIKELY",
+      "sources": ["https://skystatus.pro/guide/flying-blue-family-account"]
+    },
+    "iberia": {
+      "limit": "Awards can be booked for registered beneficiaries; see data/avios-family.json for Family Accounts.",
+      "confidence": "UNVERIFIED",
+      "sources": []
+    }
+  },
+  "pooling": {
+    "flying_blue_family": { "members": "up to 8 (max 2 adults, up to 6 children)", "notes": "Leader can transfer members' miles to themselves. Linking the child may unlock the 25% child discount.", "confidence": "LIKELY" },
+    "iberia_family_account": { "members": "2-7", "notes": "See data/avios-family.json", "confidence": "LIKELY" }
+  },
+  "split_ticket_warning": "When the 3 seats are split across programs on the same flight, each booking is separate: a schedule change or cancellation on one is not mirrored on the other, and seat assignment together is not guaranteed. Link the bookings with the airline after ticketing."
+}

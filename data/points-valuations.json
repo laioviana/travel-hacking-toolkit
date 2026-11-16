@@ -26,7 +26,7 @@
         "methodology": "Most conservative and theoretically rigorous. Frames value as 'amount at which you are indifferent to holding miles versus cash,' not 'how much airfare a mile can buy.' Accounts for devaluation risk, restricted use, and foregone mile-earning on award tickets. Older data but methodology is the gold standard."
       }
     },
-    "last_updated": "2026-11-13",
+    "last_updated": "2026-11-16",
     "staleness_days": 45,
     "staleness_note": "TPG, UP, and OMAAT update monthly. VFTW updates less frequently. If last_updated is more than 45 days ago, re-fetch from source URLs and update.",
     "methodology": "Each program has a 'floor' (conservative, min across sources) and 'ceiling' (optimistic, max across sources). Default to FLOOR for decision-making. A redemption that beats the ceiling is genuinely exceptional. A redemption below the floor is objectively poor. TPG systematically overvalues; VFTW/OMAAT are more conservative and more useful for 'should I burn points on this?' decisions. See: https://viewfromthewing.com/why-the-points-guy-systematically-overstates-the-value-of-miles/"
@@ -358,6 +358,58 @@
       "floor": 0.55,
       "ceiling": 0.9,
       "sources": { "tpg": 0.55, "up": 0.9, "omaat": 0.6, "vftw": 0.8 }
+    }
+  },
+  "brl_milheiro": {
+    "_description": "Brazilian programs valued in BRL per 1,000 points (R$/milheiro), the unit Brazilian travellers use. Not comparable to the US-cent cpp sections above. Redemption value = (cash fare in R$ - taxes paid on the award in R$) / points * 1000.",
+    "currency": "BRL",
+    "unit": "R$ per 1,000 points",
+    "sources": {
+      "compromilhas": { "name": "Compromilhas (market price for selling miles)", "url": "https://compromilhas.com/blog/quanto-vale-as-milhas", "edition": "2026-11-13", "methodology": "Price buyers pay for miles on the Brazilian secondary market. Use as an opportunity-cost reference, not a usage value." },
+      "milhasbot": { "name": "MilhasBot (usage-value ranges)", "url": "https://www.milhasbot.com.br/valores-do-milheiro/", "edition": "September 2026", "methodology": "Typical redemption-value range per program; also notes typical promo purchase floors for Livelo (~R$ 25.90) and Esfera (~R$ 31.50)." }
+    },
+    "decision_rules": [
+      "Compare every redemption against the user's own cost basis first (avg_cost_per_milheiro_brl in data/my-balances.json). Below cost basis = the miles were worth more as bought than as spent.",
+      "Then compare against the floor below. Below floor = poor redemption. Above ceiling = exceptional.",
+      "For EUR-based programs (Flying Blue, Avios, Accor), convert cash prices to BRL with scripts/fx.py and use the cost basis when known."
+    ],
+    "programs": {
+      "latam_pass": {
+        "name": "LATAM Pass",
+        "floor": 23.72,
+        "ceiling": 33.0,
+        "sources": { "compromilhas": 23.72, "milhasbot": "27-33" }
+      },
+      "smiles": {
+        "name": "GOL Smiles",
+        "floor": 19.45,
+        "ceiling": 27.0,
+        "sources": { "compromilhas": 19.45, "milhasbot": "21-27" }
+      },
+      "azul_fidelidade": {
+        "name": "Azul Fidelidade",
+        "floor": 13.27,
+        "ceiling": 21.0,
+        "sources": { "compromilhas": 13.27, "milhasbot": "17-21" },
+        "note": "Azul went through a restructuring (Chapter 11) in 2025-2026; keep balances low."
+      },
+      "livelo": {
+        "name": "Livelo",
+        "floor": 23.0,
+        "ceiling": 29.0,
+        "sources": { "milhasbot": "23-29" },
+        "note": "Transferable currency. Real value depends on the transfer bonus at the time of transfer."
+      },
+      "esfera": {
+        "name": "Esfera",
+        "floor": 21.0,
+        "ceiling": 27.0,
+        "sources": { "milhasbot": "21-27" },
+        "note": "Transferable currency. Real value depends on the transfer bonus at the time of transfer."
+      }
+    },
+    "fixed_value": {
+      "accor": { "name": "ALL Accor", "value": "2,000 points = EUR 40 (EUR 0.02 per point)", "note": "Fixed-value currency; convert EUR to BRL at the current rate. No upside beyond this." }
     }
   }
 }

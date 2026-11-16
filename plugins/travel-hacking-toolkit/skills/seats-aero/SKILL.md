@@ -122,7 +122,7 @@ Sometimes a flight shows bookable but no seat actually exists. Causes:
 
 ### Foreign Program Caveats
 
-Some programs (Smiles, TudoAzul, etc.) may require local tax IDs, local payment methods, or are only available in the local language. They still appear in results because they can serve as **signals**: if Azul TudoAzul shows United saver space, that same space is likely bookable through Aeroplan or other Star Alliance partners you CAN access.
+Some programs (Smiles, Azul Fidelidade, etc.) may require local tax IDs, local payment methods, or are only available in the local language. **This user is Brazilian with a CPF, so Smiles and Azul Fidelidade are real booking programs for them, not just signals** (check `has_cpf` in `data/my-profile.json`). For users without one they still serve as **signals**: if Azul Fidelidade shows United saver space, that same space is likely bookable through Aeroplan or other Star Alliance partners you CAN access.
 
 ### Award Release Dates
 
@@ -149,7 +149,7 @@ Each result from Cached Search / Bulk Availability is a **summary** that groups 
 | `velocity` | Virgin Australia Velocity | Y/W/J/F | Yes | Yes | Yes |
 | `qantas` | Qantas Frequent Flyer | Y/W/J/F | No | Yes | Yes |
 | `connectmiles` | Copa ConnectMiles | Y/J/F | No | Yes | Yes |
-| `azul` | Azul TudoAzul | Y/J | No | Yes | Yes |
+| `azul` | Azul Fidelidade (formerly TudoAzul) | Y/J | No | Yes | Yes |
 | `smiles` | GOL Smiles | Y/W/J/F | Yes | Yes | Yes |
 | `flyingblue` | Air France/KLM Flying Blue | Y/W/J/F | Yes | Yes | Yes |
 | `jetblue` | JetBlue TrueBlue | Y/W/J/F | Yes | Yes | Yes |
