@@ -184,3 +184,11 @@ If seats.aero returns no availability, say "No award availability found" instead
 - Portal searches require Docker and login credentials. Skip if not configured.
 - Seats.aero shows cached availability (up to 24h old). Live search via seats-aero-web is local only.
 - Transfer ratios are from `transfer-partners.json`. Verify against issuer before large transfers.
+
+## This User: Profile Defaults
+
+- **Markets:** NL then BR from the profile's `search_markets`. Show both when they differ.
+- **Currency:** the unified table is in R$. Convert with `python3 scripts/fx.py`. Cash for the whole party, awards as miles per person and total, plus taxes in R$.
+- **Award value:** R$ per milheiro, against the user's `avg_cost_per_milheiro_brl` and `brl_milheiro` in `data/points-valuations.json`. Skip the Amex US portal and US card currencies. Transfer optimization uses `amex_nl_mr`, `livelo`, `esfera` in `data/transfer-partners.json`.
+- **Positioning airports:** add rows for BRU, DUS, EIN, RTM, CGN when the fare or taxes may be lower, with positioning cost.
+- **Programs without Seats.aero:** LATAM Pass (`latam-pass`) and Iberia (`avios`, use Qatar as a hint only) need their own check.

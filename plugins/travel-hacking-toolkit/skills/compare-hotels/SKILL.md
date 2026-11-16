@@ -211,3 +211,10 @@ If premium databases show FHR/Edit properties in the city but the portal search 
 - FHR/THC/Edit databases are updated periodically. Properties may have been added or removed.
 - Amex hotel points pricing is variable (not 1 cpp). Use the actual points price from the portal.
 - Direct booking prices (via SerpAPI) may differ from portal prices for the same hotel.
+
+## This User: Accor First, BRL, Profile Party
+
+- **Occupancy:** the profile party (adults plus children with ages on the stay date). Prefer family rooms or apartments.
+- **Accor first.** On Accor brands (`hotel-chains`), compare ALL points (2,000 = EUR 40) and the user's Accor status benefits against cash. Status benefits usually apply only to the member's own room.
+- **Trivago:** set country to the user's residence (NL) and currency to BRL if the tool lists it, otherwise EUR, then convert with `python3 scripts/fx.py`. Use only values the tool lists. Never put personal details in the query.
+- **Currency:** show all prices in R$. Skip FHR, THC and Edit (US programs, archived in a later PR).

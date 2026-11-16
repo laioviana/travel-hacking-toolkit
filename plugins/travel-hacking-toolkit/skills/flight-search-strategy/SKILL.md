@@ -82,3 +82,13 @@ When sources disagree on cash prices:
 - Trusting SerpAPI prices as bookable (they're often inflated).
 - Skipping Seats.aero because the user "doesn't have those points" — they may have them via transfer, see the `partner-awards` skill.
 - Single-market search on international routes (always try at least 2 markets).
+
+## This User: Markets, Currency, Positioning
+
+Defaults come from `data/my-profile.json` (read via `my-points`), not from the examples above.
+
+- **Markets:** use the profile's `search_markets`, in order. For this user that is **NL first, then BR**. The BR market sometimes returns lower fares for Brazil-bound trips, and the fare is then payable in BRL with a Brazilian card. Ask before trying a third market.
+- **Currency:** show every price in R$. Convert EUR and USD with `python3 scripts/fx.py <amount> EUR`. State the rate date. Card FX adds roughly 1 to 3%.
+- **Positioning:** also search the profile's `positioning_airports` (EIN, RTM, BRU, DUS, CGN). Add the cost and time of getting there (rail via `deutsche-bahn` for DUS and CGN) before calling a positioning fare cheaper. Taxes on awards by departure airport are UNVERIFIED, so test each airport on the booking engine rather than assuming (see `flying-blue`).
+- **Party:** search `party.default_seats` seats, with the child counted at the age on the travel date.
+- **Brazil-bound trips:** run `ams-for` for Fortaleza. Load `flying-blue` and `avios` for Air France and Iberia awards.

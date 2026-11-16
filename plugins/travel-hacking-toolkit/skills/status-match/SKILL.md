@@ -211,3 +211,7 @@ jq '[.direct_matches.airlines, .direct_matches.hotels, .paid_concierge.programs]
 5. **Reddit /r/awardtravel** — most current real-world reports
 
 When sources disagree, primary sources win. When official terms are silent on lifetime restrictions, default to "treat as once per program cycle" and flag UNVERIFIED.
+
+## This User: Start From the Profile
+
+Read the user's current status with `my-points` (`status` in the profile) before suggesting a match. Start from the tiers they already hold, such as ALL Accor, and look for hotel matches that tier can unlock (see `data/status-match.json`). Apply the lifetime-restriction rule first. Skip US card-granted paths. Only suggest a match when travel in the next 6 to 12 months would use it.

@@ -44,3 +44,5 @@ ams-for	orchestration	AMS to Fortaleza family search across every gateway. Cash 
 bonificadas	loyalty	Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.	None (public feeds)	
 brazil-programs	reference	Livelo, Esfera, Smiles, LATAM Pass and Azul. Cost basis in R$ per milheiro and when each program wins.	None (local data)	
 latam-pass	loyalty	LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.	None (requires browser)	
+flying-blue	loyalty	Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1.	None (Seats.aero source flyingblue)	
+avios	loyalty	Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR.	None (Seats.aero source qatar as stand-in)	
