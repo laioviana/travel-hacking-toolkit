@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "last_updated": "2026-11-16",
+    "staleness_days": 90,
+    "description": "Priority routes the user flies every year, with every gateway and the programs that can book each leg. Search all gateways, not only the user's usual ones. Gateway service is from the destination airport's Wikipedia 'Airlines and destinations' table (re-check with the wikipedia-airports skill when stale). No award prices here: prices are dynamic and must come from live searches.",
+    "sources": ["https://en.wikipedia.org/wiki/Fortaleza_Airport"]
+  },
+  "routes": {
+    "AMS-FOR": {
+      "origin": "AMS",
+      "origin_alternatives": ["EIN", "RTM", "BRU", "DUS", "CGN"],
+      "destination": "FOR",
+      "frequency": "At least once a year, family of 3",
+      "gateways": [
+        {
+          "via": "CDG",
+          "long_haul": "Air France CDG-FOR (nonstop)",
+          "programs": ["flying_blue", "smiles"],
+          "seats_aero_sources": ["flyingblue", "smiles"],
+          "notes": "User's usual option. Flying Blue Promo Rewards and the 25% child discount apply. Smiles can be fed from Livelo/Esfera at 1:1 plus bonificadas."
+        },
+        {
+          "via": "MAD",
+          "long_haul": "Iberia MAD-FOR (nonstop)",
+          "programs": ["iberia", "british_airways", "qatar"],
+          "seats_aero_sources": ["qatar"],
+          "notes": "User's usual option. Iberia off-peak Avios pricing. Seats.aero has no Iberia source; Qatar results are a stand-in, then price on iberia.com."
+        },
+        {
+          "via": "LIS",
+          "long_haul": "TAP LIS-FOR (nonstop)",
+          "programs": ["tap", "azul", "smiles"],
+          "seats_aero_sources": ["azul", "smiles"],
+          "notes": "TAP Miles&Go reachable from Esfera (2.7:1). Azul is a TAP partner."
+        },
+        {
+          "via": "LIS",
+          "long_haul": "LATAM LIS-FOR (seasonal nonstop)",
+          "programs": ["latam_pass"],
+          "seats_aero_sources": [],
+          "notes": "Best use of the LATAM Pass balance (cheapest cost basis). Not on Seats.aero: search latampass.latam.com directly."
+        },
+        {
+          "via": "GRU / GIG / REC + domestic",
+          "long_haul": "LATAM, Azul or GOL via a Brazilian hub",
+          "programs": ["latam_pass", "smiles", "azul"],
+          "seats_aero_sources": ["smiles", "azul"],
+          "notes": "Two connections with a toddler; only if much cheaper."
+        }
+      ],
+      "always_check": [
+        "Mixed one-ways (e.g. Flying Blue out, Iberia Avios back).",
+        "Positioning to BRU/DUS when taxes or fares are lower.",
+        "Cash baseline from both NL and BR markets, converted to BRL.",
+        "3 seats on the same flight; flag programs that hide seat counts."
+      ]
+    }
+  }
+}

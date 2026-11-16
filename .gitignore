@@ -27,3 +27,9 @@ trips/logs/
 
 # Personal points balances — local only
 data/my-balances.json
+
+# Personal travel profile — local only
+data/my-profile.json
+
+# FX rate cache (scripts/fx.py)
+.cache/

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "last_updated": "2026-11-16",
+    "staleness_days": 45,
+    "description": "Market reference prices for buying Brazilian points and miles (R$ per 1,000). The user's own average purchase cost lives in data/my-balances.json (avg_cost_per_milheiro_brl) and always takes precedence. Use these numbers to answer 'is this purchase promo good?' and to compute the effective cost of airline miles after a transfer bonus.",
+    "sources": [
+      "https://www.milhasbot.com.br/valores-do-milheiro/",
+      "https://farejadordemilhas.com.br/comprar-milhas",
+      "https://mai.app.br/blog/transferir-pontos-livelo-para-milhas"
+    ]
+  },
+  "formula": "effective_cost_per_airline_milheiro = purchase_cost_per_milheiro / (base_ratio * (1 + bonus_pct/100)). Example: Livelo at R$ 25.33 with +100% to Smiles at 1:1 = 25.33 / 2 = R$ 12.67 per 1,000 Smiles miles.",
+  "purchase_reference": {
+    "livelo": { "good_promo_floor_brl": 25.90, "regular_reference_brl": 30.0, "confidence": "LIKELY", "note": "Floor seen in strong promos (MilhasBot, Sep 2026). Regular reference from Mai.app 2026." },
+    "esfera": { "good_promo_floor_brl": 31.50, "confidence": "UNVERIFIED", "note": "Floor per MilhasBot Sep 2026. User already bought at R$ 28.85, below this reference." }
+  },
+  "recent_effective_costs_seen": [
+    { "date": "2026-10", "path": "Esfera -> Smiles (bonificada)", "smiles_milheiro_brl": 15.75, "source": "https://farejadordemilhas.com.br/comprar-milhas", "confidence": "UNVERIFIED" }
+  ],
+  "decision_rules": [
+    "A buy + transfer is worth it only if the effective airline milheiro is below what that program's miles will be redeemed at (see brl_milheiro in data/points-valuations.json) AND there is a concrete redemption in sight.",
+    "Never transfer Livelo/Esfera without a transfer bonus unless an award is about to disappear; bonuses of 80-100% to Smiles/LATAM/Azul are routine.",
+    "Points bought for a specific trip: check that the transfer arrives in time (Livelo up to 7 business days)."
+  ]
+}

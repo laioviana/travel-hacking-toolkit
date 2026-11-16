@@ -3,42 +3,17 @@
     "last_updated": "2026-11-16",
     "note": "Template only"
   },
-  "_comment": "Copy to data/my-balances.json (gitignored) and fill in. Keep program names matching data/transfer-partners.json where possible.",
+  "_comment": "Copy to data/my-balances.json (gitignored) and fill in. Keep program names matching data/transfer-partners.json where possible. balance null = unknown. avg_cost_per_milheiro_brl = average R$ paid per 1,000 points (optional).",
   "updated": "2026-11-16",
   "balances": [
-    {
-      "program": "Chase Ultimate Rewards",
-      "kind": "bank",
-      "balance": 0
-    },
-    {
-      "program": "Amex Membership Rewards",
-      "kind": "bank",
-      "balance": 0
-    },
-    {
-      "program": "Capital One",
-      "kind": "bank",
-      "balance": 0
-    },
-    {
-      "program": "Bilt Rewards",
-      "kind": "bank",
-      "balance": 0
-    },
-    {
-      "program": "United MileagePlus",
-      "kind": "airline",
-      "balance": 0,
-      "status": "",
-      "expires": null
-    },
-    {
-      "program": "World of Hyatt",
-      "kind": "hotel",
-      "balance": 0,
-      "status": "",
-      "expires": null
-    }
+    { "program": "Amex Membership Rewards (NL)", "kind": "bank", "balance": 0 },
+    { "program": "Livelo", "kind": "bank", "balance": 0, "avg_cost_per_milheiro_brl": null },
+    { "program": "Esfera", "kind": "bank", "balance": 0, "avg_cost_per_milheiro_brl": null },
+    { "program": "LATAM Pass", "kind": "airline", "balance": 0, "status": "", "expires": null, "avg_cost_per_milheiro_brl": null },
+    { "program": "Smiles", "kind": "airline", "balance": 0, "status": "", "expires": null },
+    { "program": "Azul Fidelidade", "kind": "airline", "balance": 0, "status": "", "expires": null },
+    { "program": "Flying Blue", "kind": "airline", "balance": 0, "status": "", "expires": null },
+    { "program": "Iberia Plus", "kind": "airline", "balance": 0, "status": "", "expires": null, "avg_cost_per_milheiro_brl": null },
+    { "program": "All Accor", "kind": "hotel", "balance": 0, "status": "", "expires": null }
   ]
 }

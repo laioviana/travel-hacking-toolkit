@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "last_updated": "2026-11-16",
+    "staleness_days": 3650,
+    "note": "Template only. Copy to data/my-profile.json (gitignored) and fill in."
+  },
+  "home_airport": "AMS",
+  "positioning_airports": ["EIN", "RTM", "BRU", "DUS", "CGN"],
+  "country_of_residence": "NL",
+  "nationality": "BR",
+  "has_cpf": true,
+  "display_currency": "BRL",
+  "search_markets": ["NL", "BR"],
+  "party": {
+    "adults": 2,
+    "children": [{ "label": "child", "birth": "YYYY-MM" }],
+    "default_seats": 3,
+    "points_holder": "Account holder only; other travellers are booked as beneficiaries."
+  },
+  "status": [{ "program": "ALL Accor", "tier": "Gold" }],
+  "card_currencies": ["amex_nl_mr"],
+  "bought_currencies": ["livelo", "esfera"],
+  "priority_routes": ["AMS-FOR"]
+}
