@@ -14,6 +14,7 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 ## Orchestration (start here)
 
 <!-- BEGIN: llms:orchestration -->
+- [Ams For](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/ams-for/SKILL.md): AMS to Fortaleza family search across every gateway. Cash and awards priced in BRL against cost basis.
 - [Award Calendar](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/award-calendar/SKILL.md): Cheapest award dates for a route across a date range. Calendar grid view.
 - [Compare Flights](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/compare-flights/SKILL.md): Unified flight comparison across ALL sources in parallel. Auto-applies transfer optimization.
 - [Compare Hotels](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/compare-hotels/SKILL.md): Unified hotel comparison across portals, metasearch, and Airbnb. FHR/Edit stacking detection.
@@ -57,7 +58,9 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 <!-- BEGIN: llms:loyalty -->
 - [American Airlines](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/american-airlines/SKILL.md): AAdvantage balance and elite status. AwardWallet does not support AA. Docker: `ghcr.io/borski/aa-miles-check`.
 - [Awardwallet](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/awardwallet/SKILL.md): All loyalty balances, elite status, history.
-- [My Points](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/my-points/SKILL.md): User's own points/miles balances, cost basis, status and travel profile (local files or own web app).
+- [Bonificadas](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/bonificadas/SKILL.md): Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.
+- [Latam Pass](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/latam-pass/SKILL.md): LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.
+- [My Points](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/my-points/SKILL.md): The user own points and miles balances, cost basis, status and travel profile (local files or own web app).
 - [Transfer Partners](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/transfer-partners/SKILL.md): Cheapest transfer path from credit card points to mileage programs.
 - [Wheretocredit](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/wheretocredit/SKILL.md): Mileage earning rates by airline and booking class across 50+ programs.
 <!-- END: llms:loyalty -->
@@ -80,11 +83,12 @@ These skills carry institutional knowledge that the agent loads when triggered. 
 - [Award Holds](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/award-holds/SKILL.md): Per-program rules for placing award flight tickets on hold. Covers 9 programs with holds (AA 24h online, LH 5 days, FB 3 days, CX 2 days, Turkish 2 days, Virgin Atlantic 1-2 days, ANA 2 days, Emirates 1 day, EVA online), Singapore as agent-discretionary, and the negative space (UA/AS/DL/Aeroplan/BA/Qatar/Korean/Etihad - many programs still do not allow holds).
 - [Award Sweet Spots](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/award-sweet-spots/SKILL.md): Catalog of legendary, excellent, and good award redemptions with current rates and devaluation history.
 - [Booking Guidance](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/booking-guidance/SKILL.md): The booking flow, hold-before-transfer rule, phone numbers for major programs.
+- [Brazil Programs](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/brazil-programs/SKILL.md): Livelo, Esfera, Smiles, LATAM Pass and Azul. Cost basis in R$ per milheiro and when each program wins.
 - [Cabin Codes](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/cabin-codes/SKILL.md): IATA cabin codes (F/J/W/Y) and saver fare class codes (X/I/O) for partner-bookable inventory.
 - [Fallback And Resilience](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/fallback-and-resilience/SKILL.md): What to do when each tool fails. Tool-by-tool fallback paths.
 - [Flight Search Strategy](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/flight-search-strategy/SKILL.md): The canonical multi-source search workflow. Source priority (Ignav > Bilt portal > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes.
 - [Hotel Chains](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/hotel-chains/SKILL.md): Maps brand names (Westin, Holiday Inn, etc.) to chain families and loyalty programs.
-- [Lessons Learned](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/lessons-learned/SKILL.md): Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Bilt portal limitations. Load before any award flight search.
+- [Lessons Learned](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/lessons-learned/SKILL.md): Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Ignav limitations. Load before any award flight search.
 - [Partner Awards](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/partner-awards/SKILL.md): Which programs ticket which airlines (alliance + bilateral). Cross-references credit card currencies to booking programs. Reachability workflow.
 - [Points Valuations](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/points-valuations/SKILL.md): CPP formula, floor/ceiling rules, surcharge-heavy programs to avoid, transfer bonus considerations, Chase Points Boost dynamics, opportunity cost.
 - [Round The World](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/round-the-world/SKILL.md): RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued.
