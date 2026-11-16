@@ -24,3 +24,6 @@ Thumbs.db
 
 # Trip logs (trip-log skill) — local only
 trips/logs/
+
+# Personal points balances — local only
+data/my-balances.json

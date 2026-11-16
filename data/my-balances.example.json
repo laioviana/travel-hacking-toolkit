@@ -1,0 +1,44 @@
+{
+  "_meta": {
+    "last_updated": "2026-11-16",
+    "note": "Template only"
+  },
+  "_comment": "Copy to data/my-balances.json (gitignored) and fill in. Keep program names matching data/transfer-partners.json where possible.",
+  "updated": "2026-11-16",
+  "balances": [
+    {
+      "program": "Chase Ultimate Rewards",
+      "kind": "bank",
+      "balance": 0
+    },
+    {
+      "program": "Amex Membership Rewards",
+      "kind": "bank",
+      "balance": 0
+    },
+    {
+      "program": "Capital One",
+      "kind": "bank",
+      "balance": 0
+    },
+    {
+      "program": "Bilt Rewards",
+      "kind": "bank",
+      "balance": 0
+    },
+    {
+      "program": "United MileagePlus",
+      "kind": "airline",
+      "balance": 0,
+      "status": "",
+      "expires": null
+    },
+    {
+      "program": "World of Hyatt",
+      "kind": "hotel",
+      "balance": 0,
+      "status": "",
+      "expires": null
+    }
+  ]
+}
