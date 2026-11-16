@@ -17,7 +17,7 @@
     "default_seats": 3,
     "points_holder": "Account holder only; other travellers are booked as beneficiaries."
   },
-  "status": [{ "program": "ALL Accor", "tier": "Gold" }],
+  "status": [{ "program": "ALL Accor", "tier": "" }],
   "card_currencies": ["amex_nl_mr"],
   "bought_currencies": ["livelo", "esfera"],
   "priority_routes": ["AMS-FOR"]

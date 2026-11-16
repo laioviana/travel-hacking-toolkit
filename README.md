@@ -160,6 +160,7 @@ Start here: the **orchestration skills** call everything else automatically.
 <!-- BEGIN: readme:orchestration -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
+| **ams-for** | AMS to Fortaleza family search across every gateway. Cash and awards priced in BRL against cost basis. | Uses individual skill keys |
 | **award-calendar** | Cheapest award dates for a route across a date range. Calendar grid view. | Seats.aero Pro |
 | **compare-flights** | Unified flight comparison across ALL sources in parallel. Auto-applies transfer optimization. | Uses individual skill keys |
 | **compare-hotels** | Unified hotel comparison across portals, metasearch, and Airbnb. FHR/Edit stacking detection. | Uses individual skill keys |
@@ -213,7 +214,9 @@ Also use **tripadvisor** (under Destinations) for hotel ratings, rankings, subra
 |-------|-------------|---------|
 | **american-airlines** | AAdvantage balance and elite status. AwardWallet does not support AA. Docker: `ghcr.io/borski/aa-miles-check`. | None (requires Patchright) |
 | **awardwallet** | All loyalty balances, elite status, history. | AwardWallet Business |
-| **my-points** | User's own points/miles balances, cost basis, status and travel profile (local files or own web app). | none |
+| **bonificadas** | Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs. | None (public feeds) |
+| **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
+| **my-points** | The user own points and miles balances, cost basis, status and travel profile (local files or own web app). | none |
 | **transfer-partners** | Cheapest transfer path from credit card points to mileage programs. | None (local data) |
 | **wheretocredit** | Mileage earning rates by airline and booking class across 50+ programs. | None (free) |
 <!-- END: readme:loyalty -->
@@ -240,11 +243,12 @@ These skills carry the deep institutional knowledge that used to live in CLAUDE.
 | **award-holds** | Per-program rules for placing award flight tickets on hold. Covers 9 programs with holds (AA 24h online, LH 5 days, FB 3 days, CX 2 days, Turkish 2 days, Virgin Atlantic 1-2 days, ANA 2 days, Emirates 1 day, EVA online), Singapore as agent-discretionary, and the negative space (UA/AS/DL/Aeroplan/BA/Qatar/Korean/Etihad - many programs still do not allow holds). |
 | **award-sweet-spots** | Catalog of legendary, excellent, and good award redemptions with current rates and devaluation history. |
 | **booking-guidance** | The booking flow, hold-before-transfer rule, phone numbers for major programs. |
+| **brazil-programs** | Livelo, Esfera, Smiles, LATAM Pass and Azul. Cost basis in R$ per milheiro and when each program wins. |
 | **cabin-codes** | IATA cabin codes (F/J/W/Y) and saver fare class codes (X/I/O) for partner-bookable inventory. |
 | **fallback-and-resilience** | What to do when each tool fails. Tool-by-tool fallback paths. |
 | **flight-search-strategy** | The canonical multi-source search workflow. Source priority (Ignav > Bilt portal > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes. |
 | **hotel-chains** | Maps brand names (Westin, Holiday Inn, etc.) to chain families and loyalty programs. |
-| **lessons-learned** | Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Bilt portal limitations. Load before any award flight search. |
+| **lessons-learned** | Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Ignav limitations. Load before any award flight search. |
 | **partner-awards** | Which programs ticket which airlines (alliance + bilateral). Cross-references credit card currencies to booking programs. Reachability workflow. |
 | **points-valuations** | CPP formula, floor/ceiling rules, surcharge-heavy programs to avoid, transfer bonus considerations, Chase Points Boost dynamics, opportunity cost. |
 | **round-the-world** | RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued. |

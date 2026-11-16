@@ -2,7 +2,7 @@
 name: lessons-learned
 description: Mandatory pre-flight-search reference. Contains the Seats.aero workflow (pull ALL programs first), source accuracy hierarchy, small-market caveats, and Bilt portal limitations.
 category: reference
-summary: Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Bilt portal limitations. Load before any award flight search.
+summary: Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Ignav limitations. Load before any award flight search.
 ---
 
 # Lessons Learned

@@ -30,6 +30,9 @@ jobs:
       - name: Refresh transfer bonuses (scrapes Frequent Miler)
         run: python3 scripts/refresh-transfer-bonuses.py || echo "transfer-bonuses refresh failed — leaving existing data (non-fatal)"
 
+      - name: Refresh Brazilian bonificadas (Pontos pra Voar + Passageiro de Primeira feeds)
+        run: python3 scripts/refresh-bonificadas.py || echo "bonificadas refresh failed — leaving existing data (non-fatal)"
+
       - name: Refresh hotel property data (FHR / THC / Chase Edit KML)
         run: python3 scripts/refresh-hotel-data.py || echo "hotel-data refresh failed — leaving existing data (non-fatal)"
 
@@ -39,7 +42,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/
-            git commit -m "data: weekly auto-refresh (transfer bonuses + hotel properties)"
+            git commit -m "data: weekly auto-refresh (transfer bonuses, bonificadas, hotel properties)"
             git push
           else
             echo "No data changes this run."

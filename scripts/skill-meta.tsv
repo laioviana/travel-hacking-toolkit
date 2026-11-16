@@ -39,4 +39,8 @@ lessons-learned	reference	Hard-won knowledge from real searches. The mandatory S
 round-the-world	reference	RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued.		
 status-match	reference	Per-program status match rules with lifetime / once-per-N-years warnings, free vs paid concierge distinction, real fees, plus card-granted renewable status as the alternative.		
 vrbo	hotels	VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays.	None (requires Patchright)	ghcr.io/borski/vrbo
-my-points	loyalty	User's own points/miles balances and status (local file or own web app).	none	
+my-points	loyalty	The user own points and miles balances, cost basis, status and travel profile (local files or own web app).	none	
+ams-for	orchestration	AMS to Fortaleza family search across every gateway. Cash and awards priced in BRL against cost basis.	Uses individual skill keys	
+bonificadas	loyalty	Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.	None (public feeds)	
+brazil-programs	reference	Livelo, Esfera, Smiles, LATAM Pass and Azul. Cost basis in R$ per milheiro and when each program wins.	None (local data)	
+latam-pass	loyalty	LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.	None (requires browser)	
