@@ -111,30 +111,6 @@ install_optional_tools() {
 
   echo ""
 
-  # American Airlines / Amex: Docker or Patchright
-  echo "  American Airlines and Amex skills: browser automation for balance checks and portal pricing."
-  echo "  Requires either Docker (recommended) or Patchright (Python)."
-  echo ""
-
-  if command -v docker &>/dev/null; then
-    echo "  Docker detected. Pulling pre-built images..."
-    docker pull ghcr.io/borski/aa-miles-check:latest 2>/dev/null && echo "  ✓ American Airlines Docker image ready." || echo "  Could not pull AA image. Build locally: docker build -t aa-check skills/american-airlines/"
-    docker pull ghcr.io/borski/amex-travel:latest 2>/dev/null && echo "  ✓ Amex Travel Docker image ready." || echo "  Could not pull Amex image. Build locally: docker build -t amex-travel skills/amex-travel/"
-  else
-    echo "  Docker not found."
-    if python3 -c "import patchright" 2>/dev/null; then
-      echo "  ✓ Patchright already installed (AA/Amex skills, headed mode)"
-    else
-      read -rp "  Install Patchright for AA/Amex skills? [y/N]: " PR_CHOICE
-      if [[ "$PR_CHOICE" == "y" || "$PR_CHOICE" == "Y" ]]; then
-        pip install patchright && patchright install chromium
-        echo "  ✓ Patchright installed. AA/Amex skills will open a Chrome window briefly."
-      else
-        echo "  Skipped. AA/Amex skills won't work without Docker or Patchright."
-      fi
-    fi
-  fi
-
   echo ""
 }
 
@@ -164,7 +140,7 @@ install_skills_to() {
   echo "  Installing skills to $target..."
   mkdir -p "$target"
 
-  for skill_dir in "$REPO_DIR"/skills/*/; do
+  for skill_dir in "$REPO_DIR"/skills/[!_]*/; do
     skill_name=$(basename "$skill_dir")
     dest="$target/$skill_name"
 

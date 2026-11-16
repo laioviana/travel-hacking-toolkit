@@ -166,17 +166,8 @@ prompt_key IGNAV_API_KEY \
   "Primary cash flight prices. Fast REST API." \
   "https://ignav.com (1,000 free requests/month)"
 
-prompt_key AWARDWALLET_API_KEY \
-  "Auto-pull your loyalty balances, elite status, transfer ratios." \
-  "https://business.awardwallet.com/profile/api (Business account required)"
-
-prompt_key AWARDWALLET_USER_ID \
-  "Your AwardWallet user ID (paired with the API key above)." \
-  "" \
-  3
-
 echo ""
-printf "Continue with Tier 2 (SerpAPI, RapidAPI, TripAdvisor)? [y/N] "
+printf "Continue with Tier 2 (SerpAPI, RapidAPI)? [y/N] "
 read -r more
 case "$more" in
   [Yy]*)
@@ -186,9 +177,6 @@ case "$more" in
     prompt_key RAPIDAPI_KEY \
       "Booking.com Live + Google Flights Live as fallback sources." \
       "https://rapidapi.com"
-    prompt_key TRIPADVISOR_API_KEY \
-      "Hotel ratings, reviews, and rankings." \
-      "https://tripadvisor-content-api.readme.io (5K calls/mo free)"
     ;;
 esac
 

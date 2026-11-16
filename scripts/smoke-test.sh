@@ -139,7 +139,7 @@ PY
 
   # 3. Skill frontmatter
   bad_skills=0
-  for f in skills/*/SKILL.md; do
+  for f in skills/[!_]*/SKILL.md; do
     name=$(awk '/^---/{c++; next} c==1 && /^name:/{print; exit}' "$f")
     desc=$(awk '/^---/{c++; next} c==1 && /^description:/{print; exit}' "$f")
     if [ -z "$name" ] || [ -z "$desc" ]; then
@@ -147,7 +147,7 @@ PY
       bad_skills=$((bad_skills+1))
     fi
   done
-  total_skills=$(ls -d skills/*/ | wc -l | xargs)
+  total_skills=$(ls -d skills/[!_]*/ | wc -l | xargs)
   if [ "$bad_skills" -eq 0 ]; then
     ok "all $total_skills skills have name + description"
   else
@@ -217,7 +217,7 @@ PY
       grep -E "MISSING_META|BAD_DATE" /tmp/freshness.out | sed 's/^/      /'
     fi
     if grep -qE "STALE" /tmp/freshness.out; then
-      warn "stale data files past TTL (refresh: python3 scripts/refresh-transfer-bonuses.py / scripts/refresh-hotel-data.py)"
+      warn "stale data files past TTL (refresh: python3 scripts/refresh-transfer-bonuses.py)"
       grep -E "STALE" /tmp/freshness.out | sed 's/^/      /'
     fi
   fi
@@ -406,7 +406,7 @@ else
     done
 
     local found_optional=0
-    for skill in award-calendar award-sweet-spots awardwallet seats-aero points-valuations partner-awards; do
+    for skill in award-calendar award-sweet-spots my-points seats-aero points-valuations partner-awards; do
       if echo "$travel_out" | grep -q "$skill"; then
         found_optional=$((found_optional+1))
       fi

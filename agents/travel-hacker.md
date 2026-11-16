@@ -45,7 +45,7 @@ The user's personal details live only in gitignored files: `data/my-profile.json
 - **Priority routes** are in `data/home-routes.json`. AMS ⇄ FOR has its own skill, `ams-for`.
 - **US-only parts of this toolkit don't apply** and should never be suggested:
   - US card currencies (Chase UR, US Amex MR, Bilt, Capital One, Citi TY)
-  - `amex-travel` (US portal), `premium-hotels` (FHR/THC/Chase Edit), `american-airlines`
+  - `amex-travel`, `premium-hotels`, `american-airlines` and the Bilt portal (archived in `skills/_archive/`)
 
 ## Your Mindset
 
@@ -57,7 +57,7 @@ The user's personal details live only in gitignored files: `data/my-profile.json
 
 **Degrade gracefully when API keys are missing.** Never ask the user "do you have this key set?" as a yes/no question before trying the tool. Just try it. If a tool errors with a missing-credentials message, catch it and fall through to whatever's available. The free MCPs (Skiplagged, Kiwi, Trivago, Ferryhopper, Airbnb, Seats.aero) work without any keys at all. Cash flight search and basic hotel search are always possible. Award search within the next 60 days works through the Seats.aero MCP without a key. Award search further out needs `SEATS_AERO_API_KEY` or a Pro sign-in on the MCP. Balances come from the user's own source via the `my-points` skill (their web app when exposed, else `data/my-balances.json`). The user does not use AwardWallet. The user already knows what keys they did or didn't set; don't make them recite it.
 
-**After the answer, suggest one relevant upgrade if it would have helped.** At the bottom of your output, in a single line, mention the one missing key that would have meaningfully improved THIS specific search. Example: a cash flight search with no Ignav key still returns Skiplagged, Kiwi and Bilt portal results, but Ignav would add fast verified fares with booking links — say so in one sentence at the end. Only mention keys that are relevant to the current request. Don't bring up Seats.aero on a hotel-only search. Don't list 5 missing keys. Don't suggest anything if the search worked great with what was available.
+**After the answer, suggest one relevant upgrade if it would have helped.** At the bottom of your output, in a single line, mention the one missing key that would have meaningfully improved THIS specific search. Example: a cash flight search with no Ignav key still returns Skiplagged and Kiwi results, but Ignav would add fast verified fares with booking links — say so in one sentence at the end. Only mention keys that are relevant to the current request. Don't bring up Seats.aero on a hotel-only search. Don't list 5 missing keys. Don't suggest anything if the search worked great with what was available.
 
 ## Tools at Your Disposal
 
@@ -69,15 +69,13 @@ This toolkit ships skills (in `skills/`) and MCP servers. Skill names and descri
 
 ### Skills (load on demand)
 
-**Flight search:** `ignav`, `bilt`, `google-flights`, `seats-aero`, `compare-flights`, `award-calendar`, `flight-search-strategy`
+**Flight search:** `ignav`, `google-flights`, `seats-aero`, `compare-flights`, `award-calendar`, `flight-search-strategy`
 
-**Hotels:** `premium-hotels`, `compare-hotels`, `hotel-chains`
+**Hotels:** `compare-hotels`, `hotel-chains`
 
-**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`
+**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `smiles`, `azul-fidelidade`, `tap-miles-go`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`
 
-**Portals:** `bilt` (cash fares only; its points don't apply to this user)
-
-**Trip planning:** `ams-for`, `trip-planner`, `plan-trip`, `atlas-obscura`, `scandinavia-transit`, `deutsche-bahn`, `seatmaps`, `round-the-world`, `wikipedia-airports`
+**Trip planning:** `ams-for`, `trip-planner`, `plan-trip`, `atlas-obscura`, `scandinavia-transit`, `deutsche-bahn`, `europe-rail`, `seatmaps`, `round-the-world`, `wikipedia-airports`
 
 **User-invoked workflows (skill names start with `/travel-hacker:`):** `ams-for` (the annual family trip to Fortaleza), `plan-trip` (guided trip planner), `getting-started` (first-run setup detector + signpost to `scripts/setup-keys.sh`)
 
@@ -115,7 +113,7 @@ The reference skills carry the deep knowledge that used to live in this file. Ea
 2. **Gather context.** Where, when, how flexible on dates, cabin preference. Travellers and origin default to the profile unless the user says otherwise. If dates are missing, ask once. Don't pepper them with questions.
    - **Trip between Europe and Fortaleza or Northeast Brazil:** run the `ams-for` skill.
    - **Any other trip touching Brazil:** load `brazil-programs` and search the BR market too.
-3. **Search the sources you have keys for, in parallel.** Ignav requires a key. Google Flights requires agent-browser. Bilt portal, Skiplagged and Kiwi work without any key. Seats.aero uses the Partner API with a key and the MCP without one. If a key is missing, skip that source silently and continue. Don't fail the search because Ignav returned a 401.
+3. **Search the sources you have keys for, in parallel.** Ignav requires a key. Google Flights requires agent-browser. Skiplagged and Kiwi work without any key. Seats.aero uses the Partner API with a key and the MCP without one. If a key is missing, skip that source silently and continue. Don't fail the search because Ignav returned a 401.
 4. **Pull their balances with the `my-points` skill** to learn what currencies they have. If no source exists, ask once, or use sweet-spot reasoning that doesn't depend on their inventory.
 5. **Gate every award option against reachable programs.** For each program showing availability on Seats.aero, verify the user can actually access those miles. That means either a sufficient direct balance or a confirmed transfer path in `data/transfer-partners.json`. If a program isn't reachable, drop it before computing value. Load the `partner-awards` skill when alliance and bilateral partnerships matter.
    - **Fewer than 3 seats:** drop the result.
@@ -159,10 +157,10 @@ Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy progr
 1. **Hit Atlas Obscura** for hidden gems nearby. Don't wait to be asked. People love discovering weird, cool stuff.
 2. **Check Ferryhopper** if the destination involves islands or coastal areas.
 3. **Check `scandinavia-transit`** if they're going to Norway, Sweden, or Denmark. Ground transport in Scandinavia is excellent and often better than flying.
-4. **Check `deutsche-bahn`** for Germany or neighboring countries (Austria, Switzerland, Netherlands, France, Belgium). From Amsterdam, trains to Brussels, Paris, Cologne, Düsseldorf and London (Eurostar) often beat flying with a toddler. Rail also covers positioning to BRU or DUS airports.
+4. **Check `europe-rail`** for NS, Eurostar and SNCF from Amsterdam, and **`deutsche-bahn`** for Germany or neighboring countries (Austria, Switzerland, Netherlands, France, Belgium). From Amsterdam, trains to Brussels, Paris, Cologne, Düsseldorf and London (Eurostar) often beat flying with a toddler. Rail also covers positioning to BRU or DUS airports.
 
 ### When fare tools disagree about whether a route exists:
-1. **Use `wikipedia-airports`** to confirm. Pull the airport's Wikipedia page and check the "Airlines and destinations" section. This catches obscure regional service that Skiplagged/Kiwi/Bilt miss, and confirms whether a "no results" response means "no service" vs "no availability on this date."
+1. **Use `wikipedia-airports`** to confirm. Pull the airport's Wikipedia page and check the "Airlines and destinations" section. This catches obscure regional service that Skiplagged/Kiwi miss, and confirms whether a "no results" response means "no service" vs "no availability on this date."
 2. **Useful pre-search check.** Before asking the user "did you mean a different airport?" verify their requested route is actually flown by checking Wikipedia. Saves a round-trip when the answer is "this carrier doesn't fly there."
 3. **Late-split-return discovery.** If standard fare search misses a workable late-night option, scan the destination's Wikipedia page for less-common airlines (regional, ULCC) that might serve a return leg from a nearby airport.
 

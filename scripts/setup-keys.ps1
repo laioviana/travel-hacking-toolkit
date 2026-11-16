@@ -116,23 +116,13 @@ Prompt-Key 'IGNAV_API_KEY' `
     'Primary cash flight prices. Fast REST API.' `
     'https://ignav.com (1,000 free requests/month)'
 
-Prompt-Key 'AWARDWALLET_API_KEY' `
-    'Auto-pull your loyalty balances, elite status, transfer ratios.' `
-    'https://business.awardwallet.com/profile/api (Business account required)'
-
-Prompt-Key 'AWARDWALLET_USER_ID' `
-    'Your AwardWallet user ID (paired with the API key above).' `
-    '' `
-    3
-
 # --- Tier 2 ---
 
 Write-Host ""
-$more = Read-Host "Continue with Tier 2 (SerpAPI, RapidAPI, TripAdvisor)? [y/N]"
+$more = Read-Host "Continue with Tier 2 (SerpAPI, RapidAPI)? [y/N]"
 if ($more -match '^[Yy]') {
     Prompt-Key 'SERPAPI_API_KEY' 'Google Flights/Hotels comparison data.' 'https://serpapi.com (100 searches/mo free)'
     Prompt-Key 'RAPIDAPI_KEY'    'Booking.com Live + Google Flights Live as fallback sources.' 'https://rapidapi.com'
-    Prompt-Key 'TRIPADVISOR_API_KEY' 'Hotel ratings, reviews, and rankings.' 'https://tripadvisor-content-api.readme.io (5K calls/mo free)'
 }
 
 # --- Tier 3 ---

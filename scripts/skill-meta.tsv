@@ -10,19 +10,12 @@ google-flights	flights	Browser-automated Google Flights. All airlines.	None (req
 ignav	flights	Fast REST API cash prices. Market selection for arbitrage.	Ignav (1,000 free)	
 seats-aero	flights	Award availability across 27 mileage programs. Partner API, plus the official MCP (keyless for the next 60 days, Pro sign-in for live search and alerts).	Seats.aero Pro/Partner (MCP free for 60 days)	
 seatmaps	flights	Aircraft seat maps, cabin dimensions, seat recommendations.	None (requires agent-browser)	
-amex-travel	portals	Amex MR portal for flights, hotels, IAP discounts, FHR/THC benefits. Requires Platinum.	None (requires Patchright)	ghcr.io/borski/amex-travel
-bilt	portals	Bilt Rewards travel portal for hotels and flights. 1.25 cpp on Bilt Points. Home Away From Home properties give $300+ in benefits to Gold/Platinum members.	None (public API)	
-premium-hotels	hotels	Search 4,659 Amex FHR/THC hotels by city. Stacking opportunities.	None (local data)	
 rapidapi	hotels	Booking.com hotel prices.	RapidAPI	
 serpapi	hotels	Google Hotels search and destination discovery.	SerpAPI	
-sutochno	hotels	Sutochno.ru Russian apartment search via Patchright. Ruble / Mir payment for Georgia / CIS stays.	None	ghcr.io/borski/sutochno
-american-airlines	loyalty	AAdvantage balance and elite status. AwardWallet does not support AA.	None (requires Patchright)	ghcr.io/borski/aa-miles-check
-awardwallet	loyalty	All loyalty balances, elite status, history.	AwardWallet Business	
 transfer-partners	loyalty	Cheapest transfer path from credit card points to mileage programs.	None (local data)	
 wheretocredit	loyalty	Mileage earning rates by airline and booking class across 50+ programs.	None (free)	
 atlas-obscura	destinations	Hidden gems and unusual attractions near any destination.	None (free)	
 scandinavia-transit	destinations	Trains, buses, ferries in Norway, Sweden, and Denmark. Includes Danish fare/zone pricing.	Entur + Trafiklab + Rejseplanen	
-tripadvisor	destinations	Hotel ratings, restaurant search, attraction reviews, nearby search. 5K calls/month.	TripAdvisor	
 flight-search-strategy	reference	The canonical multi-source search workflow. Source priority (Ignav > Bilt portal > Google Flights > others), market selection for international routes, source accuracy hierarchy, common failure modes.		
 transfer-bonuses	reference	Active credit card transfer bonuses with primary-source citations. Tells the agent the real effective ratio when transferring points during a promotion.		
 stopovers	reference	Per-program stopover rules for award redemptions. Includes Icelandair free stopover, Aeroplan, Alaska Atmos, Flying Blue, Singapore tiers, plus the negative space (BA, AA, Delta, JetBlue) that have no stopover programs.		
@@ -38,9 +31,12 @@ booking-guidance	reference	The booking flow, hold-before-transfer rule, phone nu
 lessons-learned	reference	Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Ignav limitations. Load before any award flight search.		
 round-the-world	reference	RTW + Pacific Circle + Asia-Pacific Circle + regional distance-award reference. 13 active programs, 4 discontinued.		
 status-match	reference	Per-program status match rules with lifetime / once-per-N-years warnings, free vs paid concierge distinction, real fees, plus card-granted renewable status as the alternative.		
-vrbo	hotels	VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays.	None (requires Patchright)	ghcr.io/borski/vrbo
 my-points	loyalty	The user own points and miles balances, cost basis, status and travel profile (local files or own web app).	none	
 ams-for	orchestration	AMS to Fortaleza family search across every gateway. Cash and awards priced in BRL against cost basis.	Uses individual skill keys	
 bonificadas	loyalty	Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.	None (public feeds)	
 brazil-programs	reference	Livelo, Esfera, Smiles, LATAM Pass and Azul. Cost basis in R$ per milheiro and when each program wins.	None (local data)	
 latam-pass	loyalty	LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.	None (requires browser)	
+smiles	loyalty	Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules.	None (local data)	
+azul-fidelidade	loyalty	Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts.	None (local data)	
+tap-miles-go	loyalty	TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon.	None (requires browser)	
+europe-rail	destinations	Rail from Amsterdam under six hours. NS, Eurostar, SNCF, child fares, links to deutsche-bahn.	None	

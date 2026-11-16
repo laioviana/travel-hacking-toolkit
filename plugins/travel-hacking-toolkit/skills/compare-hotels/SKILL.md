@@ -1,213 +1,100 @@
 ---
 name: compare-hotels
-description: Unified hotel comparison across Amex FHR/THC, metasearch, and Airbnb. Highlights premium program benefits, stacking opportunities, and benefit-adjusted pricing.
+description: Unified hotel comparison across metasearch (Trivago, Google Hotels), Airbnb and chain award rates. Accor first, prices in BRL, family occupancy from the profile.
 category: orchestration
 summary: Unified hotel comparison across portals, metasearch, and Airbnb. FHR/Edit stacking detection.
 api_key: Uses individual skill keys
 ---
 
 **Companion reference skills.** Load these for deeper context:
-- `hotel-chains` — branded property to loyalty program mapping
-- `premium-hotels` — FHR / THC credits and stacking strategy
-- `points-valuations` — CPP floor/ceiling for hotel programs (Hyatt 1.4-1.7cpp, Hilton 0.4cpp floor, etc.)
-- `fallback-and-resilience` — recovery when a hotel source fails
-
+- `hotel-chains` for the brand to loyalty program mapping
+- `points-valuations` for hotel point values (Accor ALL is fixed at 2,000 points = EUR 40)
+- `my-points` for balances, status and the party (occupancy)
+- `fallback-and-resilience` for recovery when a hotel source fails
 
 # Compare Hotels
 
-Search every available source for accommodation and present one unified comparison. Combines portal premium programs (Amex FHR/THC), cash pricing, and Airbnb alternatives into a single view.
+Search every available source for accommodation and present one unified comparison in R$ (convert EUR or USD with `python3 scripts/fx.py`). This is an orchestration skill: it tells the agent which tools to run and how to combine results. No standalone script.
 
-**This is an orchestration skill.** It tells the agent which tools to run and how to combine results. No standalone script.
+The US portal programs (Amex FHR/THC, Chase Edit) do not apply to this user and are archived in `skills/_archive/premium-hotels`. Do not suggest them.
 
 ## When to Use
 
-- "Find me a hotel in Paris for Aug 11-15"
-- "Should I book through Amex or a transfer partner for this hotel?"
-- "Compare hotels vs Airbnb in Oslo"
+- "Find me a hotel in Lisbon for a weekend"
+- "Is it worth paying with Accor points for this hotel?"
+- "Compare hotels vs Airbnb in Fortaleza"
 - Any accommodation search where the user wants the full picture
 
 ## Sources
 
 Run these in parallel where possible. **Never fail silently.**
 
-### Portal Premium Programs (Docker required)
+| Source | Skill/Tool | What It Finds |
+|--------|------------|---------------|
+| Trivago | `trivago-accommodation-radius-search` MCP | Metasearch across OTAs. Set country NL and currency BRL or EUR if listed. Cheapest OTA rate per hotel. |
+| Skiplagged hotels | `sk_hotels_search` MCP | Second cash opinion. |
+| SerpAPI | `serpapi` | Google Hotels cash prices, ratings and review counts. |
+| Airbnb | `airbnb_search` MCP | Entire homes and apartments with total pricing. Best for families and 5+ nights. |
+| RapidAPI | `rapidapi` | Booking.com inventory. Only when the user asks for Booking.com. |
+| Accor award rate | `hotel-chains` plus the Accor site | ALL points price. Fixed 2,000 points = EUR 40, so compare cash price with points needed. |
 
-| Source | Skill | Speed | What It Finds |
-|--------|-------|-------|---------------|
-| Amex Travel | `amex-travel` | ~45s | FHR ($100+ credit, breakfast, upgrade, late checkout), THC ($100 credit on 2+ nights) |
-
-### Cash Prices and Metasearch
-
-| Source | Skill/Tool | Speed | What It Finds |
-|--------|------------|-------|---------------|
-| SerpAPI | `serpapi` | ~3s | Google Hotels cash prices and direct booking links. |
-| Trivago | web search | ~5s | Metasearch across many OTAs. Use tavily/exa to search `trivago.com`. Finds the absolute cheapest OTA rate. |
-| RapidAPI | `rapidapi` | ~3s | Booking.com inventory and pricing. Optional, use when user asks for Booking.com specifically. |
-
-### Quality and Ratings
-
-| Source | Skill/Tool | Speed | What It Finds |
-|--------|------------|-------|---------------|
-| Google Reviews | `serpapi` (Google Reviews section) | ~3s | Google rating, review count, location rating (free with the Google Hotels price search). Star distribution and per-topic sentiment for finalists via `property_token`. |
-| TripAdvisor | `tripadvisor` | ~2s | Optional. Rankings and subratings. Only when the user asks for TripAdvisor specifically. |
-
-**SerpAPI and Trivago are both default.** Always search both. Only add RapidAPI if the user asks for Booking.com specifically. **Google Reviews is the default quality source.** Show Google rating + review count for every hotel in the table, then pull the property details (star distribution, topic sentiment) for the top 2-3 finalists only.
-
-### Vacation Rentals
-
-| Source | Skill/Tool | Speed | What It Finds |
-|--------|------------|-------|---------------|
-| Airbnb | `airbnb_search` MCP tool | ~5s | Entire homes, private rooms, with total pricing |
-| VRBO | `vrbo` skill (Patchright) | ~20s | Whole homes, condos, cabins. Professionally-managed units often not on Airbnb. Headed/Docker — behind Akamai. |
-
-### Premium Property Databases (local, instant)
-
-| Source | Data File | What It Finds |
-|--------|-----------|---------------|
-| FHR properties | `data/fhr-properties.json` | Check if a hotel is FHR before booking |
-| THC properties | `data/thc-properties.json` | Check if a hotel is THC |
+Occupancy comes from the profile party (adults plus the child). Prefer family rooms, apartments and kids-stay-free policies, and say when a rate only fits two guests.
 
 ## Workflow
 
-### Step 1: Search All Sources
+### Step 1: Search all sources in parallel
 
-```
-PARALLEL GROUP 1 (fast — HTTP/API/MCP calls, no browser, ~3-5s):
-  - SerpAPI: Google Hotels cash prices
-  - Trivago: metasearch across OTAs (web search)
-  - Airbnb: vacation rentals in the area (npx MCP — lightweight scrape, not a browser)
-  - Local data: check premium-hotels databases for the city
+For each source capture the source name, status ("ok", "error: reason", "skipped: reason"), result count and data.
 
-PARALLEL GROUP 2 (slow — headed browser via Patchright/Xvfb in Docker, ~20-45s):
-  - VRBO: whole homes / condos / cabins — vrbo skill (~20s, headed/Docker, behind Akamai; run for whole-home comparisons alongside Airbnb)
-  - Amex Travel: --hotel --dest "City" --checkin YYYY-MM-DD --checkout YYYY-MM-DD --json
-```
+### Step 2: Chain trigger
 
-For each source, capture:
-- Source name
-- Status: "ok" | "error: {reason}" | "skipped: {reason}"
-- Results count
-- Data
+If any result is a branded chain property, load `hotel-chains` and check award rates. Accor first: mention the user's ALL status benefits from the profile on Accor properties (they usually apply to the member's own room only). Hilton at a 0.4 cpp floor is almost always worse than cash. Say so.
 
-### Step 2: Identify Stacking Opportunities
+### Step 3: Value points in R$
 
-Cross-reference results with `data/fhr-properties.json`, `data/thc-properties.json`:
+For award stays: R$ value of the points used (see `data/point-costs.json` and the cost basis in the balances file) against the cash rate in R$. Use R$ per milheiro, never cents per point. Accor: 2,000 points = EUR 40 means 1,000 points = EUR 20, converted to R$ with `scripts/fx.py`.
 
-```
-For each hotel in results:
-  - Is it in FHR? → Tag [FHR]
-  - Is it in THC? → Tag [THC]
-  - Is it in multiple? → Tag [FHR+EDIT] and note stacking potential
-```
+### Step 4: Present one table
 
-Stacking means: book through one portal, pay with the other card separately. For example, book FHR through Amex (get breakfast + credit + upgrade), then use CSR $300 travel credit on something else at the property.
+Always a markdown table, sorted by total stay price in R$ for the whole party.
 
-### Step 3: Calculate Points Value
+| # | Hotel | Source | Stars | Google | Per night (R$) | Total (R$) | Points | Notes |
+|---|-------|--------|-------|--------|----------------|------------|--------|-------|
 
-**Amex:**
-- Hotel portal pricing is variable (NOT always 1 cpp like flights).
-- The points price shown is the actual MR cost. Calculate CPP from cash/points ratio.
-- FHR benefits ($100+ credit, breakfast) offset the rate significantly.
+Add the Google rating and review count when SerpAPI has it. Airbnb listings show their own rating, labeled as such.
 
-**Calculate benefit-adjusted price:**
-```
-FHR adjusted = total_price - $100 credit - (breakfast_value × nights)
-  breakfast_value ≈ $30-50/person × 2 people = $60-100/night
-THC adjusted = total_price - $100 credit (2+ night stays only)
-Edit adjusted = total_price - $100 credit - (breakfast_value × nights)
-```
-
-### Step 4: Present Unified Table
-
-**Always use markdown tables.** Hotels sorted by benefit-adjusted total price.
-
-#### Example: Paris, Aug 11-15 (4 nights, 2 guests)
-
-| # | Hotel | Program | Stars | Google | Per Night | Total | Points | Benefits | Adj Total |
-|---|-------|---------|-------|--------|-----------|-------|--------|----------|-----------|
-| 1 | SO/ Paris | EDIT+BOOST | 5★ | 4.5 (1,210) | $639 | $2,555 | 127,756 UR | Breakfast, $100 credit, upgrade | ~$1,855 |
-| 2 | Hotel Balzac | EDIT+BOOST | 5★ | 4.6 (890) | $614 | $2,455 | 122,769 UR | Breakfast, $100 credit, upgrade | ~$1,755 |
-| 3 | Le Bristol | FHR | 5★ | 4.8 (2,340) | $1,849 | $8,284 | n/a | $100 credit, breakfast, upgrade, 4pm checkout | ~$6,884 |
-| 4 | Marriott Champs-Élysées | — | 4★ | 4.3 (3,105) | $289 | $1,156 | — | — | $1,156 |
-| 5 | Airbnb: Marais 2BR | — | — | 4.9 (Airbnb, 64) | $195 | $780 | — | Kitchen, washing machine | $780 |
-
-The Google column is `overall_rating (reviews)` from SerpAPI. Hotels from other sources (Amex) get their Google rating by matching names against the SerpAPI results. Airbnb listings show their own Airbnb rating, labeled as such.
-
-**Sources checked:**
-- ✅ Amex Travel: 17 hotels (13 FHR, 4 THC)
-- ✅ SerpAPI: 25 hotels
-- ✅ Trivago: 30 hotels (cheapest OTA per hotel)
-- ✅ Airbnb: 18 listings
-- ✅ Premium databases: 8 FHR, 3 THC, 15 Edit properties in Paris
-- ⏭️ RapidAPI/Booking.com: skipped (not requested)
+List sources checked, with status, under the table.
 
 ### Step 5: Recommendation
 
-After the table, always provide:
-
-1. **Best luxury value:** Which premium hotel gives the most benefit-adjusted savings
-2. **Best budget option:** Cheapest option (often Airbnb for longer stays)
-3. **Stacking opportunities:** Hotels in both FHR AND THC
-4. **Credit usage:** Which card credits apply ($600 Amex FHR, $300 CSR travel, $250 Select Hotels)
-5. **Points vs cash:** Is using points worthwhile for any of these? (Calculate CPP)
-6. **Direct booking comparison:** Note if direct booking is significantly cheaper than portal price
+1. Best value overall and why.
+2. Best for the family (space, kitchen, breakfast included).
+3. Points vs cash, with R$ numbers.
+4. Direct vs OTA price when different.
+5. Rail or flight context for the trip is handled by `europe-rail` and `compare-flights`.
 
 ## Airbnb Integration
 
-Use the `airbnb_search` MCP tool:
-
 ```
-airbnb_search(
-  location="Paris, France",
-  checkin="2026-08-11",
-  checkout="2026-08-15",
-  adults=2,
-  propertyType="entire_home"
-)
+airbnb_search(location="Lisbon, Portugal", checkin="2026-08-11", checkout="2026-08-15", adults=2, children=1, propertyType="entire_home")
 ```
 
-For each Airbnb result, extract:
-- Name, price, rating, reviews
-- Property type (entire home, private room)
-- Key amenities (kitchen, washer, wifi, AC)
-- Direct link to listing
-
-**When Airbnb makes sense:**
-- Stays of 5+ nights (usually cheaper per night)
-- Groups or families needing space
-- Destinations where hotels are overpriced
-- When kitchen access matters (dietary restrictions, saving on meals)
-
-**When hotels win:**
-- Short stays (1-2 nights)
-- Premium benefits offset the rate (FHR breakfast alone can be $100+/night value)
-- Points redemption gives good CPP
-- Loyalty status benefits (upgrades, late checkout, lounge access)
+Extract name, total price, rating, reviews, property type, key amenities (kitchen, washer, wifi, AC) and the listing link. Airbnb wins for 5+ nights, families needing space and when a kitchen matters. Hotels win for 1 to 2 nights, when status or points give clear value, or when breakfast is included.
 
 ## Error Handling
 
-**NEVER fail silently.** Every source must report its status.
-
-```
-- ❌ Airbnb: No results for this location/dates.
-- ⚠️ Amex Travel: Only 3 results (some hotels may not be available for these dates).
-```
-
-If premium databases show FHR/Edit properties in the city but the portal search didn't return them, note this: "The FHR database lists 8 properties in Paris but Amex Travel only returned 3. Some may not have availability for your dates."
+Report every source status. Example: "Airbnb: no results for these dates", "Trivago: error, used Skiplagged hotels instead".
 
 ## Data Files Used
 
 | File | Purpose |
 |------|---------|
-| `data/fhr-properties.json` | FHR property lookup by city/coordinates |
-| `data/thc-properties.json` | THC property lookup |
 | `data/hotel-chains.json` | Hotel chain to loyalty program mapping |
-| `data/points-valuations.json` | CPP valuations for points calculations |
+| `data/points-valuations.json` | Point valuations, including Accor ALL |
+| `data/point-costs.json` | Typical purchase cost of bought points |
 
 ## Limitations
 
-- Portal searches require Docker and credentials. Skip if not configured.
 - Airbnb MCP must be available. Skip gracefully if not.
-- FHR/THC/Edit databases are updated periodically. Properties may have been added or removed.
-- Amex hotel points pricing is variable (not 1 cpp). Use the actual points price from the portal.
-- Direct booking prices (via SerpAPI) may differ from portal prices for the same hotel.
+- Hotel award prices are variable except Accor. Use the live points price shown by the program.
+- Direct booking prices may differ from OTA prices for the same hotel.

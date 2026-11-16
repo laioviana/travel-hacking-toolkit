@@ -251,8 +251,6 @@ ignav|Ignav|https://ignav.com|Fast flight search REST API. 1,000 free requests, 
 seats-aero|Seats.aero|https://seats.aero|Award flight availability across 27 mileage programs. Pro tier ($99/yr) includes API access.
 rapidapi|RapidAPI|https://rapidapi.com|Marketplace; subscribe to Booking.com Live + Google Flights Live.
 serpapi|SerpAPI|https://serpapi.com|Google Flights, Google Hotels, Travel Explore.
-tripadvisor|TripAdvisor|https://www.tripadvisor.com/developers|Hotel/restaurant/attraction data. 5K calls/month free.
-awardwallet|AwardWallet|https://business.awardwallet.com|Loyalty program balance aggregator. Business tier required.
 scandinavia-transit|Trafiklab (Sweden)|https://www.trafiklab.se|Sweden transit. Free API key. 30,000 calls/month.
 scandinavia-transit|Rejseplanen (Denmark)|https://labs.rejseplanen.dk|Denmark transit. Free API key (application required). 50,000 calls/month, non-commercial only.
 DATA

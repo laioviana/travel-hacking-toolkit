@@ -31,7 +31,7 @@ When checking if a user can actually book an award flight:
 
 1. **Identify the operating airline.** Star Alliance? oneworld? SkyTeam? Independent?
 2. **List all programs that can ticket it.** Alliance partners + bilateral partners from `partner-awards.json`.
-3. **For each program, check direct balance.** AwardWallet shows what the user has now.
+3. **For each program, check direct balance.** The `my-points` skill shows what the user has now.
 4. **For each program with insufficient balance, check transfer paths.** `data/transfer-partners.json` lists every credit card currency → airline program path with the ratio.
 5. **Effective balance = direct balance + max transferable in.** A user with 16K United miles but 145K Chase UR has 161K effective United miles (UR transfers 1:1 to United).
 6. **Drop programs that are unreachable.** Only compare cpp on options the user can actually book.
