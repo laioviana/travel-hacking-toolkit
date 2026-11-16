@@ -213,8 +213,10 @@ Also use **tripadvisor** (under Destinations) for hotel ratings, rankings, subra
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
 | **american-airlines** | AAdvantage balance and elite status. AwardWallet does not support AA. Docker: `ghcr.io/borski/aa-miles-check`. | None (requires Patchright) |
+| **avios** | Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR. | None (Seats.aero source qatar as stand-in) |
 | **awardwallet** | All loyalty balances, elite status, history. | AwardWallet Business |
 | **bonificadas** | Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs. | None (public feeds) |
+| **flying-blue** | Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1. | None (Seats.aero source flyingblue) |
 | **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
 | **my-points** | The user own points and miles balances, cost basis, status and travel profile (local files or own web app). | none |
 | **transfer-partners** | Cheapest transfer path from credit card points to mileage programs. | None (local data) |
