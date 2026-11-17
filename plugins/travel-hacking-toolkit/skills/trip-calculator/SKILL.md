@@ -216,3 +216,13 @@ For premium hotel programs (FHR, THC), factor in the additional benefits (breakf
 - "Opportunity cost" assumes you WILL use those points eventually at floor value. If you're sitting on a huge balance with no plans, the real opportunity cost is lower.
 - Currency devaluation risk matters for long-term holdings. Points are depreciating assets.
 - Transfer bonuses can shift the math significantly. A 30% bonus on Chase → Flying Blue means 75K UR becomes 97.5K Flying Blue miles.
+
+## This User: R$ per Milheiro
+
+Replace the CPP steps with R$ per milheiro:
+
+- Value = `(cash in R$ - award taxes in R$) / points * 1000`. Convert with `python3 scripts/fx.py`.
+- Compare with `avg_cost_per_milheiro_brl` in `data/my-balances.json` first, then the `brl_milheiro` floor and ceiling in `data/points-valuations.json`.
+- Points needed come from the profile party, with child pricing from `data/family-booking.json` (Flying Blue 25% off for ages 2 to 11).
+- Transfer cost = ratio times the source currency cost basis, adjusted for the live bonus (`bonificadas`). Use the cheapest currency first.
+- Opportunity cost for Livelo and Esfera: use the market price in `brl_milheiro` sources, and say when a transfer would use up a bonus window.

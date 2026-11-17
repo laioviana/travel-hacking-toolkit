@@ -99,3 +99,12 @@ See the `cabin-codes` skill for the full mapping.
 ## Status Effects on Booking
 
 Elite status with the booking program (or alliance partner) often unlocks longer hold windows, waived close-in booking fees, and priority on phone bookings. If the user has elite status, mention which benefits apply. If they don't and the question of getting status comes up, load the `status-match` skill — it covers the lifetime restrictions that punish wasted matches and the renewable card-based alternatives.
+
+## This User: Brazil and Europe Programs
+
+- **Flying Blue:** book on airfrance.com or klm.com. Phone holds are available (`flying-blue`). Check the child discount appears before paying.
+- **Iberia:** book on iberia.com ("pagar com Avios"). No hold. Infants are added through the Iberia app. Check the off-peak calendar for the exact date (`avios`).
+- **LATAM Pass:** own-metal online at latampass.latam.com, partner awards by phone or WhatsApp only (`latam-pass`).
+- **Smiles, Azul Fidelidade, TAP Miles&Go:** booking for family needs the traveller to be a registered beneficiary or a counted third party within limits (`data/family-booking.json`). Phone numbers are not verified here: use the number on the program's official site.
+- **Split bookings across programs** on one flight are separate tickets. Ask each airline to link them after ticketing.
+- **Rule:** never move Livelo, Esfera or Amex NL points until the award space and price are confirmed on the program's own site.

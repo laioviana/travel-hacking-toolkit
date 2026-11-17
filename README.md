@@ -203,8 +203,10 @@ Start here: the **orchestration skills** call everything else automatically.
 <!-- BEGIN: readme:loyalty -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
+| **avios** | Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR. | None (Seats.aero source qatar as stand-in) |
 | **azul-fidelidade** | Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts. | None (local data) |
 | **bonificadas** | Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs. | None (public feeds) |
+| **flying-blue** | Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1. | None (Seats.aero source flyingblue) |
 | **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
 | **my-points** | The user own points and miles balances, cost basis, status and travel profile (local files or own web app). | none |
 | **smiles** | Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules. | None (local data) |

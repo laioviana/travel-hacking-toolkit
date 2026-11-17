@@ -76,3 +76,13 @@ These are not required for every search but should be loaded when the conversati
 - **`award-holds`** — Load before any "transfer points first" recommendation. Hold landscape per current data: AA allows 24h self-service hold online (the only program with online holds; the previous 5-day version was discontinued in late 2024). Virgin Atlantic Flying Club holds 1-2 days by phone, free. Flying Blue holds up to 3 days by phone with a $25 phone-booking fee at ticketing. Lufthansa M&M up to 5 days. Cathay ~2 days. Singapore agent-discretionary. The major Western programs that DO NOT allow holds: United, Alaska, Delta, BA, Aeroplan. Always check the data file rather than relying on this one-line summary.
 - **`round-the-world`** — Load when the trip implies 3+ stops or multiple regions. 13 active + 4 discontinued products documented. The RTW universe is collapsing (4 killed in last 18 months), but Star Alliance + oneworld + Lufthansa M&M + Qantas remain solid. Special Business RTW at 26,000 miles is the steal. Includes Iberia Plus intra-Europe sweet spots and Aeroplan distance-based regional awards.
 - **`status-match`** — Load when the user asks about elite status shortcuts, status match, status challenge, "switching loyalty programs," or mentions a once-in-a-while opportunity (Hyatt Globalist Challenge, Marriott Platinum Challenge). Critical lifetime/once-per-N-years warnings: Alaska Atmos = once per lifetime, AA = once every 2 years, Delta/United = once every 3 years, Hyatt Globalist Challenge = once per lifetime. The skill distinguishes free direct matches from paid concierge (statusmatch.com is real but charges fees) from card-granted renewable status (Amex Platinum = Hilton Gold + Marriott Gold automatic).
+
+## Brazil Caveats
+
+- **LATAM Pass is not on Seats.aero. Iberia is not either.** Seats.aero `qatar` is only a hint for Iberia metal space. Confirm on iberia.com. Smiles, Azul and Flying Blue are on Seats.aero.
+- **Seat counts:** Azul, Qatar and some others hide counts. Mark "3 seats unverified".
+- **Livelo and Esfera promos last days.** Refresh `bonificadas` before quoting a transfer.
+- **Compare in R$** against the cost basis from `data/my-balances.json`. Seats.aero and most blogs speak in US cents per point, which does not apply here.
+- **Cash fares differ by market** (NL vs BR). Search both.
+- **Don't extrapolate Iberia or Flying Blue prices** from one dated promo article. Prices are dynamic or date-based. Read the live page.
+- **Azul restructuring:** keep Azul balances low (`data/points-valuations.json` note).

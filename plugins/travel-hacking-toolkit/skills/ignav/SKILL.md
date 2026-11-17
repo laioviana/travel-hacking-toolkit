@@ -117,3 +117,10 @@ After the table, highlight cheapest, fastest, and best value. Call out tradeoffs
 - Default to round-trip and economy if not specified
 - Use airport search endpoint for city name lookups
 - **Market affects prices.** Same route can cost significantly less from a different market. Try departure country first, then destination country.
+
+## This User: Markets and Currency
+
+- **`market`:** use the profile's `search_markets` in order, `NL` then `BR`, instead of the `US` default. Run both and compare.
+- **`adults` and `children`:** set from the profile party, with the child counted by age on the travel date.
+- **Currency:** convert fares to R$ with `python3 scripts/fx.py <amount> <currency>`. Show the result in R$ and keep the original currency in a small note.
+- **Positioning:** also query the profile's `positioning_airports` as origins.

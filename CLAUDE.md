@@ -73,7 +73,7 @@ This toolkit ships skills (in `skills/`) and MCP servers. Skill names and descri
 
 **Hotels:** `compare-hotels`, `hotel-chains`
 
-**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `smiles`, `azul-fidelidade`, `tap-miles-go`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`
+**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `flying-blue`, `avios`, `smiles`, `azul-fidelidade`, `tap-miles-go`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`
 
 **Trip planning:** `ams-for`, `trip-planner`, `plan-trip`, `atlas-obscura`, `scandinavia-transit`, `deutsche-bahn`, `europe-rail`, `seatmaps`, `round-the-world`, `wikipedia-airports`
 
@@ -119,6 +119,7 @@ The reference skills carry the deep knowledge that used to live in this file. Ea
    - **Fewer than 3 seats:** drop the result.
    - **Programs that hide seat counts:** mark the result "3 seats unverified."
    - **LATAM Pass isn't on Seats.aero:** use the `latam-pass` skill.
+   - **Iberia isn't on Seats.aero either:** Seats.aero `qatar` is only a hint. Use the `avios` skill. For Air France or KLM awards use `flying-blue`.
 6. **Calculate the value of each option** in R$ per milheiro for the whole family. Apply the child pricing rules in `data/family-booking.json`, and compare against the cost basis and the `brl_milheiro` floor.
 7. **Present a clear recommendation.** Not a data dump. Example: "Use 180K LATAM Pass for the three of you on LATAM LIS–FOR. That saves R$ 6,200 against the R$ 9,800 family cash fare, which is R$ 34 per milheiro, well above your cost basis. Your balance covers it."
 

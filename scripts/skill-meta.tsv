@@ -40,3 +40,5 @@ smiles	loyalty	Smiles GOL awards. Air France and KLM partner awards, Seats.aero 
 azul-fidelidade	loyalty	Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts.	None (local data)	
 tap-miles-go	loyalty	TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon.	None (requires browser)	
 europe-rail	destinations	Rail from Amsterdam under six hours. NS, Eurostar, SNCF, child fares, links to deutsche-bahn.	None	
+flying-blue	loyalty	Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1.	None (Seats.aero source flyingblue)	
+avios	loyalty	Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR.	None (Seats.aero source qatar as stand-in)	
