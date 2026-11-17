@@ -88,7 +88,7 @@ This is especially useful for Southwest because:
 
 After Wikipedia suggests the route exists:
 
-1. Check cash pricing with SerpAPI, Kiwi, Skiplagged, or the Bilt portal
+1. Check cash pricing with SerpAPI, Kiwi, or Skiplagged
 2. Check Southwest separately when needed
 3. Prefer airline/fare-tool evidence over Wikipedia if they disagree
 

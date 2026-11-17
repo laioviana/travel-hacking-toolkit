@@ -71,7 +71,7 @@ PARALLEL:
   3. compare-hotels: destination, checkin = departure, checkout = return
 ```
 
-Each of these internally runs their own parallel sub-searches (Ignav, Bilt, seats.aero, Amex, SerpAPI, Trivago, Airbnb, etc).
+Each of these internally runs their own parallel sub-searches (Ignav, seats.aero, SerpAPI, Trivago, Airbnb, etc).
 
 ### Step 3: Combine into Trip Cost Matrix
 
@@ -179,7 +179,7 @@ If ALL sources fail for one component, say so:
 
 ## Limitations
 
-- Round-trip cash prices from Ignav/Bilt may be cheaper than two one-ways. Note when this is the case.
+- Round-trip cash prices from Ignav may be cheaper than two one-ways. Note when this is the case.
 - Award pricing is one-way. The combined outbound + return award cost is the correct comparison against a round-trip cash fare.
 - Hotel pricing may vary between portal and direct booking. Note significant differences.
 - Trip totals are estimates. Taxes, fees, and exchange rates can change actual booking costs.

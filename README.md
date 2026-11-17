@@ -19,7 +19,7 @@ Inside Claude Code, run:
 /plugin install travel-hacker@borski
 ```
 
-Done. 42 skills, 6 MCP servers (all free), and the `travel-hacker` subagent are installed. Run `claude` from anywhere and ask it to plan a trip.
+Done. 45 skills, 6 MCP servers (all free), and the `travel-hacker` subagent are installed. Run `claude` from anywhere and ask it to plan a trip.
 
 To verify the install, run `/travel-hacker:getting-started` inside Claude Code. It tells you which API keys are configured and points at the local setup script for the missing ones. Or in your shell: `claude plugin list | grep travel-hacker` should show the plugin.
 
@@ -65,17 +65,16 @@ Remove-Item $env:TEMP\setup-keys.ps1
 
 The script prompts for each key with masked input, validates them (rejects values with single quotes that would break the export, plus a per-key minimum length sanity check), writes them to the right shell rc with a backup, and never echoes the values back. The exports are single-quoted so other shell metacharacters in the key are safe. Keys never enter your terminal scrollback or any chat session. The `/travel-hacker:getting-started` skill inside Claude Code points at the same script.
 
-The 4 highest-value keys:
+The highest-value keys:
 
 | Key | What it unlocks | Cost |
 |-----|------|-----------|
 | `SEATS_AERO_API_KEY` | Award flight search across 27 mileage programs. The main event. | Pro ~$8/mo |
 | `IGNAV_API_KEY` | Primary cash flight prices. Fast REST API. | 1,000 free requests/month |
-| `AWARDWALLET_API_KEY` + `AWARDWALLET_USER_ID` | Auto-pull your loyalty balances, elite status, transfer ratios. | Business account required |
 
-Other keys (SerpAPI, RapidAPI, TripAdvisor, RESROBOT, Rejseplanen, Entur) extend specific skills. The setup skill covers them too. See the [full API key reference](#api-keys--signup-links) for signup links.
+Other keys (SerpAPI, RapidAPI, RESROBOT, Rejseplanen, Entur) extend specific skills. The setup skill covers them too. See the [full API key reference](#api-keys--signup-links) for signup links.
 
-Two Docker-based skills (American Airlines, Amex) handle sites that don't have public APIs, plus a shared base image. They auto-pull on first use. See the [Docker Images](#docker-images) section for credentials and configuration.
+The Docker-based skills for sites without public APIs (American Airlines, Amex, VRBO, Sutochno) were US or Russia specific and are archived in `skills/_archive/`.
 
 #### Manual setup (if you'd rather not use the skill)
 
@@ -84,8 +83,6 @@ Add to your shell rc (`~/.zshrc`, `~/.bashrc`, etc.):
 ```bash
 export SEATS_AERO_API_KEY="your-key-here"
 export IGNAV_API_KEY="your-key-here"
-export AWARDWALLET_API_KEY="your-key-here"
-export AWARDWALLET_USER_ID="your-user-id"
 ```
 
 Reload (`source ~/.zshrc`) or open a new terminal, then run `claude`.
@@ -189,8 +186,6 @@ Start here: the **orchestration skills** call everything else automatically.
 <!-- BEGIN: readme:portals -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
-| **amex-travel** | Amex MR portal for flights, hotels, IAP discounts, FHR/THC benefits. Requires Platinum. Docker: `ghcr.io/borski/amex-travel`. | None (requires Patchright) |
-| **bilt** | Bilt Rewards travel portal for hotels and flights. 1.25 cpp on Bilt Points. Home Away From Home properties give $300+ in benefits to Gold/Platinum members. | None (public API) |
 <!-- END: readme:portals -->
 
 #### Hotels and Accommodation
@@ -198,27 +193,24 @@ Start here: the **orchestration skills** call everything else automatically.
 <!-- BEGIN: readme:hotels -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
-| **premium-hotels** | Search 4,659 Amex FHR/THC hotels by city. Stacking opportunities. | None (local data) |
 | **rapidapi** | Booking.com hotel prices. | RapidAPI |
 | **serpapi** | Google Hotels search and destination discovery. | SerpAPI |
-| **sutochno** | Sutochno.ru Russian apartment search via Patchright. Ruble / Mir payment for Georgia / CIS stays. Docker: `ghcr.io/borski/sutochno`. | None |
-| **vrbo** | VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays. Docker: `ghcr.io/borski/vrbo`. | None (requires Patchright) |
 <!-- END: readme:hotels -->
 
-Also use **tripadvisor** (under Destinations) for hotel ratings, rankings, subratings, and reviews.
 
 #### Loyalty and Points
 
 <!-- BEGIN: readme:loyalty -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
-| **american-airlines** | AAdvantage balance and elite status. AwardWallet does not support AA. Docker: `ghcr.io/borski/aa-miles-check`. | None (requires Patchright) |
 | **avios** | Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR. | None (Seats.aero source qatar as stand-in) |
-| **awardwallet** | All loyalty balances, elite status, history. | AwardWallet Business |
+| **azul-fidelidade** | Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts. | None (local data) |
 | **bonificadas** | Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs. | None (public feeds) |
 | **flying-blue** | Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1. | None (Seats.aero source flyingblue) |
 | **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
 | **my-points** | The user own points and miles balances, cost basis, status and travel profile (local files or own web app). | none |
+| **smiles** | Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules. | None (local data) |
+| **tap-miles-go** | TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon. | None (requires browser) |
 | **transfer-partners** | Cheapest transfer path from credit card points to mileage programs. | None (local data) |
 | **wheretocredit** | Mileage earning rates by airline and booking class across 50+ programs. | None (free) |
 <!-- END: readme:loyalty -->
@@ -230,8 +222,8 @@ Also use **tripadvisor** (under Destinations) for hotel ratings, rankings, subra
 |-------|-------------|---------|
 | **atlas-obscura** | Hidden gems and unusual attractions near any destination. | None (free) |
 | **deutsche-bahn** | Deutsche Bahn (DB) train search across Germany and into AT/CH/NL/FR/BE via the open-source db-vendo-client. Stations, journeys, departure boards. No API key. Pairs with scandinavia-transit for Europe-wide rail coverage. | None |
+| **europe-rail** | Rail from Amsterdam under six hours. NS, Eurostar, SNCF, child fares, links to deutsche-bahn. | None |
 | **scandinavia-transit** | Trains, buses, ferries in Norway, Sweden, and Denmark. Includes Danish fare/zone pricing. | Entur + Trafiklab + Rejseplanen |
-| **tripadvisor** | Hotel ratings, restaurant search, attraction reviews, nearby search. 5K calls/month. | TripAdvisor |
 <!-- END: readme:destinations -->
 
 #### Reference and Operations (auto-loaded on demand)
@@ -270,8 +262,6 @@ These skills require an external account or API key signup. See [`.env.example`]
 | `seats-aero` | Seats.aero | [seats.aero](https://seats.aero) | Award flight availability across 27 mileage programs. Pro tier ($99/yr) includes API access. |
 | `rapidapi` | RapidAPI | [rapidapi.com](https://rapidapi.com) | Marketplace; subscribe to Booking.com Live + Google Flights Live. |
 | `serpapi` | SerpAPI | [serpapi.com](https://serpapi.com) | Google Flights, Google Hotels, Travel Explore. |
-| `tripadvisor` | TripAdvisor | [www.tripadvisor.com/developers](https://www.tripadvisor.com/developers) | Hotel/restaurant/attraction data. 5K calls/month free. |
-| `awardwallet` | AwardWallet | [business.awardwallet.com](https://business.awardwallet.com) | Loyalty program balance aggregator. Business tier required. |
 | `scandinavia-transit` | Trafiklab (Sweden) | [www.trafiklab.se](https://www.trafiklab.se) | Sweden transit. Free API key. 30,000 calls/month. |
 | `scandinavia-transit` | Rejseplanen (Denmark) | [labs.rejseplanen.dk](https://labs.rejseplanen.dk) | Denmark transit. Free API key (application required). 50,000 calls/month, non-commercial only. |
 <!-- END: readme:signup-links -->
@@ -284,26 +274,7 @@ Five skills run as Docker containers (browser-automated via Patchright), plus a 
 | Image | Skill | Purpose | Source |
 |-------|-------|---------|--------|
 | [`ghcr.io/borski/patchright-docker`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/patchright-docker) | (base) | Patchright + Chromium + xvfb base layer that all other browser-skill images build on. | [external](https://github.com/borski/patchright-docker) |
-| [`ghcr.io/borski/aa-miles-check`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/aa-miles-check) | `american-airlines` | AAdvantage balance and elite status. AwardWallet does not support AA. | [skills/american-airlines](skills/american-airlines/Dockerfile) |
-| [`ghcr.io/borski/amex-travel`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/amex-travel) | `amex-travel` | Amex MR portal for flights, hotels, IAP discounts, FHR/THC benefits. Requires Platinum. | [skills/amex-travel](skills/amex-travel/Dockerfile) |
-| [`ghcr.io/borski/sutochno`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/sutochno) | `sutochno` | Sutochno.ru Russian apartment search via Patchright. Ruble / Mir payment for Georgia / CIS stays. | [skills/sutochno](skills/sutochno/Dockerfile) |
-| [`ghcr.io/borski/vrbo`](https://github.com/borski/travel-hacking-toolkit/pkgs/container/vrbo) | `vrbo` | VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays. | [skills/vrbo](skills/vrbo/Dockerfile) |
 <!-- END: readme:docker -->
-
-### Usage
-
-```bash
-# American Airlines: AAdvantage balance + elite status (not in AwardWallet)
-docker pull ghcr.io/borski/aa-miles-check:latest
-docker run --rm -e AA_USERNAME=your_number -e AA_PASSWORD=your_pass ghcr.io/borski/aa-miles-check --json
-
-# Amex Travel: MR portal pricing, IAP discounts, FHR/THC hotels
-docker pull ghcr.io/borski/amex-travel:latest
-docker run --rm -v ~/.amex-travel-profiles:/profiles \
-    -e AMEX_USERNAME -e AMEX_PASSWORD \
-    ghcr.io/borski/amex-travel script /app/search_flights.py \
-    --origin SFO --dest NRT --depart 2026-08-15 --cabin business --json
-```
 
 ### Building Locally
 
@@ -354,7 +325,6 @@ Skiplagged, Kiwi.com, Trivago, Ferryhopper, Airbnb, and Seats.aero need no setup
 
 "Find hotels in Paris"
   ├─ Best overall      → compare-hotels (portals + metasearch + Airbnb)
-  └─ Premium programs  → premium-hotels (FHR/THC)
 
 "Should I use points or cash?"
   └─→ trip-calculator (CPP analysis + opportunity cost)
@@ -385,10 +355,10 @@ The **reference skills** (`flight-search-strategy`, `points-valuations`, `partne
 
 The core question: **"Should I burn points or pay cash?"**
 
-1. **Search ALL flight sources** — Ignav + Bilt portal + Google Flights + Skiplagged + Kiwi for cash. Seats.aero for awards. Amex portal for pay-with-points.
+1. **Search ALL flight sources** — Ignav + Google Flights + Skiplagged + Kiwi for cash. Seats.aero for awards. Amex portal for pay-with-points.
 2. **Optimize transfers** — `transfer-partners` finds the cheapest path from your credit card points to the loyalty program offering the best deal.
 3. **Compare** — `trip-calculator` shows CPP for each option. Higher CPP = better use of points. Below floor valuation = pay cash instead.
-4. **Check balances** — AwardWallet confirms you have enough points.
+4. **Check balances** — the `my-points` skill confirms you have enough points.
 5. **Book it** — Use booking links from Seats.aero or Ignav. Don't transfer points until you've confirmed availability on the airline's site.
 
 ### Example Prompts
@@ -462,25 +432,12 @@ travel-hacking-toolkit/
 │   ├── seatmaps/SKILL.md           # Aircraft seat maps
 │   ├── seats-aero/SKILL.md         # Award flight availability
 │   │
-│   │  # ── Credit Card Portals ──
-│   ├── amex-travel/                # Amex MR portal (flights + hotels)
-│   │   ├── SKILL.md
-│   │   ├── Dockerfile
-│   │   └── scripts/
-│   │       └── search_flights.py
-│   │
 │   │  # ── Hotels ──
-│   ├── premium-hotels/SKILL.md     # FHR/THC local database
 │   ├── rapidapi/SKILL.md           # Booking.com prices
 │   ├── serpapi/SKILL.md            # Google Hotels + destination discovery
 │   │
 │   │  # ── Loyalty ──
-│   ├── american-airlines/          # AA AAdvantage balance
-│   │   ├── SKILL.md
-│   │   ├── Dockerfile
-│   │   └── scripts/
-│   │       └── check_balance.py
-│   ├── awardwallet/SKILL.md        # All loyalty balances
+│   ├── smiles/ azul-fidelidade/ tap-miles-go/  # Brazilian award programs
 │   ├── transfer-partners/SKILL.md  # Transfer path optimizer
 │   ├── wheretocredit/SKILL.md      # Mileage earning rates
 │   │
@@ -490,7 +447,8 @@ travel-hacking-toolkit/
 │   │   ├── ao.mjs
 │   │   └── package.json
 │   ├── scandinavia-transit/SKILL.md # Nordic trains/buses/ferries
-│   ├── tripadvisor/SKILL.md        # Ratings, reviews, nearby restaurants
+│   ├── europe-rail/SKILL.md        # NS, Eurostar, SNCF from Amsterdam
+│   ├── _archive/                   # US-only skills, not loaded
 │   │
 │   │  # ── Reference & Operations (auto-load on demand) ──
 │   ├── flight-search-strategy/SKILL.md  # Canonical multi-source search workflow

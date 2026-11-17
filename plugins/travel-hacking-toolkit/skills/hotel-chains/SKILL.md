@@ -13,7 +13,7 @@ Use the `quick_lookup` section in the data file to instantly identify which loya
 
 ## The Trigger Table
 
-When results contain properties from ANY of these chains, IMMEDIATELY pull AwardWallet balances and check award rates. No judgment call. No asking. Just do it.
+When results contain properties from ANY of these chains, IMMEDIATELY pull balances with the `my-points` skill and check award rates. No judgment call. No asking. Just do it.
 
 | Chain Family | Properties Include | Loyalty Program |
 |---|---|---|

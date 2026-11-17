@@ -39,30 +39,26 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 ## Credit Card Travel Portals
 
 <!-- BEGIN: llms:portals -->
-- [Amex Travel](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/amex-travel/SKILL.md): Amex MR portal for flights, hotels, IAP discounts, FHR/THC benefits. Requires Platinum. Docker: `ghcr.io/borski/amex-travel`.
-- [Bilt](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/bilt/SKILL.md): Bilt Rewards travel portal for hotels and flights. 1.25 cpp on Bilt Points. Home Away From Home properties give $300+ in benefits to Gold/Platinum members.
 <!-- END: llms:portals -->
 
 ## Hotels and Accommodation
 
 <!-- BEGIN: llms:hotels -->
-- [Premium Hotels](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/premium-hotels/SKILL.md): Search 4,659 Amex FHR/THC hotels by city. Stacking opportunities.
 - [Rapidapi](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/rapidapi/SKILL.md): Booking.com hotel prices.
 - [Serpapi](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/serpapi/SKILL.md): Google Hotels search and destination discovery.
-- [Sutochno](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/sutochno/SKILL.md): Sutochno.ru Russian apartment search via Patchright. Ruble / Mir payment for Georgia / CIS stays. Docker: `ghcr.io/borski/sutochno`.
-- [Vrbo](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/vrbo/SKILL.md): VRBO whole-home, condo, and cabin search via Patchright. Complements Airbnb for group stays. Docker: `ghcr.io/borski/vrbo`.
 <!-- END: llms:hotels -->
 
 ## Loyalty and Points
 
 <!-- BEGIN: llms:loyalty -->
-- [American Airlines](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/american-airlines/SKILL.md): AAdvantage balance and elite status. AwardWallet does not support AA. Docker: `ghcr.io/borski/aa-miles-check`.
 - [Avios](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/avios/SKILL.md): Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR.
-- [Awardwallet](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/awardwallet/SKILL.md): All loyalty balances, elite status, history.
+- [Azul Fidelidade](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/azul-fidelidade/SKILL.md): Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts.
 - [Bonificadas](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/bonificadas/SKILL.md): Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.
 - [Flying Blue](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/flying-blue/SKILL.md): Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1.
 - [Latam Pass](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/latam-pass/SKILL.md): LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.
 - [My Points](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/my-points/SKILL.md): The user own points and miles balances, cost basis, status and travel profile (local files or own web app).
+- [Smiles](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/smiles/SKILL.md): Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules.
+- [Tap Miles Go](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/tap-miles-go/SKILL.md): TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon.
 - [Transfer Partners](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/transfer-partners/SKILL.md): Cheapest transfer path from credit card points to mileage programs.
 - [Wheretocredit](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/wheretocredit/SKILL.md): Mileage earning rates by airline and booking class across 50+ programs.
 <!-- END: llms:loyalty -->
@@ -72,8 +68,8 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 <!-- BEGIN: llms:destinations -->
 - [Atlas Obscura](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/atlas-obscura/SKILL.md): Hidden gems and unusual attractions near any destination.
 - [Deutsche Bahn](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/deutsche-bahn/SKILL.md): Deutsche Bahn (DB) train search across Germany and into AT/CH/NL/FR/BE via the open-source db-vendo-client. Stations, journeys, departure boards. No API key. Pairs with scandinavia-transit for Europe-wide rail coverage.
+- [Europe Rail](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/europe-rail/SKILL.md): Rail from Amsterdam under six hours. NS, Eurostar, SNCF, child fares, links to deutsche-bahn.
 - [Scandinavia Transit](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/scandinavia-transit/SKILL.md): Trains, buses, ferries in Norway, Sweden, and Denmark. Includes Danish fare/zone pricing.
-- [Tripadvisor](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/tripadvisor/SKILL.md): Hotel ratings, restaurant search, attraction reviews, nearby search. 5K calls/month.
 <!-- END: llms:destinations -->
 
 ## Reference and Operations (auto-load on demand)
@@ -104,8 +100,6 @@ These skills carry institutional knowledge that the agent loads when triggered. 
 All images are public on GitHub Container Registry. Pull with `docker pull ghcr.io/borski/<name>:latest`.
 
 - `ghcr.io/borski/patchright-docker`: Base image. Patchright + Chromium + xvfb. All other browser-skill images build on this.
-- `ghcr.io/borski/aa-miles-check`: American Airlines skill (AAdvantage balance + status).
-- `ghcr.io/borski/amex-travel`: Amex MR travel portal.
 
 ## Data Files
 

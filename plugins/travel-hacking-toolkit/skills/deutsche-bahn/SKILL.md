@@ -141,5 +141,5 @@ Load this skill when:
 
 Do NOT use for:
 - Booking tickets (search only — book at bahn.de or trainline.com)
-- Flight searches (use Ignav, Bilt portal, Skiplagged, etc.)
+- Flight searches (use Ignav, Skiplagged, etc.)
 - Pricing (not available via API)

@@ -89,7 +89,7 @@ For date 2026-09-05, cheapest business = 55,000 via Flying Blue:
 | Sep 12 | Aeroplan | 75,000 | Amex MR | 75,000 | 5.6 | 2 | ❌ 1-stop |
 | ...  | ... | ... | ... | ... | ... | ... | ... |
 
-*CPP calculated against cheapest cash fare from Ignav/Bilt if available, otherwise estimated.
+*CPP calculated against cheapest cash fare from Ignav if available, otherwise estimated.
 
 ⭐ = Best deal of the month
 
@@ -105,7 +105,7 @@ After the grid, include:
 
 1. **Freshness warning:** "Data from seats.aero cached search. Last seen times vary. Verify before transferring points."
 2. **Transfer advice:** "Don't transfer until you've confirmed the specific flight exists on the airline's website."
-3. **Cash comparison:** If a cash price was fetched (from Ignav/Bilt), show the CPP for context.
+3. **Cash comparison:** If a cash price was fetched (from Ignav), show the CPP for context.
 4. **Booking links:** For the top 3 dates, mention how to book (e.g., "Book via Virgin Atlantic website, call to hold").
 5. **Release date note:** If searching far out, mention which airlines may not have released space yet (use seats.aero release date tool).
 

@@ -11,21 +11,19 @@ Tools go down. APIs break. Have a backup plan for every search.
 
 | Primary Tool | When It Fails | Fallback |
 |-------------|---------------|----------|
-| Bilt portal | API error or timeout | Ignav, Google Flights skill, Skiplagged |
-| Ignav | API error | Bilt portal, Google Flights skill, Skiplagged |
-| Google Flights | agent-browser error | Ignav, Bilt portal, Skiplagged |
-| Skiplagged | 502/timeout (Cloudflare issues) | Kiwi.com MCP, Ignav, Bilt portal |
-| Kiwi.com | Server error | Skiplagged MCP, Ignav, Bilt portal |
+| Ignav | API error | Google Flights skill, Skiplagged |
+| Google Flights | agent-browser error | Ignav, Skiplagged |
+| Skiplagged | 502/timeout (Cloudflare issues) | Kiwi.com MCP, Ignav |
+| Kiwi.com | Server error | Skiplagged MCP, Ignav |
 | Seats.aero (Partner API) | API error, 401, or daily cap | `seats-aero` MCP (`get_flights`). Same cached data, keyless within 60 days. Then the airline website directly. |
-| Seats.aero (MCP) | Server error, or dates beyond the 60-day anonymous window | Partner API skill if `SEATS_AERO_API_KEY` is set. Otherwise check the airline website directly, and use Ignav or the Bilt portal for GDS inventory |
-| Seats.aero (either) | Stale data (`ComputedLastSeen` / `minutes_old` too old) | Check airline website directly, use Ignav or the Bilt portal for GDS inventory |
+| Seats.aero (MCP) | Server error, or dates beyond the 60-day anonymous window | Partner API skill if `SEATS_AERO_API_KEY` is set. Otherwise check the airline website directly, and use Ignav for GDS inventory |
+| Seats.aero (either) | Stale data (`ComputedLastSeen` / `minutes_old` too old) | Check airline website directly, use Ignav for GDS inventory |
 | SerpAPI | Rate limit (100/mo free) | Trivago for hotels, web search for destination discovery |
 | Trivago | Server error | SerpAPI Google Hotels, Skiplagged Hotels |
 | Airbnb | Scraping blocked | Suggest user check airbnb.com directly |
-| AwardWallet | API error | Ask user for their balances directly |
+| my-points | Web app unreachable | Fall back to `data/my-balances.json`, else ask the user for their balances |
 | Ferryhopper | Server error | SerpAPI or web search for ferry routes |
 | Atlas Obscura | Script error | Web search for "unusual things to do in [destination]" |
-| Amex Travel | Login failure or form changes | Use Ignav/Bilt portal for cash prices. Note that IAP fares and FHR/THC detection are Amex-only. |
 | Deutsche Bahn (db-vendo) | Library error or bahn.de outage | SerpAPI Google Travel Explore, web search for "DB train [origin] [dest]", or fall back to confirming flight options instead. |
 | Wikipedia airports | API rate limit (rare) or page missing | Web search "[airport name] airlines destinations" returns the same data via Google. |
 | Fare tool says "no results" | Could be no availability OR no service | **Use `wikipedia-airports` to confirm whether the route is flown at all.** If Wikipedia lists the destination as served, fare tools have no availability on that date. If Wikipedia doesn't list it, the route doesn't exist. Saves you from asking the user to retry searches that can never succeed. |
@@ -49,8 +47,6 @@ Several APIs in the toolkit enforce IP allowlists on the developer key. If you s
 
 | API | Error Signature | Whitelist Page |
 |---|---|---|
-| AwardWallet | `{"error": "access_denied", "code": "IP_DENIED"}` | https://business.awardwallet.com/profile/api |
-| TripAdvisor | `User is not authorized to access this resource with an explicit deny` | https://www.tripadvisor.com/developers |
 
 Diagnostic flow when an API call fails with an auth-shaped error on first use:
 

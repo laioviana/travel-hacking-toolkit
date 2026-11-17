@@ -23,7 +23,7 @@ Compares the true cost of booking with cash versus each available points currenc
 
 ## When to Use
 
-- User has both cash prices (from Ignav/Bilt/Google Flights) and award prices (from seats.aero)
+- User has both cash prices (from Ignav/Google Flights) and award prices (from seats.aero)
 - User asks "should I pay cash or use points?"
 - User wants to know the CPP of a specific redemption
 - User is deciding between multiple booking strategies for a trip
@@ -67,7 +67,6 @@ The tie goes to cash because points maintain optionality.
 **Cash prices** (use one or more sources):
 ```
 Ignav API → fast verified bookable fares
-Bilt portal API → GDS fares, no key (see bilt skill)
 Google Flights → browser-based, all airlines
 ```
 
