@@ -21,7 +21,8 @@ Source for this section: [Passageiro de Primeira, 2026-07-30](https://passageiro
 - Examples on 2026-10-16, taxes extra: GRU to LIS economy 49,000 miles, business 175,000. GRU to MAD economy 46,000, business 270,000. Treat as a snapshot, not a table.
 - Any seat that is for sale can now be booked with miles, at a variable price.
 - Economy Prime cannot yet be booked with miles.
-- Taxes are charged on top, the amount was not given. Read it at checkout.
+- Taxes are charged on top. One blog estimates R$ 130 to R$ 250 per segment to Lisbon or Madrid ([Fabrica de Milha](https://fabricademilha.com/programas-de-milhas/tap-miles-go)), UNVERIFIED. Partner awards may charge taxes in EUR ([Buscamilhas](https://buscamilhas.com/blog/passagem-aereas-com-milhas/tabela-fixa-tap/)). Read the real figure at checkout.
+- **Sources conflict on GRU to LIS economy**: 49,000 miles ([Passageiro de Primeira](https://passageirodeprimeira.com/tap-milesgo-amplia-resgates-com-milhas-adotando-tarifa-dinamica-para-voos-proprios/)) vs 32,500 miles on the 2026 table ([Alerta de Milhas](https://www.alertademilhas.com.br/blog/programas/tap-miles-go-brasileiro-como-funciona-vale-pena-2026)). Check the TAP site for the live number.
 
 Promotions: TAP ran a 30% discount on Brazil to Europe awards until 2026-07-14 for travel until 2026-08-31 (expired). Source: [Passageiro de Primeira](https://passageirodeprimeira.com/?p=548912). Confidence: LIKELY. Look for the next one in `bonificadas`.
 
@@ -39,8 +40,9 @@ At 2.7:1 a Esfera point costs 2.7 times as much per TAP mile, so TAP via Esfera 
 
 | Rule | Status |
 |---|---|
-| Child 2 to 11 and infant pricing | UNVERIFIED, not found. Read at checkout. |
-| Booking for others | UNVERIFIED, not researched. |
+| Child 2 to 11 | 25% off the miles of the fare available on the purchase date. Source: [TAP Miles&Go terms](https://www.flytap.com/en-us/legal-info/terms-and-conditions-miles-and-go). LIKELY (read via a search summary of the official page). |
+| Infant under 2 | UNVERIFIED, not found. Read at checkout. |
+| Booking for others | UNVERIFIED, still not found. Ask TAP support. |
 | Holds | See `award-holds`. |
 | Fixed partner table | TAP also revised a fixed table in 2026, sources disagree on the figures, UNVERIFIED. |
 

@@ -39,14 +39,14 @@ Two takeaways that likely still hold (LIKELY): a Clube Smiles subscription lower
 |---|---|---|---|
 | Taxes | Charged on top, amount not published in the sources found. Read it at checkout and add it in R$. | [Pontos pra Voar](https://pontospravoar.com/resgate-passagens-europa-smiles-partir-92900-milhas/) | UNVERIFIED |
 | Child 2 to 11 | No child discount on award redemptions. | `data/family-booking.json` | UNVERIFIED |
-| Infant under 2 | Fee paid in cash, not miles. | `data/family-booking.json` | UNVERIFIED |
+| Infant under 2 | Typically 10% to 15% of the adult fare plus taxes on international flights, set by the operating airline. Reclame Aqui reports show customers paying the partner airline separately to add the baby after issuing adults with Smiles miles. Ask Smiles support and the operating airline before issuing. | [Melhores Destinos](https://www.melhoresdestinos.com.br/bebe-de-colo-aviao.html), [Reclame Aqui](https://www.reclameaqui.com.br/smiles/cobranca-abusiva-pata-bebe-de-colo-apos-compra-pela-smiles_iBwVsaxh6futIxO9/) | UNVERIFIED |
 | Booking for others | 25 people per calendar year, resets 1 January. No fee reported. | [cartoesdecredito.me](https://www.cartoesdecredito.me/milhas/limite-de-cpf-azul-fidelidade-latam-pass-e-smiles-2026/) | LIKELY |
 | Earning | Tickets issued with miles on KLM do not earn miles in Smiles. | [Smiles KLM page](https://www.smiles.com.br/klm) | LIKELY |
 
 ## Not found (gaps)
 
 - Official Smiles partner award table for 2026: UNVERIFIED, one blog claims a fixed Europe table of 35,000 to 120,000 miles but its validity period is unclear.
-- Cancellation and change fees: not found.
+- Cancellation and change fees: not found. The official Smiles help page on infants was not found either.
 - Smiles Money (miles plus cash) pricing: not found.
 
 ## Workflow for AMS and FOR
