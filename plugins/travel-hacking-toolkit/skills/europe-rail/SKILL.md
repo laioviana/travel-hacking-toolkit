@@ -31,7 +31,7 @@ Work out the child's age on the travel date from the profile before pricing.
 
 ## Domestic NL and SNCF
 
-- NS domestic (Schiphol to Amsterdam Centraal, Eindhoven, Rotterdam) fares and child rules: not researched. UNVERIFIED. Use ns.nl live.
+- NS domestic children: under 4 travel free (one source adds that they share a seat). Ages 4 to 11 use a Railrunner, EUR 2.50 per child per day, or the free Kids Vrij subscription with an adult (up to 3 children per adult, one source says it needs a Dutch bank account). Sources: [Kids er op uit](https://kidseropuit.nl/kinderen-met-de-trein/), [NL Times on 2027 fares](https://nltimes.nl/2026/10/20/dutch-rail-operator-ns-raise-ticket-prices-47-starting-january-2027) (NS fares rise 4.7% in January 2027, child products unchanged). Confidence: LIKELY. Adult fares: use ns.nl live, not researched.
 - SNCF Paris to onward France and Paris to Lisbon-type connections: not researched. UNVERIFIED.
 
 ## When rail wins

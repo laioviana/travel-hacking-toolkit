@@ -33,6 +33,9 @@ Every fact has a source and a confidence level. UNVERIFIED means confirm on voea
 | Fee | Between R$ 69.90 and R$ 189.90 when booking under 120 days out without the account holder on the booking. | same | UNVERIFIED |
 | Late taxes | An extra fee applies to some emissions under 90 days out, except Diamante. | [Pontos pra Voar](https://pontospravoar.com/alerta-ppv-passagens-lisboa-71200-pontos-azul-fidelidade-taxas/) | UNVERIFIED |
 | Child 2 to 11 | No child discount (older source). | `data/family-booking.json` | UNVERIFIED |
+| Infant under 2 | Azul does not issue a seat ticket under 2, the child travels as a lap infant. Pricing in points not found. | [Reclame Aqui reply](https://www.reclameaqui.com.br/azul/nao-consigo-cadastrar-minha-filha-de-2-anos-como-beneficiaria-para-viagem_7uEDUdBf8xc3ZmN-/) | UNVERIFIED |
+| Redemption fee | Issuing 120 days or more ahead is fee-free, closer in is charged, with discounts on site or app. | [Passageiro de Primeira](https://passageirodeprimeira.com/azul-fidelidade-ajusta-taxa-de-resgate-para-passagens-com-pontos/) | LIKELY |
+| Partners | Awards on 7 partners: United, TAP, Copa, Turkish, Air Canada, Emirates, Etihad. | [Radar Viagens](https://radarviagens.com/radar-milhas/programas/azul-fidelidade/guia) | UNVERIFIED |
 | TAP partner awards | No fixed table, price follows the fare type offered. | [Passageiro de Primeira](https://passageirodeprimeira.com/tap-executiva-award/) | UNVERIFIED |
 
 ## Gaps
