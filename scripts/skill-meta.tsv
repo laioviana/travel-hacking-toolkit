@@ -36,6 +36,7 @@ ams-for	orchestration	AMS to Fortaleza family search across every gateway. Cash 
 bonificadas	loyalty	Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.	None (public feeds)	
 brazil-programs	reference	Livelo, Esfera, Smiles, LATAM Pass and Azul. Cost basis in R$ per milheiro and when each program wins.	None (local data)	
 latam-pass	loyalty	LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.	None (requires browser)	
+latam-tabela-fixa	loyalty	LATAM Pass fixed partner award chart. Official region matrix, calculator, booking by phone or WhatsApp.	None (local data)	
 smiles	loyalty	Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules.	None (local data)	
 azul-fidelidade	loyalty	Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts.	None (local data)	
 tap-miles-go	loyalty	TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon.	None (requires browser)	

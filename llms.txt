@@ -56,6 +56,7 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 - [Bonificadas](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/bonificadas/SKILL.md): Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.
 - [Flying Blue](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/flying-blue/SKILL.md): Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1.
 - [Latam Pass](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/latam-pass/SKILL.md): LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.
+- [Latam Tabela Fixa](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/latam-tabela-fixa/SKILL.md): LATAM Pass fixed partner award chart. Official region matrix, calculator, booking by phone or WhatsApp.
 - [My Points](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/my-points/SKILL.md): The user own points and miles balances, cost basis, status and travel profile (local files or own web app).
 - [Smiles](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/smiles/SKILL.md): Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules.
 - [Status Matcher](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/status-matcher/SKILL.md): Live status match opportunities from your current elite statuses, via statusmatcher.com reports.

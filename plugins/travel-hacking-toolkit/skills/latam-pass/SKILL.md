@@ -1,6 +1,6 @@
 ---
 name: latam-pass
-description: LATAM Pass award search and rules. Own-metal dynamic pricing, the fixed partner award table (Brazil to Europe), the 20 percent partner table increase from 2026-11-23, phone and WhatsApp booking, infant pricing and booking for others. LATAM Pass is not on Seats.aero, so use this whenever a LATAM flight or LATAM Pass miles are part of an option, including LATAM Lisbon to Fortaleza.
+description: LATAM Pass award search and rules. Own-metal dynamic pricing (the fixed partner chart is in latam-tabela-fixa), phone and WhatsApp booking, infant pricing and booking for others. LATAM Pass is not on Seats.aero, so use this whenever a LATAM flight or LATAM Pass miles are part of an option, including LATAM Lisbon to Fortaleza.
 category: loyalty
 summary: LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.
 api_key: None (requires browser)
@@ -26,32 +26,20 @@ Check the user's LATAM Pass balance and `avg_cost_per_milheiro_brl` in `data/my-
 - **Otherwise,** use the built-in browser pane.
 - **If both fail** (bot wall, login needed), give the user the exact search to run: route, dates, passengers, "Usar milhas." Never guess a miles price.
 
-### 2. Partner flights: fixed table
-- **Booking:** phone (4002-5700) or WhatsApp only. Not bookable online.
-- **Pricing:** depends on the cabin and the regions travelled, not on the number of connections. Availability is not guaranteed.
-- **Brazil–Europe, one way**, per the official table in force since 2026-03-02:
+### 2. Partner flights: fixed table (tabela fixa)
+**Use the `latam-tabela-fixa` skill.** It has the full official chart for all region pairs and cabins, a calculator (`scripts/latam_tabela_fixa.py`), the region table and the booking flow.
 
-| Cabin | Until 2026-11-22 | From 2026-11-23 (+20%) |
-|---|---|---|
-| Economy | 80,700 | ≈ 96,840 (computed: +20%, not yet published) |
-| Premium Economy | 90,700 | ≈ 108,840 (computed) |
-| Business | 201,600 | 241,920 |
-| First | 336,000 | 403,200 |
-
-- **Partner bookings made by 2026-11-22 use the old table.** For any partner award the user is considering, mention this deadline.
-- **Partner economy to Europe is poor value for this user.** 80,700 miles is about R$ 1,775 per person at a typical R$ 22/milheiro cost, so it rarely beats cash from Europe. LATAM's own metal (dynamic) is usually the better use.
-
-Sources:
-- [LATAM table, economy](https://web.latampass.latam.com/pt_br/viagem/usar-milhas-para-voar/regras-de-resgate/latam/classe-economica)
-- [Melhores Destinos on the November 2026 increase](https://www.melhoresdestinos.com.br/milhas/aumento-tabela-fixa-latam-nov26)
-- [Seu Crédito Digital](https://seucreditodigital.com.br/latam-pass-aumenta-resgate-novembro-2026/)
-
-Confidence: LIKELY.
+The essentials:
+- **Booking:** phone or WhatsApp only.
+- **Price:** set by cabin and region pairs.
+- **20% increase in force since 2026-11-23:** Brazil–Europe economy is now 96,840 and business 241,920, one way.
+- **Infants under 2 can't be issued on partner awards.**
+- **Partner economy to Europe is poor value for this user.** LATAM's own metal (dynamic) is usually the better use.
 
 ## Family rules
 
 From `data/family-booking.json`:
-- **Infant under 2 (all segments):** about 10% of the adult miles plus taxes.
+- **Infant under 2 (all segments):** about 10% of the adult miles plus taxes, on LATAM-operated flights only. Partner awards (tabela fixa) don't allow infants under 2.
 - **Child 2–11:** assume full miles.
 - **Booking for others:** about 24–25 distinct people per rolling 12 months. No fee reported.
 
