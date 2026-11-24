@@ -210,6 +210,7 @@ Start here: the **orchestration skills** call everything else automatically.
 | **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
 | **my-points** | The user own points and miles balances, cost basis, status and travel profile (local files or own web app). | none |
 | **smiles** | Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules. | None (local data) |
+| **status-matcher** | Live status match opportunities from your current elite statuses, via statusmatcher.com reports. | None (public site) |
 | **tap-miles-go** | TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon. | None (requires browser) |
 | **transfer-partners** | Cheapest transfer path from credit card points to mileage programs. | None (local data) |
 | **wheretocredit** | Mileage earning rates by airline and booking class across 50+ programs. | None (free) |

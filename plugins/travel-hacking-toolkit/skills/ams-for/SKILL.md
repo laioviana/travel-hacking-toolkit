@@ -42,6 +42,8 @@ Reads:
 
 **LATAM Pass** (not on Seats.aero): follow the `latam-pass` skill for LIS–FOR (seasonal) and Europe–GRU–FOR.
 
+**Status match check:** run the `status-matcher` skill (`python3 scripts/statusmatcher.py --profile`) and, for the carriers in play, `--to "flying blue"`, `--to iberia`, `--to tap`, `--to latam`. Status on the carrier flown can mean free bags and seats together for the whole family.
+
 **Bonus check:** run the `bonificadas` skill, i.e. refresh and filter. A running Livelo or Esfera bonus into Smiles, Azul or LATAM changes which program wins.
 
 ## 2. Build the options
@@ -96,6 +98,7 @@ Then:
   - promos ending soon
   - the LATAM partner table increase on 2026-11-23, if relevant
   - seats.aero data older than 24h
+- **Status match:** one line if `status-matcher` found a match on the recommended carrier that's worth applying for before this trip (with its lifetime limit from `status-match`). Skip the line if none.
 - **Next step:** what to transfer (amount, path, expected arrival time) and where to book. Load `booking-guidance` and `award-holds` before telling the user to transfer.
 
 ## Rules

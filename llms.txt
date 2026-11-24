@@ -58,6 +58,7 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 - [Latam Pass](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/latam-pass/SKILL.md): LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.
 - [My Points](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/my-points/SKILL.md): The user own points and miles balances, cost basis, status and travel profile (local files or own web app).
 - [Smiles](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/smiles/SKILL.md): Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules.
+- [Status Matcher](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/status-matcher/SKILL.md): Live status match opportunities from your current elite statuses, via statusmatcher.com reports.
 - [Tap Miles Go](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/tap-miles-go/SKILL.md): TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon.
 - [Transfer Partners](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/transfer-partners/SKILL.md): Cheapest transfer path from credit card points to mileage programs.
 - [Wheretocredit](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/wheretocredit/SKILL.md): Mileage earning rates by airline and booking class across 50+ programs.

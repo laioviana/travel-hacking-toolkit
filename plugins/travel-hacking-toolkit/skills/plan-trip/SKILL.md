@@ -36,10 +36,11 @@ Once you have the inputs:
 6. **Cross-reference** with transfer-partners and transfer-bonuses to find the cheapest currency you actually have.
 7. **Apply points-valuations** to compute cents-per-point on each award option.
 8. **Surface anything from award-sweet-spots** that matches this route.
-9. **Check stopovers** if the destination involves a connection. Multi-city trips might unlock "two destinations for the price of one" via Aeroplan, Alaska, or Flying Blue.
-10. **Show the math** in a markdown table. One row per option, ranked. Columns: program, miles cost, cash co-pay, total $ value, cpp, hold-before-transfer rule, recommendation.
-11. **Pick a winner** with one-sentence reasoning.
-12. **Show booking next steps** via booking-guidance: which program to call, hold rules, transfer timing, phone numbers if needed.
+9. **Check status matches** with the `status-matcher` skill (`python3 scripts/statusmatcher.py --profile`, plus `--to <program>` for the airline and hotel chain in the recommendation). Mention one only if it fits this trip, with its lifetime limit from `status-match`.
+10. **Check stopovers** if the destination involves a connection. Multi-city trips might unlock "two destinations for the price of one" via Aeroplan, Alaska, or Flying Blue.
+11. **Show the math** in a markdown table. One row per option, ranked. Columns: program, miles cost, cash co-pay, total $ value, cpp, hold-before-transfer rule, recommendation.
+12. **Pick a winner** with one-sentence reasoning.
+13. **Show booking next steps** via booking-guidance: which program to call, hold rules, transfer timing, phone numbers if needed.
 
 ## Hotels and ground transit
 
