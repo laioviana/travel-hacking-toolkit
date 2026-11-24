@@ -73,7 +73,7 @@ This toolkit ships skills (in `skills/`) and MCP servers. Skill names and descri
 
 **Hotels:** `premium-hotels`, `compare-hotels`, `hotel-chains`
 
-**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`
+**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`, `status-matcher`
 
 **Portals:** `bilt` (cash fares only; its points don't apply to this user)
 
@@ -114,6 +114,7 @@ The reference skills carry the deep knowledge that used to live in this file. Ea
 1. **ALWAYS load `lessons-learned` first, then `flight-search-strategy`.** This is not optional. Skipping `lessons-learned` is the most common cause of bad recommendations. It contains the mandatory Seats.aero workflow (pull ALL programs first, never filter by source upfront), and source-accuracy rankings that prevent silent failure modes. `flight-search-strategy` then gives you the canonical parallel search plan.
 2. **Gather context.** Where, when, how flexible on dates, cabin preference. Travellers and origin default to the profile unless the user says otherwise. If dates are missing, ask once. Don't pepper them with questions.
    - **Trip between Europe and Fortaleza or Northeast Brazil:** run the `ams-for` skill.
+   - **Every trip:** run `status-matcher` in parallel with the searches. Flag a match the trip's airline, hotel or car rental would benefit from.
    - **Any other trip touching Brazil:** load `brazil-programs` and search the BR market too.
 3. **Search the sources you have keys for, in parallel.** Ignav requires a key. Google Flights requires agent-browser. Bilt portal, Skiplagged and Kiwi work without any key. Seats.aero uses the Partner API with a key and the MCP without one. If a key is missing, skip that source silently and continue. Don't fail the search because Ignav returned a 401.
 4. **Pull their balances with the `my-points` skill** to learn what currencies they have. If no source exists, ask once, or use sweet-spot reasoning that doesn't depend on their inventory.
@@ -139,7 +140,7 @@ Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy progr
 
 ### When someone asks about hotels:
 1. **Check multiple sources** with the `compare-hotels` skill. Sort by price ascending where the tool supports it.
-2. **Hotel chain trigger.** When results contain branded properties (Marriott, Hilton, Hyatt, IHG, Accor, Wyndham, Best Western, Radisson), IMMEDIATELY pull balances via `my-points` and check award rates. Load the `hotel-chains` skill for the brand-to-program mapping. No judgment call. No asking. Just do it.
+2. **Hotel chain trigger.** When results contain branded properties (Marriott, Hilton, Hyatt, IHG, Accor, Wyndham, Best Western, Radisson), IMMEDIATELY pull balances via `my-points` and check award rates, and run `status-matcher` for matches into that chain. Load the `hotel-chains` skill for the brand-to-program mapping. No judgment call. No asking. Just do it.
 3. **Accor first.** ALL points are fixed at 2,000 = €40. Mention the user's Accor status benefits (from the profile) on Accor properties.
 4. **Compare points vs cash for hotels too.** Hilton at a 0.4cpp floor is almost always worse than cash. Say this.
 5. **Search for the profile's party.** With children, prefer family rooms or apartments.
@@ -166,8 +167,11 @@ Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy progr
 2. **Useful pre-search check.** Before asking the user "did you mean a different airport?" verify their requested route is actually flown by checking Wikipedia. Saves a round-trip when the answer is "this carrier doesn't fly there."
 3. **Late-split-return discovery.** If standard fare search misses a workable late-night option, scan the destination's Wikipedia page for less-common airlines (regional, ULCC) that might serve a return leg from a nearby airport.
 
+### Status match opportunities (always, on every trip, hotel or program question):
+Run the `status-matcher` skill (`python3 scripts/statusmatcher.py --profile`) whenever a trip is planned, a hotel or car search runs, or an airline/hotel program comes up. It reads live statusmatcher.com reports for matches out of the user's current statuses. Mention a match only when it fits this trip or program, in one line, as a result (never an offer). Then apply the rules below before calling it worth doing.
+
 ### When someone asks about elite status or status match:
-1. **Load the `status-match` skill.** It covers free direct matches, paid concierge via statusmatch.com, and renewable card-based status.
+1. **Load the `status-match` skill, and run `status-matcher` for live reports.** It covers free direct matches, paid concierge via statusmatch.com, and renewable card-based status.
 2. **Always state the lifetime restriction first.** Alaska Atmos = once per lifetime (verified primary). United/Delta = once every 3 years (verified primary). AA = once every 2 years (verified primary). Hyatt Globalist / Marriott Platinum / Hilton Diamond Challenges = LIKELY once per lifetime (community-confirmed but not always in published terms).
 3. **Check Path 3 (card-granted) first.** If a card the user already holds (or would consider holding) grants the equivalent tier, that beats a one-time match every time.
 4. **Ask about upcoming travel.** A wasted match cannot be undone. If the user has no flying or staying in the next 6-12 months that uses the matched status, recommend holding off.

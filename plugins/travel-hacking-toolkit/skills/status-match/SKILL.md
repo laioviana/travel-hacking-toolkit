@@ -140,7 +140,7 @@ If break-even is under 1 year of typical travel, recommend. If over 2-3 years (a
 
 ### Step 5: Cross-check via community database
 
-For grants/denials in the past 6 months, point at [statusmatcher.com](https://statusmatcher.com/). Useful for confirming the program is currently accepting matches and what proof is being accepted.
+Run the [`status-matcher`](../status-matcher/SKILL.md) skill for live statusmatcher.com reports: `python3 scripts/statusmatcher.py --to <program> --details 5` shows recent Match/Challenge/Deny outcomes into the target, the tiers matched and how to apply; `--profile` finds targets from the user's current statuses. Useful for confirming the program is currently accepting matches and what proof is being accepted. The reports are crowdsourced, so treat them as UNVERIFIED until the program's terms confirm.
 
 ## Output Format
 

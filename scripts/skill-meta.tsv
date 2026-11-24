@@ -44,3 +44,4 @@ ams-for	orchestration	AMS to Fortaleza family search across every gateway. Cash 
 bonificadas	loyalty	Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.	None (public feeds)	
 brazil-programs	reference	Livelo, Esfera, Smiles, LATAM Pass and Azul. Cost basis in R$ per milheiro and when each program wins.	None (local data)	
 latam-pass	loyalty	LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero.	None (requires browser)	
+status-matcher	loyalty	Live status match opportunities from your current elite statuses, via statusmatcher.com reports.	None (public site)	

@@ -217,6 +217,7 @@ Also use **tripadvisor** (under Destinations) for hotel ratings, rankings, subra
 | **bonificadas** | Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs. | None (public feeds) |
 | **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
 | **my-points** | The user own points and miles balances, cost basis, status and travel profile (local files or own web app). | none |
+| **status-matcher** | Live status match opportunities from your current elite statuses, via statusmatcher.com reports. | None (public site) |
 | **transfer-partners** | Cheapest transfer path from credit card points to mileage programs. | None (local data) |
 | **wheretocredit** | Mileage earning rates by airline and booking class across 50+ programs. | None (free) |
 <!-- END: readme:loyalty -->
