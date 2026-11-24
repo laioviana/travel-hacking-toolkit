@@ -1,0 +1,159 @@
+{
+  "_meta": {
+    "description": "LATAM Pass Tabela Fixa: fixed award chart for flights operated 100% by partner airlines. Miles per passenger, one way, per region-pair combination. Matrices are rows = origin region, columns = destination region, in the order of `regions` (economy adds Argentina as its own row and column, see `economy_regions`).",
+    "source": "https://latampass.latam.com/br/pt/regras-de-resgate (section 'Resgate de milhas com companhias aéreas parceiras'), read in the browser 2026-11-24",
+    "regions_source": "https://latampass.latam.com/br/pt/regras-de-resgate/tabela-de-regioes, read 2026-11-24",
+    "secondary_sources": [
+      "https://passageirodeprimeira.com/valendo-latam-pass-reajusta-tabela-fixa-de-resgate-com-companhias-parceiras/ (2026-11-23)",
+      "https://passageirodeprimeira.com/como-emitir-voos-tabela-fixa-latam/ (2026-11-17)"
+    ],
+    "current_valid_from": "2026-11-23",
+    "previous_valid_until": "2026-11-22",
+    "change_note": "Increase of 20% on many pairs, effective 2026-11-23 (the second increase in 2026, after the one in March). Some pairs did not change, for example Brazil to South America and to Ásia Ocidental. Run scripts/latam_tabela_fixa.py --diff for the full list.",
+    "last_updated": "2026-11-24",
+    "staleness_days": 60,
+    "confidence": "VERIFIED (official LATAM page)",
+    "known_quirks": [
+      "Previous premium economy shows Ásia Oriental->Brasil 214,400 but Brasil->Ásia Oriental 214,000. Asymmetric typo on LATAM's page. It is only in the previous table."
+    ]
+  },
+  "regions": ["Brasil", "América do Sul", "América Central", "América do Norte", "Europa", "Oceania", "Oriente Médio", "África", "Ásia Oriental", "Ásia Ocidental"],
+  "economy_regions": ["Brasil", "Argentina", "América do Sul", "América Central", "América do Norte", "Europa", "Oceania", "Oriente Médio", "África", "Ásia Oriental", "Ásia Ocidental"],
+  "chart": {
+    "economy": {
+      "current": [
+        [0, 24000, 24000, 50400, 68400, 96840, 114000, 145800, 74400, 150600, 82500],
+        [24000, 24000, 24000, 50400, 50400, 48000, 95000, 71300, 41000, 95000, 82500],
+        [24000, 24000, 24000, 42000, 50400, 48000, 95000, 71300, 41000, 95000, 82500],
+        [50400, 50400, 42000, 36000, 36000, 43200, 66000, 66000, 58000, 79200, 82500],
+        [68400, 50400, 50400, 36000, 36000, 51840, 56880, 79000, 55200, 63600, 66000],
+        [96840, 48000, 48000, 43200, 51840, 28800, 60000, 43200, 51840, 72000, 48000],
+        [114000, 95000, 95000, 66000, 56880, 60000, 43200, 48000, 48000, 57600, 60000],
+        [145800, 71300, 71300, 66000, 79000, 43200, 48000, 29000, 36000, 51600, 36000],
+        [74400, 41000, 41000, 58000, 55200, 51840, 48000, 36000, 24000, 48000, 42000],
+        [150600, 95000, 95000, 79200, 63600, 72000, 57600, 51600, 48000, 28800, 30000],
+        [82500, 82500, 82500, 82500, 66000, 48000, 60000, 36000, 42000, 30000, 24000]
+      ],
+      "previous": [
+        [0, 24000, 24000, 42000, 57000, 80700, 95000, 121500, 62000, 125500, 82500],
+        [24000, 24000, 24000, 42000, 42000, 48000, 95000, 71300, 41000, 95000, 82500],
+        [24000, 24000, 24000, 42000, 42000, 48000, 95000, 71300, 41000, 95000, 82500],
+        [42000, 42000, 42000, 30000, 30000, 36000, 66000, 66000, 58000, 66000, 82500],
+        [57000, 42000, 42000, 30000, 30000, 43200, 47400, 79000, 46000, 53000, 66000],
+        [80700, 48000, 48000, 36000, 43200, 24000, 60000, 36000, 43200, 60000, 48000],
+        [95000, 95000, 95000, 66000, 47400, 60000, 36000, 48000, 48000, 48000, 60000],
+        [121500, 71300, 71300, 66000, 79000, 36000, 48000, 29000, 36000, 43000, 36000],
+        [62000, 41000, 41000, 58000, 46000, 43200, 48000, 36000, 24000, 48000, 42000],
+        [125500, 95000, 95000, 66000, 53000, 60000, 48000, 43000, 48000, 24000, 30000],
+        [82500, 82500, 82500, 82500, 66000, 48000, 60000, 36000, 42000, 30000, 24000]
+      ]
+    },
+    "premium_economy": {
+      "current": [
+        [0, 43200, 51840, 90720, 108840, 136800, 264600, 165000, 256800, 136000],
+        [43200, 43200, 43200, 84000, 75600, 114000, 132000, 124000, 132000, 137500],
+        [51840, 43200, 51840, 78000, 90720, 114000, 132000, 134000, 158400, 178000],
+        [90720, 84000, 78000, 64800, 77760, 128160, 179000, 142800, 124800, 119000],
+        [108840, 75600, 90720, 77760, 64800, 71000, 85200, 114000, 99600, 95000],
+        [136800, 114000, 114000, 128160, 71000, 51840, 100000, 54000, 77760, 108000],
+        [264600, 132000, 132000, 179000, 85200, 108000, 54000, 86400, 103680, 86400],
+        [165000, 124000, 134000, 142800, 114000, 54000, 72000, 43200, 54000, 64800],
+        [256800, 132000, 158400, 124800, 99600, 77760, 103680, 54000, 51840, 86400],
+        [136000, 137500, 178000, 119000, 95000, 108000, 80000, 64800, 86400, 43200]
+      ],
+      "previous": [
+        [0, 43200, 43200, 75600, 90700, 114000, 220500, 137500, 214000, 136000],
+        [43200, 43200, 43200, 70000, 75600, 114000, 132000, 124000, 132000, 137500],
+        [43200, 43200, 43200, 65000, 75600, 114000, 132000, 134000, 132000, 178000],
+        [75600, 70000, 65000, 54000, 64800, 106800, 179000, 119000, 104000, 119000],
+        [90700, 75600, 75600, 64800, 54000, 71000, 71000, 95000, 83000, 95000],
+        [114000, 114000, 114000, 106800, 71000, 43200, 100000, 54000, 64800, 108000],
+        [220500, 132000, 132000, 179000, 71000, 108000, 54000, 86400, 86400, 86400],
+        [137500, 124000, 134000, 119000, 95000, 54000, 72000, 43200, 54000, 64800],
+        [214400, 132000, 132000, 104000, 83000, 64800, 86400, 54000, 43200, 86400],
+        [136000, 137500, 178000, 119000, 95000, 108000, 80000, 64800, 86400, 43200]
+      ]
+    },
+    "business": {
+      "current": [
+        [0, 48000, 108000, 162000, 241920, 237600, 350400, 189000, 297600, 180000],
+        [48000, 66000, 90000, 129600, 120000, 198000, 173000, 144000, 190000, 180000],
+        [108000, 90000, 79200, 118800, 129600, 162000, 173000, 162000, 207600, 216000],
+        [162000, 129600, 118800, 99000, 194400, 194400, 225000, 162000, 180000, 180000],
+        [241920, 120000, 129600, 194400, 86400, 144000, 96000, 129600, 172800, 120000],
+        [237600, 198000, 162000, 194400, 144000, 108000, 108000, 108000, 129600, 114000],
+        [350400, 173000, 173000, 225000, 96000, 108000, 93000, 101000, 129600, 101000],
+        [189000, 144000, 162000, 162000, 129600, 108000, 101000, 84000, 108000, 102000],
+        [297600, 190000, 207600, 180000, 172800, 129600, 129600, 108000, 100800, 90000],
+        [180000, 180000, 216000, 180000, 120000, 114000, 101000, 102000, 90000, 84000]
+      ],
+      "previous": [
+        [0, 48000, 90000, 135000, 201600, 198000, 292000, 157500, 248000, 180000],
+        [48000, 66000, 90000, 108000, 120000, 198000, 173000, 144000, 190000, 180000],
+        [90000, 90000, 66000, 99000, 108000, 162000, 173000, 162000, 173000, 216000],
+        [135000, 108000, 99000, 82500, 162000, 162000, 225000, 135000, 150000, 180000],
+        [201600, 120000, 108000, 162000, 72000, 144000, 80000, 108000, 144000, 120000],
+        [198000, 198000, 162000, 162000, 144000, 90000, 108000, 108000, 108000, 114000],
+        [292000, 173000, 173000, 225000, 80000, 108000, 93000, 101000, 108000, 101000],
+        [157500, 144000, 162000, 135000, 108000, 108000, 101000, 84000, 108000, 102000],
+        [248000, 190000, 173000, 150000, 144000, 108000, 108000, 108000, 84000, 90000],
+        [180000, 180000, 216000, 180000, 120000, 114000, 101000, 102000, 90000, 84000]
+      ]
+    },
+    "first": {
+      "current": [
+        [0, 84000, 172800, 259200, 403200, 302400, 453600, 324000, 380400, 234000],
+        [84000, 84000, 144000, 259200, 240000, 252000, 225000, 171000, 242000, 234000],
+        [172800, 144000, 100800, 151200, 172800, 216000, 242000, 216000, 290400, 288000],
+        [259200, 259200, 151200, 126000, 259200, 259200, 312500, 216000, 252000, 240000],
+        [403200, 168000, 172800, 259200, 86400, 192000, 112800, 120960, 230400, 168000],
+        [302400, 252000, 216000, 259200, 192000, 108000, 144000, 120000, 144000, 144000],
+        [453600, 225000, 242000, 312500, 112800, 144000, 86400, 101000, 163200, 101000],
+        [324000, 171000, 216000, 216000, 120960, 120000, 101000, 84000, 120000, 114000],
+        [380400, 242000, 290400, 252000, 230400, 144000, 163200, 120000, 100800, 114000],
+        [234000, 234000, 288000, 240000, 168000, 144000, 101000, 114000, 114000, 84000]
+      ],
+      "previous": [
+        [0, 84000, 144000, 216000, 336000, 252000, 378000, 270000, 317000, 234000],
+        [84000, 84000, 144000, 216000, 240000, 252000, 225000, 171000, 242000, 234000],
+        [144000, 144000, 84000, 126000, 144000, 216000, 242000, 216000, 242000, 288000],
+        [216000, 216000, 126000, 105000, 216000, 216000, 312500, 180000, 210000, 240000],
+        [336000, 168000, 144000, 216000, 72000, 192000, 94000, 100800, 192000, 168000],
+        [252000, 252000, 216000, 216000, 192000, 90000, 144000, 120000, 120000, 144000],
+        [378000, 225000, 242000, 312500, 94000, 144000, 86400, 101000, 136000, 101000],
+        [270000, 171000, 216000, 180000, 100800, 120000, 101000, 84000, 120000, 114000],
+        [317000, 242000, 242000, 210000, 192000, 120000, 136000, 120000, 84000, 114000],
+        [234000, 234000, 288000, 240000, 168000, 144000, 101000, 114000, 114000, 84000]
+      ]
+    }
+  },
+  "region_countries": {
+    "_note": "Official region table. LATAM splits Africa into Norte and Sul for its region list, but the award chart has a single 'África' row and column. Brasil-Brasil is 0 in the chart, so domestic Brazil partner flights are not priced from this table.",
+    "África": ["Argélia", "Benim", "Burkina Faso", "Cabo Verde", "Camarões", "Chade", "Congo", "Costa do Marfim", "Djibouti", "Eritréia", "Etiópia", "Gâmbia", "Gana", "Guiné", "Guiné-Bissau", "Libéria", "Líbia", "Mali", "Marrocos", "Maurício", "Mauritânia", "Níger", "Nigéria", "Quênia", "República do Congo", "República Centro-Africana", "Saara Ocidental", "São Tomé e Príncipe", "Senegal", "Serra Leoa", "Somália", "Sudão", "Togo", "Tunísia", "Uganda", "África do Sul", "Angola", "Botswana", "Burundi", "Comores", "Gabão", "Guiné Equatorial", "Lesoto", "Madagascar", "Malawi", "Moçambique", "Namíbia", "Ruanda", "Santa Helena", "Seychelles", "Suazilândia", "Tanzânia", "Zâmbia", "Zimbábue"],
+    "América Central": ["Anguilla", "Antígua e Barbuda", "Antilhas Holandesas", "Aruba", "Bahamas", "Barbados", "Belize", "Bermuda", "Costa Rica", "Cuba", "Dominica", "El Salvador", "Granada", "Guadalupe", "Guatemala", "Haiti", "Honduras", "Ilhas Cayman", "Ilhas Virgens Americanas", "Ilhas Virgens Britânicas", "Turks e Caicos", "Jamaica", "Martinica", "Montserrat", "Nicarágua", "Panamá", "Porto Rico", "República Dominicana", "Saint Barthélemy", "Saint Martin", "Saint Pierre e Miquelon", "Santa Lúcia", "São Cristóvão e Névis", "São Vicente e Granadinas", "Trinidad e Tobago"],
+    "América do Norte": ["Canadá", "Estados Unidos", "México"],
+    "América do Sul": ["Argentina", "Bolívia", "Chile", "Colômbia", "Equador", "Guiana", "Guiana Francesa", "Paraguai", "Peru", "Suriname", "Uruguai", "Venezuela"],
+    "Ásia Ocidental": ["Afeganistão", "Cazaquistão", "Índia", "Paquistão", "Quirguistão", "Tadjiquistão", "Turcomenistão", "Uzbequistão"],
+    "Ásia Oriental": ["Bangladesh", "Brunei", "Butão", "Camboja", "China", "Cingapura", "Coréia", "Coréia do Sul", "Filipinas", "Hong Kong", "Ilhas Cocos", "Indonésia", "Japão", "Laos", "Macau", "Malásia", "Maldivas", "Mongólia", "Myanmar", "Nepal", "Sri Lanka", "Tailândia", "Timor-Leste", "Vietnã"],
+    "Brasil": ["Brasil"],
+    "Europa": ["Albânia", "Alemanha", "Andorra", "Áustria", "Bélgica", "Bielorrussia", "Bósnia-Herzegovina", "Bulgária", "Chipre", "Croácia", "Dinamarca", "Eslováquia", "Eslovênia", "Espanha", "Estônia", "Finlândia", "França", "Gibraltar", "Grécia", "Hungria", "Irlanda", "Islândia", "Itália", "Kosovo", "Letônia", "Liechtenstein", "Lituânia", "Luxemburgo", "Macedônia", "Malta", "Moldávia", "Mônaco", "Montenegro", "Noruega", "Países Baixos", "Polônia", "Portugal", "Reino Unido", "República Tcheca", "Romênia", "Rússia", "San Marino", "Sérvia", "Suécia", "Suíça", "Ucrânia", "Vaticano"],
+    "Oceania": ["Austrália", "Fiji", "Guam", "Ilhas Cook", "Ilhas Marshall", "Ilha Norfolk", "Ilhas Salomão", "Kiribati", "Marianas do Norte", "Micronésia", "Nauru", "Nova Caledônia", "Nova Zelândia", "Palau", "Papua Nova Guiné", "Polinésia Francesa", "Samoa", "Samoa Americana", "Tonga", "Toquelau", "Tuvalu", "Vanuatu", "Wallis e Futuna"],
+    "Oriente Médio": ["Arábia Saudita", "Armênia", "Azerbaijão", "Bahrein", "Egito", "Emirados Árabes Unidos", "Geórgia", "Iêmen", "Irã", "Iraque", "Israel", "Jordânia", "Kuwait", "Líbano", "Omã", "Qatar", "Síria", "Turquia"]
+  },
+  "partner_airlines": {
+    "_note": "Air partners listed on https://latampass.latam.com/br/pt/aereas-parceiras (2026-11-24). That page is about earning miles. Redeeming on each one goes through the call center and depends on the partner releasing award space, so confirm it there.",
+    "airlines": ["Aerolíneas Argentinas", "Aeroméxico", "Austrian Airlines", "British Airways", "Cathay Pacific", "Delta", "Finnair", "Iberia", "Japan Airlines", "Lufthansa", "Qantas", "Qatar Airways", "Royal Jordanian", "Swiss", "Virgin Atlantic"],
+    "not_partners_examples": ["Air France", "KLM", "TAP", "Emirates", "Turkish Airlines", "United", "American Airlines"]
+  },
+  "rules": {
+    "pricing": "Per cabin and per region-pair combination up to the final destination, regardless of how many connections fall within the same combination. Official example: RIO-MIA, MIA-NYC, NYC-ATL = Brasil>América do Norte + América do Norte>América do Norte, with the US-US price charged once.",
+    "new_region_rule": "The table value applies when a partner flies the route without passing through a new region. Otherwise the price is calculated at booking time by the agent.",
+    "own_metal_excluded": "Does not apply to LATAM-operated flights (those are dynamic, on the site).",
+    "channel": "Call center only (4002-5700 in capitals, 0300 570 5700 elsewhere in Brazil) or WhatsApp +56 9 6825 0850. Not bookable on the website.",
+    "availability": "Subject to the partner's availability and can change on the same day as the quote. What LATAM sees may differ from the partner's own website.",
+    "buy_miles_warning": "LATAM says to confirm availability with the call center BEFORE buying miles for a partner award.",
+    "infants": "Infants under 2 cannot be issued on tabela fixa partner awards.",
+    "whatsapp_template": "Send as ONE message with no greeting first: Ida ou Ida e Volta / Origem e destino (IATA) / Data de ida (AAAA-MM-DD) / Data de volta (AAAA-MM-DD) / Cabine / Adultos / Crianças / Bebês",
+    "unknown": ["Exact taxes and fees in R$ (read them at quote time)", "Change and cancellation fees", "Whether mixed-cabin itineraries are priced at the highest cabin", "Whether A>B and B>A count as the same combination (the official example only shows one direction)"]
+  }
+}
