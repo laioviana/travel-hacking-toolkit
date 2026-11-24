@@ -139,3 +139,7 @@ If TPG shows a bonus that Frequent Miler doesn't, treat it as expired or never-e
 ## Avoiding Fabrication
 
 This skill exists in part because LLMs are tempted to confidently invent transfer bonuses. **Never list a bonus that isn't in the data file.** If the data file is stale (`check-data-freshness.sh` reports STALE), refresh it before answering. If refresh fails, tell the user "the data file is stale and I can't refresh right now" rather than guessing.
+
+## This User: Brazilian Currencies
+
+This skill's data file covers card transfer bonuses. For **Livelo, Esfera and bought miles** (Smiles, LATAM Pass, Azul, TAP, Iberia, Qatar, Accor), use the `bonificadas` skill and refresh it first, since promos last days. For **Amex NL MR**, this skill's data may not include Dutch promos: say so, and check americanexpress.com/nl before transferring (`flying-blue` ratio is 2:1 since 2026-07-01). Compute the effective cost per mile in R$ against the cost basis.

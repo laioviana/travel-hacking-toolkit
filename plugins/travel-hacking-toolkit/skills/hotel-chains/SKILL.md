@@ -13,7 +13,7 @@ Use the `quick_lookup` section in the data file to instantly identify which loya
 
 ## The Trigger Table
 
-When results contain properties from ANY of these chains, IMMEDIATELY pull AwardWallet balances and check award rates. No judgment call. No asking. Just do it.
+When results contain properties from ANY of these chains, IMMEDIATELY pull balances with the `my-points` skill and check award rates. No judgment call. No asking. Just do it.
 
 | Chain Family | Properties Include | Loyalty Program |
 |---|---|---|
@@ -38,3 +38,10 @@ Mention transfer opportunities. "Your Chase UR transfers 1:1 to Hyatt. That 25K/
 ## Booking Windows for Hotels
 
 Reference `data/sweet-spots.json` `booking_windows` section if a user wants to know how far in advance to book.
+
+## This User: Accor First
+
+- Programs that matter for this user: **ALL Accor** (reachable from Livelo at 3.5:1 in blocks of 2,000 and from Esfera at 3.5:1, see `data/transfer-partners.json`), then cash. Hilton and IHG via Livelo or Esfera are available at poor ratios and are rarely worth it.
+- Pull the Accor status from the profile with `my-points` and state the benefits on every Accor property.
+- ALL points are fixed value: 2,000 points = EUR 40. Convert to R$ with `python3 scripts/fx.py`.
+- Ignore US-only paths in the table above (Chase, US Amex, Bilt, Capital One transfers).

@@ -109,3 +109,16 @@ For multi-stop or RTW itineraries, the relevant comparison isn't a single one-wa
 - **Aeroplan distance-based NA short-haul** (6,000 Aeroplan miles starting price for under 500mi) at $80-120 cash = 1.3-2.0 cpp, comparable to the Chase portal floor.
 
 Always compute the full-itinerary CPP for multi-stop trips, not the per-segment CPP, since stopover and routing benefits compound across segments.
+
+## This User: R$ per Milheiro and Cost Basis
+
+The unit is **R$ per 1,000 points (milheiro)**, not US cents per point. Reference ranges are in `data/points-valuations.json` under `brl_milheiro` (LATAM Pass, Smiles, Azul Fidelidade, Livelo, Esfera). ALL Accor is fixed at 2,000 points = EUR 40.
+
+Formula: `(cash fare in R$ - taxes paid on the award in R$) / points * 1000`. Convert EUR or USD with `python3 scripts/fx.py`.
+
+Judge in this order:
+1. **Cost basis first.** `avg_cost_per_milheiro_brl` per program in `data/my-balances.json` (gitignored). A redemption below the cost basis loses money against what was paid. For transferred points the cost per airline mile is the cost basis times the transfer ratio, less any bonus.
+2. **Then the floor and ceiling** in `brl_milheiro`. Below floor is poor, above ceiling is exceptional.
+3. **Flying Blue and Avios** have no `brl_milheiro` entry yet. Derive their cost per mile from the source currency cost and ratio (`flying-blue`, `avios`), and compare to the cash saved.
+
+Never quote a cost basis in a tracked file. Read it at runtime.

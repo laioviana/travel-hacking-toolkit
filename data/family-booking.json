@@ -37,9 +37,9 @@
       "sources": []
     },
     "tap": {
-      "child_2_11": "Not researched yet.",
-      "confidence": "UNVERIFIED",
-      "sources": []
+      "child_2_11": "25% off the miles of the fare available on the purchase date (TAP Miles&Go terms).",
+      "confidence": "LIKELY",
+      "sources": ["https://www.flytap.com/en-us/legal-info/terms-and-conditions-miles-and-go"]
     }
   },
   "booking_for_others": {

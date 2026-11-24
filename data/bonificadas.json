@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "last_updated": "2026-11-16",
+    "last_updated": "2026-11-23",
     "staleness_days": 7,
     "description": "Brazilian transfer bonuses (bonificadas) and point-purchase promos announced in the last 14 days, extracted from blog headlines. Only headline facts are stored; open the post (url) for end date, club-only tiers and minimums before acting.",
     "sources": [
@@ -18,21 +18,43 @@
   "promos": [
     {
       "kind": "transfer_bonus",
-      "pct": 25,
-      "pct_is_max": false,
-      "to_program": "latam_pass",
+      "pct": 80,
+      "pct_is_max": true,
+      "to_program": "smiles",
       "from": [
-        "c6"
+        "credit_cards_several"
       ],
       "includes_livelo": false,
       "includes_esfera": false,
       "end_date_inclusive": null,
-      "title": "LATAM Pass e C6 Bank com 25% de bônus na transferência de pontos + milhas extras",
-      "published": "2026-11-16",
+      "title": "Voltou! Smiles oferece até 80% de bônus nas transferências de pontos com parceiros",
+      "published": "2026-11-23",
       "status": "check_post",
       "urls": [
-        "https://pontospravoar.com/latam-pass-c6-bank-25-porcento-bonus-transferencia-pontos-milhas-extras/",
-        "https://passageirodeprimeira.com/latam-pass-oferece-25-de-bonus-nas-transferencias-de-pontos-do-c6-bank-4/"
+        "https://pontospravoar.com/voltou-smiles-oferece-ate-80-de-bonus-nas-transferencias-de-pontos-com-parceiros/"
+      ],
+      "sources": [
+        "pontospravoar"
+      ],
+      "confidence": "UNVERIFIED"
+    },
+    {
+      "kind": "transfer_bonus",
+      "pct": 27,
+      "pct_is_max": false,
+      "to_program": "latam_pass",
+      "from": [
+        "livelo"
+      ],
+      "includes_livelo": true,
+      "includes_esfera": false,
+      "end_date_inclusive": null,
+      "title": "Aproveite! LATAM Pass oferece 27% de bônus na transferência de pontos da Livelo",
+      "published": "2026-11-23",
+      "status": "check_post",
+      "urls": [
+        "https://pontospravoar.com/aproveite-latam-pass-oferece-27-porcento-bonus-transferencia-pontos-livelo/",
+        "https://passageirodeprimeira.com/latam-pass-oferece-27-de-bonus-na-transferencia-de-pontos-livelo/"
       ],
       "sources": [
         "passageirodeprimeira",
@@ -41,29 +63,64 @@
       "confidence": "LIKELY"
     },
     {
-      "kind": "transfer_bonus",
-      "pct": 120,
+      "kind": "purchase_promo",
+      "pct": 320,
       "pct_is_max": true,
       "to_program": "azul",
-      "from": [
-        "livelo",
-        "credit_cards_several"
-      ],
-      "includes_livelo": true,
+      "from": null,
+      "includes_livelo": false,
       "includes_esfera": false,
       "end_date_inclusive": null,
-      "title": "Azul Fidelidade oferece até 120% de bônus na transferência de parceiros – incluindo Livelo!",
-      "published": "2026-11-16",
+      "title": "Azul Fidelidade oferece até 320% de bônus na compra de pontos",
+      "published": "2026-11-23",
       "status": "check_post",
       "urls": [
-        "https://pontospravoar.com/azul-fidelidade-oferece-ate-120-porcento-bonus-transferencia-parceiros-incluindo-livelo/",
-        "https://passageirodeprimeira.com/azul-fidelidade-oferece-ate-120-de-bonus-nas-transferencias-de-pontos-dos-cartoes-de-credito-inclusive-livelo/"
+        "https://passageirodeprimeira.com/azul-fidelidade-oferece-ate-320-de-bonus-na-compra-de-pontos-2/"
       ],
       "sources": [
-        "passageirodeprimeira",
+        "passageirodeprimeira"
+      ],
+      "confidence": "UNVERIFIED"
+    },
+    {
+      "kind": "purchase_promo",
+      "pct": null,
+      "pct_is_max": true,
+      "to_program": "smiles",
+      "from": null,
+      "includes_livelo": false,
+      "includes_esfera": false,
+      "end_date_inclusive": null,
+      "title": "Smiles com bônus de até 375% na compra de milhas",
+      "published": "2026-11-21",
+      "status": "check_post",
+      "urls": [
+        "https://pontospravoar.com/smiles-bonus-ate-375-porcento-compra-milhas/"
+      ],
+      "sources": [
         "pontospravoar"
       ],
-      "confidence": "LIKELY"
+      "confidence": "UNVERIFIED"
+    },
+    {
+      "kind": "purchase_promo",
+      "pct": 120,
+      "pct_is_max": false,
+      "to_program": null,
+      "from": null,
+      "includes_livelo": false,
+      "includes_esfera": false,
+      "end_date_inclusive": "2026-11-21",
+      "title": "Último dia! Hilton Honors oferece 120% de bônus na compra de pontos",
+      "published": "2026-11-21",
+      "status": "expired",
+      "urls": [
+        "https://passageirodeprimeira.com/ultimo-dia-hilton-honors-oferece-120-de-bonus-na-compra-de-pontos/"
+      ],
+      "sources": [
+        "passageirodeprimeira"
+      ],
+      "confidence": "UNVERIFIED"
     },
     {
       "kind": "purchase_promo",
@@ -73,126 +130,19 @@
       "from": null,
       "includes_livelo": false,
       "includes_esfera": false,
-      "end_date_inclusive": null,
-      "title": "Esquenta LATAM Friday! Compre milhas LATAM Pass com até 66% de desconto",
-      "published": "2026-11-16",
-      "status": "check_post",
+      "end_date_inclusive": "2026-11-20",
+      "title": "Últimas horas! Compre milhas LATAM Pass com até 66% de desconto",
+      "published": "2026-11-20",
+      "status": "expired",
       "urls": [
-        "https://pontospravoar.com/esquenta-latam-friday-compre-milhas-latam-pass-ate-66-porcento-desconto/",
-        "https://passageirodeprimeira.com/latam-pass-oferece-ate-66-de-desconto-na-compra-de-milhas/"
+        "https://pontospravoar.com/ultimas-horas-compre-milhas-latam-pass-ate-66-porcento-desconto/",
+        "https://passageirodeprimeira.com/ultimo-dia-latam-pass-oferece-ate-66-de-desconto-na-compra-de-milhas/"
       ],
       "sources": [
         "passageirodeprimeira",
         "pontospravoar"
       ],
       "confidence": "LIKELY"
-    },
-    {
-      "kind": "purchase_promo",
-      "pct": 100,
-      "pct_is_max": true,
-      "to_program": null,
-      "from": null,
-      "includes_livelo": false,
-      "includes_esfera": false,
-      "end_date_inclusive": null,
-      "title": "Wyndham Rewards oferece até 100% de bônus na compra de pontos",
-      "published": "2026-11-16",
-      "status": "check_post",
-      "urls": [
-        "https://passageirodeprimeira.com/wyndham-rewards-oferece-ate-100-bonus-compra-pontos/"
-      ],
-      "sources": [
-        "passageirodeprimeira"
-      ],
-      "confidence": "UNVERIFIED"
-    },
-    {
-      "kind": "transfer_bonus",
-      "pct": 25,
-      "pct_is_max": false,
-      "to_program": "latam_pass",
-      "from": [
-        "itau"
-      ],
-      "includes_livelo": false,
-      "includes_esfera": false,
-      "end_date_inclusive": "2026-11-15",
-      "title": "Acaba hoje! LATAM Pass com 25% de bônus na transferência de pontos do Itaú",
-      "published": "2026-11-15",
-      "status": "expired",
-      "urls": [
-        "https://pontospravoar.com/acaba-hoje-latam-pass-25-porcento-bonus-transferencia-pontos-itau/"
-      ],
-      "sources": [
-        "pontospravoar"
-      ],
-      "confidence": "LIKELY"
-    },
-    {
-      "kind": "transfer_bonus",
-      "pct": 120,
-      "pct_is_max": true,
-      "to_program": "azul",
-      "from": [
-        "nomad"
-      ],
-      "includes_livelo": false,
-      "includes_esfera": false,
-      "end_date_inclusive": null,
-      "title": "Azul Fidelidade oferece até 120% de bônus na transferência da Nomad + pontos extras",
-      "published": "2026-11-14",
-      "status": "check_post",
-      "urls": [
-        "https://pontospravoar.com/azul-fidelidade-oferece-ate-120-porcento-bonus-transferencia-da-nomad-pontos-extras/",
-        "https://passageirodeprimeira.com/azul-fidelidade-oferece-ate-120-de-bonus-na-transferencia-de-pontos-da-nomad-e-alloyal/"
-      ],
-      "sources": [
-        "passageirodeprimeira",
-        "pontospravoar"
-      ],
-      "confidence": "LIKELY"
-    },
-    {
-      "kind": "transfer_bonus",
-      "pct": 120,
-      "pct_is_max": true,
-      "to_program": "azul",
-      "from": null,
-      "includes_livelo": false,
-      "includes_esfera": false,
-      "end_date_inclusive": "2026-11-13",
-      "title": "Últimas horas! Azul Fidelidade oferece até 120% de bônus na transferência de pontos Premmia",
-      "published": "2026-11-13",
-      "status": "expired",
-      "urls": [
-        "https://pontospravoar.com/ultimas-horas-azul-fidelidade-oferece-ate-120-porcento-bonus-transferencia-pontos-premmia/",
-        "https://pontospravoar.com/apenas-hoje-azul-fidelidade-alloyal-ate-120-porcento-bonus-transferencia-pontos/"
-      ],
-      "sources": [
-        "pontospravoar"
-      ],
-      "confidence": "LIKELY"
-    },
-    {
-      "kind": "transfer_bonus",
-      "pct": 70,
-      "pct_is_max": true,
-      "to_program": "smiles",
-      "from": null,
-      "includes_livelo": false,
-      "includes_esfera": false,
-      "end_date_inclusive": "2026-11-13",
-      "title": "Acaba hoje! Smiles oferece até 70% de bônus na transferência de pontos + cupom",
-      "published": "2026-11-13",
-      "status": "expired",
-      "urls": [
-        "https://pontospravoar.com/acaba-hoje-smiles-oferece-ate-70-porcento-bonus-transferencia-pontos-cupom/"
-      ],
-      "sources": [
-        "pontospravoar"
-      ],
-      "confidence": "UNVERIFIED"
     },
     {
       "kind": "transfer_bonus",
@@ -204,84 +154,17 @@
       ],
       "includes_livelo": false,
       "includes_esfera": false,
-      "end_date_inclusive": "2026-11-13",
+      "end_date_inclusive": "2026-11-19",
       "title": "Últimas horas para ganhar até 30% de bônus ao transferir pontos Azul para ALL Accor",
-      "published": "2026-11-13",
+      "published": "2026-11-19",
       "status": "expired",
       "urls": [
-        "https://passageirodeprimeira.com/ultimas-horas-para-ganhar-ate-30-de-bonus-ao-transferir-pontos-azul-para-all-accor/"
+        "https://passageirodeprimeira.com/ultimas-horas-para-ganhar-ate-30-de-bonus-ao-transferir-pontos-azul-para-all-accor-2/"
       ],
       "sources": [
         "passageirodeprimeira"
       ],
       "confidence": "UNVERIFIED"
-    },
-    {
-      "kind": "transfer_bonus",
-      "pct": 35,
-      "pct_is_max": false,
-      "to_program": "qatar",
-      "from": [
-        "livelo"
-      ],
-      "includes_livelo": true,
-      "includes_esfera": false,
-      "end_date_inclusive": "2026-11-13",
-      "title": "Último dia para ganhar 35% de bônus transferindo pontos da Livelo para a Qatar Airways",
-      "published": "2026-11-13",
-      "status": "expired",
-      "urls": [
-        "https://passageirodeprimeira.com/ultimo-dia-para-ganhar-35-de-bonus-transferindo-pontos-da-livelo-para-a-qatar-airways/"
-      ],
-      "sources": [
-        "passageirodeprimeira"
-      ],
-      "confidence": "UNVERIFIED"
-    },
-    {
-      "kind": "transfer_bonus",
-      "pct": 35,
-      "pct_is_max": true,
-      "to_program": "latam_pass",
-      "from": [
-        "itau",
-        "credit_cards_several"
-      ],
-      "includes_livelo": false,
-      "includes_esfera": false,
-      "end_date_inclusive": null,
-      "title": "Cartão LATAM Pass Itaú Platinum: 16 mil milhas na adesão e até 35% de bônus nas transferências de pontos",
-      "published": "2026-11-12",
-      "status": "check_post",
-      "urls": [
-        "https://passageirodeprimeira.com/cartao-latam-pass-itau-platinum-16-mil-milhas-na-adesao-e-ate-35-de-bonus-nas-transferencias-de-pontos/"
-      ],
-      "sources": [
-        "passageirodeprimeira"
-      ],
-      "confidence": "UNVERIFIED"
-    },
-    {
-      "kind": "transfer_bonus",
-      "pct": 120,
-      "pct_is_max": true,
-      "to_program": "azul",
-      "from": [
-        "inter"
-      ],
-      "includes_livelo": false,
-      "includes_esfera": false,
-      "end_date_inclusive": "2026-11-12",
-      "title": "Último dia para ganhar até 120% de bônus nas transferências de pontos do Inter Loop para o Azul Fidelidade",
-      "published": "2026-11-12",
-      "status": "expired",
-      "urls": [
-        "https://passageirodeprimeira.com/azul-fidelidade-oferece-ate-120-de-bonus-nas-transferencias-de-pontos-do-inter-loop-2/"
-      ],
-      "sources": [
-        "passageirodeprimeira"
-      ],
-      "confidence": "LIKELY"
     }
   ]
 }

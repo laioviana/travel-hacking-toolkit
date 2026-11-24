@@ -1,6 +1,6 @@
 # Tailoring plan: Brazilian programs + Amsterdam base
 
-Status: Phase 1 merged (PR #8). Phase 2 in progress.
+Status: PRs 1 to 3 merged (#8, #9, #10). PR 4 (archive, remaining skills, verification) in review.
 
 ## Profile (decided)
 

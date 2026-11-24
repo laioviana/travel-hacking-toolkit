@@ -37,8 +37,8 @@ from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree as ET
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = REPO_ROOT / "data"
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+DATA_DIR = REPO_ROOT / "data" / "_archive"
 
 NS = {"kml": "http://www.opengis.net/kml/2.2"}
 

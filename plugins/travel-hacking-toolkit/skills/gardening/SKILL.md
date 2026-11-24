@@ -77,7 +77,7 @@ For **every reservation** in the file, run through this checklist. Parallelize s
 This is the user's #1 interest. For each booking:
 
 **Cash bookings:**
-- Search current cash prices on the SAME flights/dates using Ignav, Bilt portal, Google Flights, Skiplagged, and Kiwi
+- Search current cash prices on the SAME flights/dates using Ignav, Google Flights, Skiplagged, and Kiwi
 - Search **nearby airports** (within ~100 miles / reasonable driving distance) for the same dates
   - SFO → also check OAK, SJC
   - LAX → also check BUR, SNA, LGB, ONT
@@ -128,7 +128,7 @@ For each flight already in business:
 
 ### 4. Schedule Change Detection
 
-- If the user provides confirmation codes / PNRs, note that AwardWallet can monitor these automatically
+- If the user provides confirmation codes / PNRs, note that the airline app can notify of schedule changes
 - Flag any segments where the **departure time may have shifted** (search current schedules)
 - Check for **aircraft type changes** (e.g., 787-9 → 737 is a significant downgrade; 777-300ER → A350 may change seat map)
 - Warn about **seasonal schedule changes** if the trip is far out (airlines typically publish schedules in waves)
@@ -182,16 +182,8 @@ Recommend the user gardens their reservations:
 ## Tools to Use
 
 Invoke these in parallel for each reservation:
-- **Ignav / Bilt portal / Google Flights / Skiplagged / Kiwi** — current cash prices
+- **Ignav / Google Flights / Skiplagged / Kiwi** — current cash prices
 - **Seats.aero** — current award availability
 - **Trivago / Skiplagged Hotels** — hotel price checks
-- **AwardWallet** — pull latest itineraries and detect changes automatically
 - **Seatmaps** — verify seat assignments after aircraft swaps
 
-## AwardWallet Integration
-
-AwardWallet is the best automated gardening tool available:
-- It scrapes itineraries from loyalty accounts and emails
-- It detects and alerts on schedule changes, aircraft swaps, seat changes, and class of service changes
-- Recommend the user connect their accounts if not already done
-- When running this skill, always pull fresh AwardWallet data first to catch changes the user may not know about

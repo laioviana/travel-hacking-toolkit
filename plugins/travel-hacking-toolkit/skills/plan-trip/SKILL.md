@@ -30,8 +30,8 @@ Once you have the inputs:
 
 1. **Load lessons-learned** first. Non-optional. Other skills depend on it.
 2. **Load flight-search-strategy** for the canonical parallel search plan.
-3. **Pull balances** via the awardwallet skill if the user's intent is points or "best of both" AND if balances aren't already in this session's context. Skip the pull if you already know them.
-4. **Run cash search in parallel** via ignav, bilt, google-flights, and the relevant free MCPs (Skiplagged, Kiwi).
+3. **Pull balances** via the my-points skill if the user's intent is points or "best of both" AND if balances aren't already in this session's context. Skip the pull if you already know them.
+4. **Run cash search in parallel** via ignav, google-flights, and the relevant free MCPs (Skiplagged, Kiwi).
 5. **Run award search in parallel** via seats-aero across ALL programs (never filter to one program upfront — see lessons-learned).
 6. **Cross-reference** with transfer-partners and transfer-bonuses to find the cheapest currency you actually have.
 7. **Apply points-valuations** to compute cents-per-point on each award option.
@@ -57,7 +57,7 @@ Don't dump all of these at once. Lead with the flight recommendation. Mention ho
 - Markdown tables for results
 - Bold the winning option
 - Always show cpp on award redemptions
-- Cite the source skill for each piece of data ("via seats-aero", "via awardwallet")
+- Cite the source skill for each piece of data ("via seats-aero", "via my-points")
 - End with a "Next steps" section listing concrete follow-up commands the user can issue. Examples: "Next steps: I can check specific dates around X, search hotels at Y, look up sweet-spot redemptions you're not using." This must be a declarative statement, NOT a question. Don't write "Want me to..." or "Should I..." (the system prompt's PRE-OUTPUT GATE bans those patterns).
 
 ## Don't do this

@@ -1,6 +1,6 @@
 ---
 name: lessons-learned
-description: Mandatory pre-flight-search reference. Contains the Seats.aero workflow (pull ALL programs first), source accuracy hierarchy, small-market caveats, and Bilt portal limitations.
+description: Mandatory pre-flight-search reference. Contains the Seats.aero workflow (pull ALL programs first), source accuracy hierarchy, and small-market caveats.
 category: reference
 summary: Hard-won knowledge from real searches. The mandatory Seats.aero workflow, source accuracy, small-market caveats, Ignav limitations. Load before any award flight search.
 ---
@@ -19,7 +19,7 @@ For any route:
 
 1. **Search Seats.aero with NO source filter.** Pull ALL programs. Show full results sorted by cheapest.
 2. **For EVERY program in results, trace the full reachability chain:**
-   a. Direct balance? (Check AwardWallet if connected)
+   a. Direct balance? (Use the `my-points` skill)
    b. Transfer path? (Check `data/transfer-partners.json` for EVERY currency: Amex MR, Chase UR, Bilt, Capital One)
    c. Alliance chain? Identify the operating airline's alliance (`data/alliances.json`), then find ALL programs in that alliance or with bilateral partnerships (`data/partner-awards.json`), then check which of THOSE programs are reachable via transfer.
    d. Cross-alliance? Check `data/partner-awards.json` `cross_alliance_highlights` and bilateral partners.
@@ -41,9 +41,9 @@ Data files are reference material, not gospel. Airline partnerships change const
 
 ## Source Accuracy Hierarchy
 
-**Bilt portal / Ignav > Airline website > SerpAPI > Skiplagged/Kiwi**
+**Ignav > Airline website > SerpAPI > Skiplagged/Kiwi**
 
-1. **The Bilt portal (Duffel-backed) returns real GDS prices per fare class.** These are bookable. Tested with Duffel directly: it showed $271 basic / $325 main. SerpAPI showed $541 for the same flight. The gap was consistent across multiple itineraries.
+1. **Ignav returns real GDS prices per fare class.** These are bookable. In earlier testing a GDS-backed source showed $271 basic / $325 main where SerpAPI showed $541 for the same flight, and the gap was consistent across itineraries.
 2. **SerpAPI (Google Flights) inflates prices.** Google Flights often shows "main cabin" or bundled fares, not the cheapest bookable fare class. Useful for Google Hotels and destination discovery, but do not trust it as the sole source for flight cash prices.
 3. **Kiwi returns garbage on small markets.** Filter hard or skip Kiwi for domestic routes to small airports.
 
@@ -51,7 +51,7 @@ Data files are reference material, not gospel. Airline partnerships change const
 
 Small airports have limited award availability. Seats.aero cached data will be sparse. When searching small markets:
 
-1. **Ignav and the Bilt portal for cash prices** (work fine, GDS has the inventory)
+1. **Ignav for cash prices** (work fine, GDS has the inventory)
 2. **Don't bother with Seats.aero cached search** (data too sparse)
 3. **Check airline-specific award pricing** via the program's website if needed
 
@@ -66,12 +66,6 @@ Ask the user for their preferences on the first search. Key questions:
 
 Store their answers and apply to all subsequent searches in the session.
 
-## Bilt Portal Limitations
-
-- **No award pricing.** The Bilt flights endpoint shows cash fares only. Use Seats.aero for award availability.
-- **Offers expire in 15-30 minutes.** Don't cache Bilt results across sessions.
-- **Unofficial public endpoint.** No documented rate limit, so keep request volume polite and fall back to Ignav if it errors.
-- **Returns multiple fare classes for the same flight.** This is a feature. You'll see basic economy at one price and main cabin at another for the same routing. Use the cheapest bookable class for cpp comparison unless the user specifies a fare preference.
 
 ## Related Reference Skills (Load When Relevant)
 
@@ -82,3 +76,13 @@ These are not required for every search but should be loaded when the conversati
 - **`award-holds`** — Load before any "transfer points first" recommendation. Hold landscape per current data: AA allows 24h self-service hold online (the only program with online holds; the previous 5-day version was discontinued in late 2024). Virgin Atlantic Flying Club holds 1-2 days by phone, free. Flying Blue holds up to 3 days by phone with a $25 phone-booking fee at ticketing. Lufthansa M&M up to 5 days. Cathay ~2 days. Singapore agent-discretionary. The major Western programs that DO NOT allow holds: United, Alaska, Delta, BA, Aeroplan. Always check the data file rather than relying on this one-line summary.
 - **`round-the-world`** — Load when the trip implies 3+ stops or multiple regions. 13 active + 4 discontinued products documented. The RTW universe is collapsing (4 killed in last 18 months), but Star Alliance + oneworld + Lufthansa M&M + Qantas remain solid. Special Business RTW at 26,000 miles is the steal. Includes Iberia Plus intra-Europe sweet spots and Aeroplan distance-based regional awards.
 - **`status-match`** — Load when the user asks about elite status shortcuts, status match, status challenge, "switching loyalty programs," or mentions a once-in-a-while opportunity (Hyatt Globalist Challenge, Marriott Platinum Challenge). Critical lifetime/once-per-N-years warnings: Alaska Atmos = once per lifetime, AA = once every 2 years, Delta/United = once every 3 years, Hyatt Globalist Challenge = once per lifetime. The skill distinguishes free direct matches from paid concierge (statusmatch.com is real but charges fees) from card-granted renewable status (Amex Platinum = Hilton Gold + Marriott Gold automatic).
+
+## Brazil Caveats
+
+- **LATAM Pass is not on Seats.aero. Iberia is not either.** Seats.aero `qatar` is only a hint for Iberia metal space. Confirm on iberia.com. Smiles, Azul and Flying Blue are on Seats.aero.
+- **Seat counts:** Azul, Qatar and some others hide counts. Mark "3 seats unverified".
+- **Livelo and Esfera promos last days.** Refresh `bonificadas` before quoting a transfer.
+- **Compare in R$** against the cost basis from `data/my-balances.json`. Seats.aero and most blogs speak in US cents per point, which does not apply here.
+- **Cash fares differ by market** (NL vs BR). Search both.
+- **Don't extrapolate Iberia or Flying Blue prices** from one dated promo article. Prices are dynamic or date-based. Read the live page.
+- **Azul restructuring:** keep Azul balances low (`data/points-valuations.json` note).

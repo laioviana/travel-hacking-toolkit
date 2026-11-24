@@ -22,7 +22,7 @@ Don't print the values; only report SET vs MISSING.
 Use `printenv` so the loop works in both bash and zsh (Claude Code's bash tool may use either):
 
 ```bash
-for var in SEATS_AERO_API_KEY IGNAV_API_KEY AWARDWALLET_API_KEY AWARDWALLET_USER_ID SERPAPI_API_KEY RAPIDAPI_KEY TRIPADVISOR_API_KEY ENTUR_CLIENT_NAME RESROBOT_API_KEY REJSEPLANEN_API_KEY; do
+for var in SEATS_AERO_API_KEY IGNAV_API_KEY SERPAPI_API_KEY RAPIDAPI_KEY ENTUR_CLIENT_NAME RESROBOT_API_KEY REJSEPLANEN_API_KEY; do
   if [ -n "$(printenv "$var")" ]; then echo "SET: $var"; else echo "MISSING: $var"; fi
 done
 ```
@@ -30,7 +30,7 @@ done
 ### PowerShell (native Windows)
 
 ```powershell
-$keys = @('SEATS_AERO_API_KEY','IGNAV_API_KEY','AWARDWALLET_API_KEY','AWARDWALLET_USER_ID','SERPAPI_API_KEY','RAPIDAPI_KEY','TRIPADVISOR_API_KEY','ENTUR_CLIENT_NAME','RESROBOT_API_KEY','REJSEPLANEN_API_KEY')
+$keys = @('SEATS_AERO_API_KEY','IGNAV_API_KEY','SERPAPI_API_KEY','RAPIDAPI_KEY','ENTUR_CLIENT_NAME','RESROBOT_API_KEY','REJSEPLANEN_API_KEY')
 foreach ($k in $keys) {
     $v = [Environment]::GetEnvironmentVariable($k)
     if ([string]::IsNullOrEmpty($v)) { Write-Host "MISSING: $k" } else { Write-Host "SET: $k" }
@@ -39,9 +39,9 @@ foreach ($k in $keys) {
 
 Group the results:
 
-**Tier 1 (high-value, missing matters most):** SEATS_AERO_API_KEY, IGNAV_API_KEY, AWARDWALLET_API_KEY + AWARDWALLET_USER_ID
+**Tier 1 (high-value, missing matters most):** SEATS_AERO_API_KEY, IGNAV_API_KEY
 
-**Tier 2 (extra sources):** SERPAPI_API_KEY, RAPIDAPI_KEY,, TRIPADVISOR_API_KEY
+**Tier 2 (extra sources):** SERPAPI_API_KEY, RAPIDAPI_KEY
 
 **Tier 3 (specific use cases):** ENTUR_CLIENT_NAME, RESROBOT_API_KEY, REJSEPLANEN_API_KEY (Scandinavia transit only)
 
@@ -111,7 +111,7 @@ After setup (or now, if keys are already set), show 3-4 prompts scaled to what t
 - "Cheapest business class to Tokyo for two in March."
 - "Find me one outsized redemption I'm not using."
 
-**With AwardWallet:**
+**With your balances (my-points skill):**
 - "Show me my points balances and which programs are about to expire."
 - "Which transfer bonuses are active right now and worth using?"
 

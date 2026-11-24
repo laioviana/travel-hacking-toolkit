@@ -179,3 +179,10 @@ When sources disagree, the airline's own page wins. When the airline's page is s
 - The data file has confidence markers (VERIFIED / LIKELY / UNVERIFIED). When confidence is below VERIFIED, communicate that uncertainty to the user.
 - If a user asks about a program not in the data file, say so honestly. Don't guess. Look it up via Frequent Miler or the airline's own page first.
 - Stopover rules can quietly change. Note the `last_verified` date when you cite a rule. Anything older than 90 days should be re-verified before being recommended for an actual booking.
+
+## This User: Flying Blue, Iberia, TAP and Brazilian Programs
+
+- **Flying Blue:** free stopover rules are in `data/stopovers.json`. For AMS to FOR via CDG, a stopover in Paris does not help since CDG is the gateway.
+- **Iberia (Avios):** no stopover rule found. UNVERIFIED. Treat a Madrid connection as a plain connection.
+- **TAP Miles&Go and the Lisbon stopover:** sources conflict on whether award tickets qualify (one says cash fares only, others say awards allow up to 10 days, another reports a 120-hour cap). **UNVERIFIED.** Call TAP before planning on it, and build any stopover into the booking from the start. Sources: https://travelingformiles.com/tap-air-portugal-stopover-program/ , https://www.mightytravels.com/2026/08/tap-stopover-5-day-max-625k-miles-lie-flat-to-lisbon/
+- **LATAM Pass, Smiles, Azul:** no stopover or open-jaw rule found. UNVERIFIED. Book two one-way awards instead.

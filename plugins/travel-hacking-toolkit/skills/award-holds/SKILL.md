@@ -150,3 +150,11 @@ When sources disagree (e.g., FF says Cathay = 2 days, UP says 3 days), the data 
 - Hold rules are agent-dependent in practice. The data file gives the published policy; actual behavior may vary by call.
 - The 6 reliable + Singapore agent-discretionary list is canonical as of 2024 (Frugal Flyer). If a user reports a hold experience with a program NOT on the list (e.g., Etihad reports from years past), document it as anecdotal but don't update the data without primary-source confirmation.
 - Phone numbers can change. Always verify the published phone number on the airline's site before recommending a call.
+
+## This User: Flying Blue, Iberia and Brazilian Programs
+
+- **Flying Blue:** hold by phone, about 3 days, about USD 25 fee to finalise. Amex NL MR to Flying Blue is instant, so a hold is rarely essential, but Livelo or Esfera transfers can take days: hold first. See `flying-blue`.
+- **Iberia and BA Avios:** no hold (in `data/award-holds.json`). Combine Avios and Livelo or Esfera transfers add delay (one source reports a 90 day lock on combined Avios, UNVERIFIED), so confirm space and test with a small transfer before moving the full amount. See `avios`.
+- **LATAM Pass, Smiles, Azul Fidelidade:** one 2020s Brazilian source says none of the three offers an award hold. **UNVERIFIED, dated.** Smiles lets you lock a cash fare for up to 3 days and Azul has a fare-freeze feature, but those are for cash prices, not miles. Assume no hold: transfer only with space confirmed. Source: https://pontospravoar.com/conheca-programas-permitem-deixar-bilhete-premio-espera/
+- **TAP Miles&Go:** no hold rule found. UNVERIFIED.
+- Livelo transfers can take up to 7 business days, so a Livelo to Smiles, LATAM Pass or Azul award needs the space to last. Ask the program by phone whether the seat will be there.

@@ -385,7 +385,7 @@ The `cursor` is a Unix timestamp. Treat it as opaque. Rare duplicates are possib
 6. **Verify freshness**: check `ComputedLastSeen`. If stale (hours old), the availability may be phantom.
 7. **Cross-reference**: check the airline's own site or call to confirm before transferring points
 8. **Use booking_links** from trip response to book directly on each program's site
-9. Cross-reference with AwardWallet balances to confirm enough points
+9. Cross-reference with balances from the `my-points` skill to confirm enough points
 
 ## Layover Quality Filter
 

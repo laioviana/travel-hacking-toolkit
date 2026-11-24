@@ -146,5 +146,5 @@ grep -h "^status:" trips/logs/*.md
 ## Notes
 
 - Files live in `trips/logs/`, which is gitignored — local only, never pushed upstream.
-- Snapshot the user's balances in the frontmatter at search time (from AwardWallet if configured, or whatever the user shares).
+- Snapshot the user's balances in the frontmatter at search time (from the `my-points` skill, or whatever the user shares).
 - Do not store `.env` values or account numbers in trip logs.
