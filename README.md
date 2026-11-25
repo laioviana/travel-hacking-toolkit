@@ -210,6 +210,7 @@ Start here: the **orchestration skills** call everything else automatically.
 | **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
 | **latam-tabela-fixa** | LATAM Pass fixed partner award chart. Official region matrix, calculator, booking by phone or WhatsApp. | None (local data) |
 | **my-points** | The user own points and miles balances, cost basis, status and travel profile (local files or own web app). | none |
+| **shopping-portals** | Compare shopping portals and cashback (Flying Blue, Avios eStore, Revolut, CashbackXL, Woolsocks) for a purchase in R$. | None (browser for live rates) |
 | **smiles** | Smiles GOL awards. Air France and KLM partner awards, Seats.aero coverage, price tiers and booking rules. | None (local data) |
 | **status-matcher** | Live status match opportunities from your current elite statuses, via statusmatcher.com reports. | None (public site) |
 | **tap-miles-go** | TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon. | None (requires browser) |

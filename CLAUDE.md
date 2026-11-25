@@ -73,7 +73,7 @@ This toolkit ships skills (in `skills/`) and MCP servers. Skill names and descri
 
 **Hotels:** `compare-hotels`, `hotel-chains`
 
-**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `latam-tabela-fixa`, `flying-blue`, `avios`, `smiles`, `azul-fidelidade`, `tap-miles-go`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`, `status-matcher`
+**Loyalty / points:** `my-points`, `brazil-programs`, `bonificadas`, `latam-pass`, `latam-tabela-fixa`, `flying-blue`, `avios`, `smiles`, `azul-fidelidade`, `tap-miles-go`, `transfer-partners`, `trip-calculator`, `points-valuations`, `partner-awards`, `alliances`, `award-sweet-spots`, `cabin-codes`, `wheretocredit`, `transfer-bonuses`, `status-match`, `status-matcher`, `shopping-portals`
 
 **Trip planning:** `ams-for`, `trip-planner`, `plan-trip`, `atlas-obscura`, `scandinavia-transit`, `deutsche-bahn`, `europe-rail`, `seatmaps`, `round-the-world`, `wikipedia-airports`
 
@@ -143,6 +143,9 @@ Load the `points-valuations` skill. It covers cpp formula, surcharge-heavy progr
 3. **Accor first.** ALL points are fixed at 2,000 = €40. Mention the user's Accor status benefits (from the profile) on Accor properties.
 4. **Compare points vs cash for hotels too.** Hilton at a 0.4cpp floor is almost always worse than cash. Say this.
 5. **Search for the profile's party.** With children, prefer family rooms or apartments.
+
+### When someone is about to buy something online:
+Load `shopping-portals`. Look up the live rate on each portal that fits the shop (Flying Blue, Avios, Revolut, CashbackXL, Woolsocks, Brazilian portals for R$ purchases), run `scripts/shopping_value.py`, and name one portal plus one card. Cash usually beats a shopping mile; say so with the numbers.
 
 ### When someone mentions Livelo, Esfera or buying miles:
 1. **Load `brazil-programs` and run `bonificadas`.** Answer "buy/transfer now or wait?" with the effective R$ per milheiro after the bonus.

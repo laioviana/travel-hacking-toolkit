@@ -1,0 +1,290 @@
+{
+  "_meta": {
+    "last_updated": "2026-11-24",
+    "staleness_days": 90,
+    "description": "Shopping portals, cashback sites and card programs that pay miles, points or cash on online purchases, for a resident of the Netherlands who also holds a Brazilian CPF. Stores static facts only (what each portal pays, who can use it, tracking rules, URL patterns). Per-retailer rates change weekly, so look them up live at purchase time. Values are generic and contain no personal data.",
+    "confidence_levels": "VERIFIED = read on the portal's own page on last_updated. LIKELY = secondary source or partial read. UNVERIFIED = page blocked or not read; check before relying on it.",
+    "fetch_notes": "Plain HTTP fetch is blocked (403) on avios.com, revolut.com, topcashback.*, livelo.com.br and latampass.latam.com. Use a real browser (the host's built-in browser tools, or agent-browser). Reject non-essential cookies when asked."
+  },
+
+  "valuation": {
+    "_description": "Default value of one unit of each reward, in R$ per 1,000 (milheiro). Used to turn 'X miles per EUR 10' into an effective cashback percentage. Logic: a mile earned shopping is worth what it would cost to get the same mile another way (replacement cost), not its best-case redemption value. Overridden at runtime by the user's own avg_cost_per_milheiro_brl in data/my-balances.json where a matching program has one.",
+    "unit": "R$ per 1,000",
+    "programs": {
+      "cash": { "value_brl_per_unit": "1 EUR/GBP/USD/BRL = its value in R$ via scripts/fx.py", "note": "Cash is cash. Apply a small haircut only when the payout is uncertain (long approval, reported account blocks)." },
+      "flying_blue": { "brl_milheiro": 45.0, "derivation": "Livelo at a promo price of about R$ 26/milheiro, moved to Flying Blue at 3.5:1 (data/transfer-partners.json) with a typical +100% bonus = 26 x 3.5 / 2 = R$ 45.5.", "balance_program": "Flying Blue" },
+      "avios": { "brl_milheiro": 45.0, "derivation": "Same Livelo replacement-cost logic as Flying Blue. Overridden by the Iberia Plus cost basis when present.", "balance_program": "Iberia Plus" },
+      "revpoints": { "brl_milheiro": 45.0, "derivation": "RevPoints move 1:1 to Flying Blue, Avios (BA, Iberia, Aer Lingus, Vueling, Qatar), Finnair, Turkish and TAP (Revolut NL help centre), so worth the same as a Flying Blue mile or Avios." },
+      "rove": { "brl_milheiro": 45.0, "derivation": "Rove Miles move 1:1 to Flying Blue and Qatar Avios (data/transfer-partners.json)." },
+      "livelo": { "brl_milheiro": 23.0, "derivation": "Floor in data/points-valuations.json brl_milheiro.programs.livelo. Overridden by the Livelo cost basis when present.", "balance_program": "Livelo" },
+      "esfera": { "brl_milheiro": 21.0, "derivation": "Floor in data/points-valuations.json brl_milheiro.programs.esfera. Overridden by the Esfera cost basis when present.", "balance_program": "Esfera" },
+      "smiles": { "brl_milheiro": 19.45, "derivation": "Floor in data/points-valuations.json." },
+      "latam_pass": { "brl_milheiro": 23.72, "derivation": "Floor in data/points-valuations.json. Overridden by the LATAM Pass cost basis when present.", "balance_program": "LATAM Pass" },
+      "azul": { "brl_milheiro": 13.27, "derivation": "Floor in data/points-valuations.json." },
+      "accor": { "brl_milheiro": 131.2, "derivation": "Fixed value, 2,000 points = EUR 40, so EUR 20 per 1,000 at 6.56 BRL/EUR. Recompute with scripts/fx.py." },
+      "amex_nl_mr": { "brl_milheiro": 22.5, "derivation": "Amex NL MR moves 2:1 to Flying Blue (data/transfer-partners.json), so worth half a Flying Blue mile." }
+    }
+  },
+
+  "portals": {
+    "flying_blue_shop": {
+      "name": "Flying Blue Shop & Earn (earnonline)",
+      "tier": "primary",
+      "earns": "flying_blue",
+      "unit": "miles_per_10_eur",
+      "rate_format": "'X Miles / EUR 10'. Some retailers pay a fixed number of miles per order or sign-up instead.",
+      "nl_eligible": true,
+      "urls": {
+        "home": "https://earnonline.flyingblue.com/nl/",
+        "home_en": "https://earnonline.flyingblue.com/en/",
+        "a_to_z": "https://earnonline.flyingblue.com/nl/az",
+        "retailer_pattern": "https://earnonline.flyingblue.com/nl/<category>/<retailer-slug>",
+        "example": "https://earnonline.flyingblue.com/nl/department-stores/bol-com",
+        "black_friday": "https://earnonline.flyingblue.com/nl/black-friday-deals.nl.html"
+      },
+      "country_stores": ["NL", "FR", "DE", "ES", "UK", "IE", "US", "CA", "AE", "SG", "ID", "PH"],
+      "tracking": "Pending within 5 working days. Approved after about 90 days (travel: 90-120 days after the stay). Miles post within 48 h of approval.",
+      "rules": [
+        "Log in first, click through from the portal, finish the purchase in one session.",
+        "Accept cookies. Turn off ad blockers and cross-site tracking protection for the checkout.",
+        "No other cashback, coupon or loyalty browser extension, no voucher codes the portal didn't give you, no refer-a-friend links.",
+        "Shipping, handling and VAT are usually excluded from the earning base.",
+        "Gift cards are usually excluded (bol.com excludes them explicitly)."
+      ],
+      "sample_rates_2026_11_24": {
+        "bol.com": "9 / EUR 10",
+        "Booking.com NL": "from 18 / EUR 10",
+        "Hotels.com NL": "up to 35 / EUR 10",
+        "Agoda NL": "44 / EUR 10",
+        "MediaMarkt NL": "22 / EUR 10",
+        "Thuisbezorgd": "up to 56 / EUR 10",
+        "Zalando Lounge NL": "up to 44 / EUR 10",
+        "adidas NL": "49 / EUR 10 (promo)",
+        "Flying Blue Apple Store NL": "up to 41 / EUR 10"
+      },
+      "notes": "Earning here counts as account activity that keeps Flying Blue miles from expiring (portal FAQ). Shopping miles earn no XP.",
+      "confidence": "VERIFIED"
+    },
+
+    "avios_uk": {
+      "name": "Avios eStore UK (British Airways Club)",
+      "tier": "primary",
+      "earns": "avios",
+      "credits": "British Airways Club. Move to Iberia Club with Combine Avios (see data/avios-family.json for the 30-day rule).",
+      "unit": "avios_per_gbp",
+      "rate_format": "'X Avios / GBP 1'. Some retailers pay a fixed number of Avios.",
+      "nl_eligible": "partial",
+      "nl_note": "UK retailers in GBP. Works for UK stores that ship to NL and for travel bookings (Booking.com UK, Hotels.com UK, Agoda UK, Avios Hotels). Bonus prize draws are UK residents only. Not verified whether a non-UK BA Club account earns on every retailer.",
+      "urls": {
+        "home": "https://www.avios.com/en-GB/collect-avios/shopping/retailers/",
+        "note": "Retailers load client-side. Use a browser, sign in with the BA Club login."
+      },
+      "tracking": "Pending within 5 days, awarded within 35 days. 'Speedy Awarding' retailers award after 5 days.",
+      "rules": [
+        "Log in, start on avios.com, use the qualifying link, accept cookies, one session.",
+        "No discount codes, no ad blockers, no other reward-site plug-ins, no refer-a-friend."
+      ],
+      "sample_rates_2026_11_24": {
+        "Booking.com UK": "up to 8 / GBP 1 (Black Friday, was 4)",
+        "Hotels.com UK": "8 / GBP 1 (was 5)",
+        "Agoda UK": "10 / GBP 1 (was 6)",
+        "Avios Hotels (Expedia)": "10 / GBP 1",
+        "AliExpress UK": "7 / GBP 1 (was 1)",
+        "trainline": "up to 10 / GBP 1",
+        "Nike UK": "up to 15 / GBP 1 (was 5)",
+        "ASOS UK": "up to 18 / GBP 1 (was 6)"
+      },
+      "notes": "Black Friday 2026 runs to 21 Dec with up to 3x the usual rates. Usual rates are much lower than the 'was' figures suggest only during events.",
+      "confidence": "VERIFIED"
+    },
+
+    "iberia_club_store": {
+      "name": "Iberia Club Store (Avios eStore Spain)",
+      "tier": "primary",
+      "earns": "avios",
+      "credits": "Iberia Club directly.",
+      "unit": "avios_per_eur",
+      "rate_format": "'X Avios / EUR 1', up to 25 Avios per EUR at 200+ retailers.",
+      "nl_eligible": "partial",
+      "nl_note": "Spanish retailers in EUR. From a Dutch IP, avios.com/es-ES/ redirects to the UK store. Enter through the Iberia page and log in with the Iberia Club number and PIN.",
+      "urls": {
+        "entry": "https://www.iberia.com/es/iberiaplus/partners/leisure-purchases/iberiaplustore/",
+        "direct": "https://www.avios.com/es-ES/collect-avios/shopping/retailers/",
+        "all_leisure_partners": "https://www.iberia.com/es/iberiaplus/partners/leisure-purchases/"
+      },
+      "tracking": "Up to 35 days.",
+      "rules": ["Same golden rules as the UK store."],
+      "confidence": "LIKELY (Iberia page via search; store page redirected from NL and was not read)"
+    },
+
+    "revolut": {
+      "name": "Revolut RevPoints (card spend, Shops, Stays)",
+      "tier": "primary",
+      "earns": "revpoints",
+      "unit": "revpoints_per_eur",
+      "nl_eligible": true,
+      "card_earn_eur_per_revpoint": { "standard": 10, "plus": 10, "premium": 4, "metal": 2, "ultra": 1 },
+      "shops_multiplier": "Revolut Shops (in-app) pays up to 20x RevPoints, plus in-app discounts. The multiplier is per merchant, shown in the app.",
+      "transfer_partners": {
+        "list": ["Flying Blue", "British Airways Club", "Iberia Club", "AerClub", "Vueling Club", "Qatar Privilege Club", "Finnair Plus", "Turkish Miles&Smiles", "TAP Miles&Go"],
+        "ratio_note": "1:1 to Flying Blue and Avios per Iberia/BA partner pages and 2026 blogs. Some partners (KrisFlyer, Skywards) are 2:1 and not in the NL list. Confirm the live ratio in the app under RevPoints > Miles.",
+        "account_rule": "Airline account must be in the Revolut holder's own name."
+      },
+      "expiry": "RevPoints valid 3 years from issue.",
+      "urls": {
+        "earn": "https://help.revolut.com/en-NL/help/revpoints/what-is-revpoints/question-how-to-earn-revpoints/",
+        "airline_miles": "https://help.revolut.com/en-NL/help/revpoints/airline-miles/question-what-are-airline-miles/",
+        "shops": "https://www.revolut.com/en-NL/shops/"
+      },
+      "stacking": "Card RevPoints stack on top of any portal when you pay with the Revolut card. Shops purchases are inside the app, so they don't stack with an external portal.",
+      "confidence": "VERIFIED (earn rates, partner list, Shops up to 20x). Transfer ratio LIKELY."
+    },
+
+    "cashbackxl": {
+      "name": "CashbackXL",
+      "tier": "secondary",
+      "earns": "cash",
+      "currency": "EUR",
+      "unit": "percent",
+      "nl_eligible": true,
+      "urls": {
+        "home": "https://www.cashbackxl.nl/",
+        "retailer_pattern": "https://www.cashbackxl.nl/webshops/<slug>",
+        "examples": ["https://www.cashbackxl.nl/webshops/coolblue", "https://www.cashbackxl.nl/webshops/amazon", "https://www.cashbackxl.nl/webshops/aliexpress"]
+      },
+      "tracking": "Often shows within hours. Approval 1 week to 4 months, about 2 months on average. Gift-card purchases approve immediately.",
+      "payout": "Monthly to a Dutch bank account.",
+      "sample_rates_2026_11_24": { "Coolblue": "2.25%", "Amazon": "15%", "AliExpress": "25%", "bol gift card": "2%" },
+      "notes": "Sells retailer gift cards with instant cashback; check whether the gift card blocks portal earning at the retailer.",
+      "confidence": "VERIFIED"
+    },
+
+    "woolsocks": {
+      "name": "Woolsocks (app)",
+      "tier": "secondary",
+      "earns": "cash",
+      "currency": "EUR",
+      "unit": "percent",
+      "nl_eligible": true,
+      "urls": {
+        "home": "https://woolsocks.eu/nl",
+        "retailer_pattern": "https://woolsocks.eu/nl-NL/cashback/<merchant>-cashback",
+        "gift_cards": "https://woolsocks.eu/nl-NL/cadeaukaart/<slug-or-id>",
+        "deals": "https://woolsocks.eu/nl-NL/cashback/deals"
+      },
+      "features": ["Instant digital gift cards with cashback (Zalando up to 7.5%, MediaMarkt 4%)", "Autorewards (automatic cashback on linked card spend)", "Grocery receipt cashback"],
+      "sample_rates_2026_11_24": { "Amazon": "up to 10.5%", "AliExpress": "20%", "Zalando gift card": "up to 7.5%", "Zooplus": "up to 8%" },
+      "caution": "Trustpilot (2026) has reports of blocked accounts at payout time. Keep balances small and cash out often.",
+      "confidence": "VERIFIED (rates, features). Payout minimum not found."
+    },
+
+    "topcashback_uk": {
+      "name": "TopCashback UK",
+      "tier": "unusable_from_nl",
+      "earns": "cash",
+      "currency": "GBP",
+      "unit": "percent",
+      "nl_eligible": false,
+      "nl_note": "Geo-blocked from the Netherlands on 2026-11-24 ('this TopCashback site isn't available in your current location', called temporary). Recheck occasionally; don't suggest it while blocked.",
+      "urls": { "home": "https://www.topcashback.co.uk/", "retailer_pattern": "https://www.topcashback.co.uk/<retailer-slug>/" },
+      "confidence": "VERIFIED (block)"
+    },
+
+    "topcashback_us": {
+      "name": "TopCashback US",
+      "tier": "unusable_from_nl",
+      "earns": "cash",
+      "currency": "USD",
+      "unit": "percent",
+      "nl_eligible": false,
+      "nl_note": "Returned 403 from the Netherlands on 2026-11-24. US stores in USD; payout options for a non-US resident unverified.",
+      "urls": { "home": "https://www.topcashback.com/" },
+      "confidence": "UNVERIFIED"
+    },
+
+    "rove": {
+      "name": "Rove Miles (shopping and hotels)",
+      "tier": "secondary",
+      "earns": "rove",
+      "unit": "rove_per_usd",
+      "nl_eligible": "unverified",
+      "nl_note": "US-centric (USD prices). Fits US merchants and the Rove hotel portal (up to 25x per USD). 13,000+ shopping partners.",
+      "transfer": "1:1 to Flying Blue, Qatar, Finnair, Turkish and others; 1.5:1 to ALL Accor.",
+      "urls": { "home": "https://www.rove.com/home", "hotels": "https://www.rove.com/explore/hotels" },
+      "confidence": "LIKELY"
+    },
+
+    "scoupy": {
+      "name": "Scoupy",
+      "tier": "secondary",
+      "earns": "cash",
+      "currency": "EUR",
+      "unit": "percent",
+      "nl_eligible": true,
+      "notes": "Dutch cashback app strongest on supermarket products. Mixed reviews on payouts.",
+      "urls": { "home": "https://scoupy.com/" },
+      "confidence": "UNVERIFIED"
+    },
+
+    "esfera": {
+      "name": "Esfera (Junte pontos em lojas parceiras)",
+      "tier": "brazil",
+      "earns": "esfera",
+      "unit": "points_per_brl",
+      "rate_format": "'X pontos a cada R$ 1'. Promos of 3-6 points per R$ are common.",
+      "nl_eligible": "Brazilian stores in R$, needs an Esfera account (CPF).",
+      "urls": { "partner_stores": "https://www.esfera.com.vc/junte-pontos/junte-pontos/esf02163" },
+      "sample_rates_2026_11_24": { "Nike": "6 / R$ 1 (until 25/11)", "Temu": "3 / R$ 1 (until 25/11)" },
+      "confidence": "VERIFIED (page read). International store earning unverified."
+    },
+
+    "livelo": {
+      "name": "Livelo (Compre e pontue)",
+      "tier": "brazil",
+      "earns": "livelo",
+      "unit": "points_per_brl",
+      "nl_eligible": "Brazilian stores in R$, needs a Livelo account (CPF).",
+      "urls": { "home": "https://www.livelo.com.br/" },
+      "confidence": "UNVERIFIED (403 to fetch)"
+    },
+
+    "smiles_shopping": {
+      "name": "Shopping Smiles",
+      "tier": "brazil",
+      "earns": "smiles",
+      "unit": "points_per_brl",
+      "urls": { "home": "https://shoppingsmiles.com.br/home" },
+      "confidence": "UNVERIFIED (client-rendered)"
+    },
+
+    "latam_pass_shopping": {
+      "name": "LATAM Pass (acumule com parceiros)",
+      "tier": "brazil",
+      "earns": "latam_pass",
+      "unit": "points_per_brl",
+      "urls": { "home": "https://latampass.latam.com/pt_br/acumule-com-parceiros" },
+      "confidence": "UNVERIFIED (403 to fetch)"
+    },
+
+    "meliuz": {
+      "name": "Méliuz",
+      "tier": "brazil",
+      "earns": "cash",
+      "currency": "BRL",
+      "unit": "percent",
+      "urls": { "home": "https://www.meliuz.com.br/", "retailer_pattern": "https://www.meliuz.com.br/desconto/cupom-<store>" },
+      "payout": "Usable from R$ 20 of confirmed cashback.",
+      "sample_rates_2026_11_24": { "AliExpress": "5%", "Mercado Livre": "1.5%", "Netshoes": "up to 10%" },
+      "confidence": "VERIFIED"
+    }
+  },
+
+  "not_checked": {
+    "_description": "Candidates that couldn't be read on 2026-11-24. Check in a browser before using.",
+    "miles_and_more_shopping": "https://www.miles-and-more.com/ (403). Probably DE/AT/CH-focused.",
+    "shoop": "German cashback portal; no confirmed NL site.",
+    "amex_nl_offers": "Amex Offers in the Amex NL app (statement credits). Stack with any portal when paying by Amex.",
+    "emirates_skywards_shopping": "Timed out.",
+    "air_miles_nl": "Status in 2026 unclear."
+  }
+}
