@@ -44,3 +44,4 @@ europe-rail	destinations	Rail from Amsterdam under six hours. NS, Eurostar, SNCF
 flying-blue	loyalty	Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1.	None (Seats.aero source flyingblue)	
 avios	loyalty	Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR.	None (Seats.aero source qatar as stand-in)	
 status-matcher	loyalty	Live status match opportunities from your current elite statuses, via statusmatcher.com reports.	None (public site)	
+shopping-portals	loyalty	Compare shopping portals and cashback (Flying Blue, Avios eStore, Revolut, CashbackXL, Woolsocks) for a purchase in R$.	None (browser for live rates)	
