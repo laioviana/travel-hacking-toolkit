@@ -21,6 +21,7 @@
       "smiles": { "brl_milheiro": 19.45, "derivation": "Floor in data/points-valuations.json." },
       "latam_pass": { "brl_milheiro": 23.72, "derivation": "Floor in data/points-valuations.json. Overridden by the LATAM Pass cost basis when present.", "balance_program": "LATAM Pass" },
       "azul": { "brl_milheiro": 13.27, "derivation": "Floor in data/points-valuations.json." },
+      "tap": { "brl_milheiro": 39.0, "derivation": "Esfera at about R$ 29/milheiro, moved to TAP at 2.7:1 (data/transfer-partners.json) with a typical +100% bonus = 29 x 2.7 / 2 = R$ 39." },
       "accor": { "brl_milheiro": 131.2, "derivation": "Fixed value, 2,000 points = EUR 40, so EUR 20 per 1,000 at 6.56 BRL/EUR. Recompute with scripts/fx.py." },
       "amex_nl_mr": { "brl_milheiro": 22.5, "derivation": "Amex NL MR moves 2:1 to Flying Blue (data/transfer-partners.json), so worth half a Flying Blue mile." }
     }
@@ -226,6 +227,25 @@
       "confidence": "UNVERIFIED"
     },
 
+    "comparemania": {
+      "name": "Comparemania (aggregator for Brazilian stores)",
+      "tier": "brazil",
+      "earns": "lookup_only",
+      "unit": "n/a",
+      "role": "First stop for any Brazilian store. One page per store lists every cashback site (Méliuz, Cuponomia, PicPay, Inter, My Cashback, Dotz, ...), every points program (Esfera, Livelo, Smiles, Azul, LATAM Pass, TAP) and gift card offers, with current rates. Read it with scripts/comparemania.py.",
+      "urls": {
+        "home": "https://www.comparemania.com.br/",
+        "store_pattern": "https://www.comparemania.com.br/cashback-<store-slug>",
+        "giftcard_pattern": "https://www.comparemania.com.br/giftcard-<store-slug>",
+        "search_api": "https://www.comparemania.com.br/api/search/buscar-nomes?termo=<text>",
+        "bonificadas": "https://www.comparemania.com.br/ (menu 'Promoções Bonificadas')"
+      },
+      "fetch": "Plain HTTP works. robots.txt allows everything except /redirecionar/oferta/ (the click-through links), so never fetch those; the user clicks through on the program's own site.",
+      "units": "'X pt/R$', 'X pt/U$' and 'X pt/€' are explicit. 'X pt(s)' gives no currency; the script assumes per R$ and flags it. Confirm on the program's own partner page before recommending a 'pt(s)' offer that comes out on top, since per US$ would be about 6x more.",
+      "gift_cards": "Gift card sellers are hidden without a Comparemania login; the rates still show.",
+      "confidence": "VERIFIED (2026-11-25)"
+    },
+
     "esfera": {
       "name": "Esfera (Junte pontos em lojas parceiras)",
       "tier": "brazil",
@@ -277,6 +297,27 @@
       "sample_rates_2026_11_24": { "AliExpress": "5%", "Mercado Livre": "1.5%", "Netshoes": "up to 10%" },
       "confidence": "VERIFIED"
     }
+  },
+
+  "brazil_cashback_sites": {
+    "_description": "What each Brazilian cashback site on Comparemania needs before it can pay you. All need a CPF. Withdrawals go by Pix to a Brazilian account. Sites tied to a bank or wallet only pay when you buy through that app.",
+    "standalone": {
+      "Méliuz": "Free account with CPF. Withdraw from R$ 20 confirmed.",
+      "Cuponomia": "Free account with CPF.",
+      "My Cashback": "Free account with CPF.",
+      "Opera": "Opera browser cashback account.",
+      "Dotz": "Dotz account; cashback in R$ inside Dotz.",
+      "Zoom": "Free account.",
+      "Buscapé": "Free account."
+    },
+    "needs_brazilian_account": {
+      "Banco Inter": "Inter account; buy through the Inter Shop in the app.",
+      "Pic Pay": "PicPay account; buy through the PicPay app.",
+      "Loja BB": "Banco do Brasil account; buy through the BB app.",
+      "XP Investimentos": "XP account; pays 'investback' into investments.",
+      "Banco Mercantil": "Mercantil account."
+    },
+    "rule": "Only recommend a bank-linked site if data/my-profile.json lists that account under br_accounts. Otherwise rank it in the table but pick the best standalone site or points program."
   },
 
   "not_checked": {
