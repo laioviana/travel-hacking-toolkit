@@ -206,6 +206,7 @@ Start here: the **orchestration skills** call everything else automatically.
 | **avios** | Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR. | None (Seats.aero source qatar as stand-in) |
 | **azul-fidelidade** | Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts. | None (local data) |
 | **bonificadas** | Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs. | None (public feeds) |
+| **brazil-shopping** | Cashback and points per R$ for any Brazilian online store via Comparemania, valued at your cost basis. | None (public site) |
 | **flying-blue** | Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1. | None (Seats.aero source flyingblue) |
 | **latam-pass** | LATAM Pass awards. Dynamic own-metal pricing, fixed partner table, booking rules. Not on Seats.aero. | None (requires browser) |
 | **latam-tabela-fixa** | LATAM Pass fixed partner award chart. Official region matrix, calculator, booking by phone or WhatsApp. | None (local data) |

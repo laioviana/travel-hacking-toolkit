@@ -39,7 +39,7 @@ Pick the best portal and card for one online purchase. Every option is turned in
      | UK shop, or a travel booking | `avios_uk`, plus the above |
      | Spanish shop | `iberia_club_store`. Enter through the Iberia page, since avios.com/es-ES redirects to the UK store from NL. |
      | US shop, or a Rove hotel booking | `rove` |
-     | Brazilian store paid in R$ | `esfera`, `livelo`, `meliuz`, and the Smiles and LATAM Pass shopping portals. Run `bonificadas` too, because a points-per-R$ promo plus a transfer bonus can stack. |
+     | Brazilian store paid in R$ | Hand off to the `brazil-shopping` skill. It reads every cashback site and points program for the store from Comparemania in one call. |
      | Anything | `topcashback_uk` and `topcashback_us` are geo-blocked from NL. Skip them unless the data file says the block is gone. |
 
    - **Record each rate exactly as shown,** with "up to", "from" or "was" kept. "Up to" means only some categories earn the top rate. Read the retailer's terms for the category being bought.
