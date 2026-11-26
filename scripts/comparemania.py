@@ -100,6 +100,58 @@ def parse_rate(text: str) -> dict:
     return {"value": val, "unit": unit, "kind": "points", "upto": upto, "unit_assumed": assumed}
 
 
+LIVELO_PARTNERS = "https://www.livelo.com.br/juntar-pontos/todos-os-parceiros"
+CCY_UNIT = {"R$": "per_brl", "U$": "per_usd", "US$": "per_usd", "€": "per_eur"}
+
+
+def norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+def livelo_parities() -> dict:
+    """Livelo's own rate per partner: {key: {name, currency, parity, url}}.
+
+    Comparemania often shows Livelo as "4,00 pt(s)" with no currency, but
+    Livelo pays some partners per US$ (Booking.com, Localiza Internacional).
+    Livelo's partner list carries the real currency for every partner.
+    """
+    req = urllib.request.Request(LIVELO_PARTNERS, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        page = r.read().decode("utf-8", "replace")
+    out = {}
+    for url, ccy, per, parity in re.findall(
+        r'"partnerDetailsPage":"([^"]+)","parity":\{"currency":"([^"]+)","currencyValue":([\d.]+),"parity":([\d.]+)',
+        page,
+    ):
+        slug = url.rstrip("/").split("/")[-2]
+        out.setdefault(norm(slug), {"url": url, "currency": ccy, "parity": float(parity) / float(per)})
+    return out
+
+
+def apply_livelo_currency(offers: list[dict], store_slug: str) -> None:
+    """Take the currency of Comparemania's Livelo rate from Livelo itself.
+
+    Only the currency is taken. Comparemania's number stays, since it shows the
+    Clube Livelo rate while Livelo's "parity" field is the non-member rate.
+    Shopping Livelo is a separate channel and is left alone.
+    """
+    rows = [o for o in offers if o["site"].lower() == "livelo" and o["kind"] == "points"]
+    if not rows:
+        return
+    try:
+        partners = livelo_parities()
+    except Exception as e:
+        print(f"(Livelo partner list unavailable, Livelo unit not verified: {e})", file=sys.stderr)
+        return
+    key = norm(store_slug)
+    info = partners.get(key) or next((v for k, v in partners.items() if k.startswith(key) or key.startswith(k)), None)
+    if not info or info["currency"] not in CCY_UNIT:
+        return
+    for o in rows:
+        o.update(unit=CCY_UNIT[info["currency"]], unit_assumed=False, livelo_url=info["url"],
+                 rate_source=f"{o['value']:g} pts/{info['currency']} 1, currency from Livelo")
+
+
 def parse_offers(page: str) -> list[dict]:
     offers = []
     for m in re.finditer(r"<tr([^>]*)>(.*?)</tr>", page, re.S):
@@ -137,7 +189,8 @@ def value_offers(offers: list[dict], amount_brl: float) -> list[dict]:
             o["value_brl"] = round(amount_brl * o["value"] / 100, 2)
             o["valued_at"] = "cash" if o["kind"] == "cashback" else "discount"
         elif o["program"]:
-            units = amount_brl / sv.to_brl_rate(ccy[o["unit"]]) * o["value"]
+            o["pts_per_brl"] = round(o["value"] / sv.to_brl_rate(ccy[o["unit"]]), 3)
+            units = amount_brl * o["pts_per_brl"]
             mv, basis = sv.milheiro_value(o["program"], overrides)
             o["points"] = round(units)
             o["value_brl"] = round(units / 1000 * mv, 2)
@@ -208,6 +261,7 @@ def main() -> None:
             print(f"(no gift card page: {e})", file=sys.stderr)
     if not offers:
         raise SystemExit(f"No offers parsed from {BASE}{path}. The page layout may have changed.")
+    apply_livelo_currency(offers, path.split("cashback-", 1)[-1])
     offers = value_offers(offers, a.amount)
     offers.sort(key=lambda o: (o["value_brl"] is None, -(o["value_brl"] or 0)))
 
@@ -219,7 +273,13 @@ def main() -> None:
     print("| # | Type | Site / program | Rate | Value (R$) | Effective % | Valued at |")
     print("|---|---|---|---|---|---|---|")
     for i, o in enumerate(offers, 1):
-        rate = o["rate_text"] + (" (unit assumed R$)" if o.get("unit_assumed") and o["kind"] == "points" else "")
+        if o.get("pts_per_brl") is not None:  # points rates always shown per R$
+            src = o.get("rate_source") or o["rate_text"]
+            rate = f"{o['pts_per_brl']:g} pt/R$ ({src})" if o["unit"] != "per_brl" else f"{o['pts_per_brl']:g} pt/R$"
+            if o.get("unit_assumed"):
+                rate += " (unit not shown, assumed R$: check the program's page)"
+        else:
+            rate = o["rate_text"]
         if o["recommended"]:
             rate += " ★"
         val = f"{o['value_brl']:,.2f}" if o["value_brl"] is not None else "n/a"
