@@ -1,8 +1,8 @@
 ---
 name: avios
-description: Avios across Iberia Club, British Airways, Qatar Privilege Club, Aer Lingus and Finnair. Iberia off-peak pricing, Combine Avios rules, cheapest paths in from Esfera, Livelo and Amex NL MR, reading Seats.aero qatar results as a stand-in, Iberia infant and child pricing, and Iberia Madrid to Fortaleza. Use for any Iberia, BA or Avios award, including AMS to Fortaleza via MAD.
+description: Avios across Iberia Club, British Airways, Qatar Privilege Club, Aer Lingus and Finnair. Iberia off-peak pricing, Combine Avios rules, cheapest paths in from Esfera, Livelo and Amex NL MR, reading Seats.aero qatar results as a stand-in, Iberia infant and child pricing, Iberia Madrid to Fortaleza, and Finnair Plus fixed chart for LATAM flights (6,000 Avios one way for any domestic Brazil flight). Use for any Iberia, BA or Avios award, including AMS to Fortaleza via MAD, and for any LATAM flight inside Brazil.
 category: loyalty
-summary: Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR.
+summary: Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR, Finnair fixed chart for LATAM Brazil.
 api_key: None (Seats.aero source qatar as stand-in)
 ---
 
@@ -36,6 +36,44 @@ Observed award prices (one way, Avios, taxes extra). **These are dated promo or 
 The Fortaleza off-peak vs peak price is **UNVERIFIED**.
 
 For AMS to FOR, the AMS to MAD leg is separate: Iberia, KLM, Vueling, Transavia or cash. Alternatively Iberia sells AMS-MAD-FOR on one award. Search the full itinerary on iberia.com.
+
+## Finnair Plus: LATAM flights inside Brazil
+
+Finnair Plus prices LATAM-operated flights on a **fixed chart**, while LATAM Pass prices its own flights dynamically. On expensive domestic dates (GRU–FOR in high season, last-minute) the fixed price can win by a wide margin. Data lives in `data/avios-family.json` under `finnair_latam_chart`.
+
+| LATAM Brazil, one way, per person | Economy | Business | Confidence |
+|---|---|---|---|
+| Domestic Brazilian flights | 6,000 | 14,000 | VERIFIED |
+| Brazil to South America | 13,000 | 20,000 | LIKELY |
+| Brazil to Central and North America | 28,500 | 74,500 | LIKELY |
+| Brazil to Europe | 33,500 | 90,000 | LIKELY |
+
+Source: finnair.com partner award page, checked 2026-11-25. Taxes extra in cash. Re-check the page before transferring.
+
+**When to use it:** any LATAM flight inside Brazil, including the domestic leg of AMS–FOR via GRU or the positioning leg of a trip from Fortaleza. Always price LATAM Pass for the same flight (`latam-pass` skill) and compare the R$ cost of 6,000 Avios with the LATAM Pass miles at their cost basis.
+
+**How to book:**
+1. Find LATAM saver space first in **Iberia Club or BA** search (award space is shared across partners). Seats.aero does not show LATAM domestic space.
+2. Move enough Avios into Finnair Plus **before** asking. Since about November 2026 the chat agent only checks partner space when the balance already covers the award. LIKELY.
+3. Ask the Finnair Plus **chat** (English) or phone to book it. LATAM awards can't be booked on finnair.com. Ticketing happens within a day.
+
+**Rules (finnair.com terms, VERIFIED unless marked):**
+- Price is per person, one way or round trip. LATAM-operated flights only, no mixing two partners on one award.
+- Mixed cabins price at the highest cabin. Change and cancellation fees apply. No waitlist.
+- Connections must be the first possible flight, no stopovers. Whether a connecting domestic itinerary (e.g. GRU–BSB–FOR) is still one 6,000 award is **UNVERIFIED**. Ask the agent to price the full itinerary.
+- **Business:** a July 2026 test found LATAM business space that Iberia and BA could book but Finnair could not. Plan on economy. UNVERIFIED.
+- **Children and infants:** no child discount published. Infant pricing on LATAM through Finnair is **UNVERIFIED**. Ask the agent before moving Avios for a party with a lap infant.
+
+**Getting Avios into Finnair Plus** (`cheapest_paths_into_finnair`):
+
+| From | Path | Source points per Avios | Confidence |
+|---|---|---|---|
+| Rove | Rove to Finnair direct 1:1 | 1.0 | LIKELY |
+| Amex NL MR | MR to BA 5:4, then BA to Finnair combine | 1.25 | UNVERIFIED |
+| Esfera | Esfera to Iberia 2:1, then Iberia to BA to Finnair combine | 2.0 | LIKELY |
+| Livelo | Livelo to Qatar 3:1, then Qatar to BA to Finnair combine | 3.0 | LIKELY |
+
+The combine rules above apply (1:1, matching names, 30-day account age). Open the Finnair Plus account early so it clears the 30-day rule before you need it.
 
 ## Availability: Seats.aero `qatar` as stand-in
 

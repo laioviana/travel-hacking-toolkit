@@ -51,7 +51,7 @@ Skill listings below are auto-generated from `skills/*/SKILL.md` frontmatter by 
 ## Loyalty and Points
 
 <!-- BEGIN: llms:loyalty -->
-- [Avios](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/avios/SKILL.md): Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR.
+- [Avios](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/avios/SKILL.md): Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR, Finnair fixed chart for LATAM Brazil.
 - [Azul Fidelidade](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/azul-fidelidade/SKILL.md): Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts.
 - [Bonificadas](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/bonificadas/SKILL.md): Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs.
 - [Brazil Shopping](https://github.com/borski/travel-hacking-toolkit/blob/main/skills/brazil-shopping/SKILL.md): Cashback and points per R$ for any Brazilian online store via Comparemania, valued at your cost basis.

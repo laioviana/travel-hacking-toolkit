@@ -21,6 +21,8 @@ Check the user's LATAM Pass balance and `avg_cost_per_milheiro_brl` in `data/my-
   - Europe–GRU, then GRU–FOR
 - **Search with the profile's party** so the price covers everyone.
 
+**Domestic LATAM flights: compare with Finnair Plus.** Finnair Plus books any LATAM domestic Brazil flight for a fixed 6,000 Avios one way in economy (`avios` skill, Finnair section). When the LATAM Pass price for a domestic leg is high, show both and compare in R$ at cost basis.
+
 **How to search:**
 - **If `agent-browser` is installed,** drive the site like the `google-flights` skill does.
 - **Otherwise,** use the built-in browser pane.
