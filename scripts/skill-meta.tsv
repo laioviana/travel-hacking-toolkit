@@ -42,7 +42,7 @@ azul-fidelidade	loyalty	Azul Fidelidade awards. Lisbon flights, TAP awards, bene
 tap-miles-go	loyalty	TAP Miles and Go awards. Dynamic pricing, Esfera and Livelo ratios, Fortaleza to Lisbon.	None (requires browser)	
 europe-rail	destinations	Rail from Amsterdam under six hours. NS, Eurostar, SNCF, child fares, links to deutsche-bahn.	None	
 flying-blue	loyalty	Flying Blue awards. Promo Rewards, dynamic pricing, taxes, holds, child discount, Family pooling, Amex NL 2 to 1.	None (Seats.aero source flyingblue)	
-avios	loyalty	Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR.	None (Seats.aero source qatar as stand-in)	
+avios	loyalty	Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR, Finnair fixed chart for LATAM Brazil.	None (Seats.aero source qatar as stand-in)	
 status-matcher	loyalty	Live status match opportunities from your current elite statuses, via statusmatcher.com reports.	None (public site)	
 shopping-portals	loyalty	Compare shopping portals and cashback (Flying Blue, Avios eStore, Revolut, CashbackXL, Woolsocks) for a purchase in R$.	None (browser for live rates)	
 brazil-shopping	loyalty	Cashback and points per R$ for any Brazilian online store via Comparemania, valued at your cost basis.	None (public site)	

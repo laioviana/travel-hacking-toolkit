@@ -40,7 +40,7 @@ Reads:
 - **Programs that hide seat counts** (`azul`, `qatar`): keep the result, marked "the party's seat count unverified."
 - **`qatar` results on Iberia flights** stand in for Iberia Avios availability. Price the real award on iberia.com, since off-peak Avios can differ.
 
-**LATAM Pass** (not on Seats.aero): follow the `latam-pass` skill for LIS–FOR (seasonal) and Europe–GRU–FOR.
+**LATAM Pass** (not on Seats.aero): follow the `latam-pass` skill for LIS–FOR (seasonal) and Europe–GRU–FOR. For a separate GRU–FOR (or other domestic) LATAM leg, also price **Finnair Plus at 6,000 Avios one way** per person (`avios` skill, Finnair section).
 
 **Status match check:** run the `status-matcher` skill (`python3 scripts/statusmatcher.py --profile`) and, for the carriers in play, `--to "flying blue"`, `--to iberia`, `--to tap`, `--to latam`. Status on the carrier flown can mean free bags and seats together for the whole family.
 

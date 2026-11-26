@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "last_updated": "2026-11-16",
+    "last_updated": "2026-11-25",
     "staleness_days": 90,
     "description": "Avios is one currency shared by several programs. Moving Avios between them (\"Combine Avios\") lets a balance in one program book awards priced in another. Use this to route Livelo/Esfera/Amex NL points along the cheapest path into Iberia, and to book BA/Qatar/Aer Lingus-priced awards with Iberia Avios.",
     "confidence_levels": "VERIFIED = primary source + 1 secondary; LIKELY = single primary or multiple secondaries agree; UNVERIFIED = single secondary.",
@@ -9,31 +9,238 @@
       "https://www.theflightclub.it/en/2026/04/transfer-avios-is-no-longer-immediate-the-new-30-day-rule/",
       "https://headforpoints.com/2018/05/23/how-to-move-avios-from-british-airways-to-iberia-plus",
       "https://www.headforpoints.com/2026/02/06/iberia-club-family-account/",
-      "https://upgradedpoints.com/news/iberia-launches-family-account-pooling/"
+      "https://upgradedpoints.com/news/iberia-launches-family-account-pooling/",
+      "https://www.finnair.com/us-en/finnair-plus/collect-and-use-avios/use-avios-on-award-flights-with-partners",
+      "https://passageirodeprimeira.com/finnair-plus-passa-a-exigir-saldo-de-avios-para-consultar-disponibilidade-de-voos-via-chat/",
+      "https://passageirodeprimeira.com/latam-resgates-executiva-avios-finnair/",
+      "https://upgradedpoints.com/travel/airlines/finnair-plus-loyalty-program/"
     ]
   },
   "programs": {
-    "iberia": { "name": "Iberia Club", "currency": "Avios", "seats_aero_source": null, "note": "Not on Seats.aero. Off-peak pricing on Iberia metal (e.g. MAD-FOR) is usually the cheapest Avios use." },
-    "british_airways": { "name": "British Airways Club", "currency": "Avios", "seats_aero_source": null, "note": "Hub for Combine Avios. Transfers from Qatar and Finnair go through BA." },
-    "qatar": { "name": "Qatar Airways Privilege Club", "currency": "Avios", "seats_aero_source": "qatar", "note": "On Seats.aero, so Qatar results are a stand-in for Avios availability on oneworld partners (Iberia, BA, LATAM is NOT oneworld)." },
-    "aer_lingus": { "name": "Aer Lingus AerClub", "currency": "Avios", "seats_aero_source": null },
-    "vueling": { "name": "Vueling Club", "currency": "Avios", "seats_aero_source": null },
-    "finnair": { "name": "Finnair Plus", "currency": "Avios", "seats_aero_source": "finnair" }
+    "iberia": {
+      "name": "Iberia Club",
+      "currency": "Avios",
+      "seats_aero_source": null,
+      "note": "Not on Seats.aero. Off-peak pricing on Iberia metal (e.g. MAD-FOR) is usually the cheapest Avios use."
+    },
+    "british_airways": {
+      "name": "British Airways Club",
+      "currency": "Avios",
+      "seats_aero_source": null,
+      "note": "Hub for Combine Avios. Transfers from Qatar and Finnair go through BA."
+    },
+    "qatar": {
+      "name": "Qatar Airways Privilege Club",
+      "currency": "Avios",
+      "seats_aero_source": "qatar",
+      "note": "On Seats.aero, so Qatar results are a stand-in for Avios availability on oneworld partners (Iberia, BA, LATAM is NOT oneworld)."
+    },
+    "aer_lingus": {
+      "name": "Aer Lingus AerClub",
+      "currency": "Avios",
+      "seats_aero_source": null
+    },
+    "vueling": {
+      "name": "Vueling Club",
+      "currency": "Avios",
+      "seats_aero_source": null
+    },
+    "finnair": {
+      "name": "Finnair Plus",
+      "currency": "Avios",
+      "seats_aero_source": "finnair",
+      "note": "Fixed partner chart. LATAM Brazil domestic flights cost 6,000 Avios one way in economy (see finnair_latam_chart), often far below LATAM Pass dynamic prices. LATAM awards are booked by Finnair Plus chat or phone, not online."
+    }
   },
   "combine_rules": [
-    { "rule": "Ratio between Avios programs is 1:1.", "confidence": "VERIFIED" },
-    { "rule": "Account must be held at least 30 days before moving Avios out (introduced 2026).", "confidence": "LIKELY" },
-    { "rule": "Iberia account must have had Avios credited at least once (be active) before receiving/sending.", "confidence": "LIKELY" },
-    { "rule": "Name on both accounts must match. Moves are done from the BA 'Combine Avios' tool or the Qatar 'Manage your Avios' page.", "confidence": "LIKELY" },
-    { "rule": "Qatar person-to-person transfers: up to 250,000 Avios/year in blocks of 1,000, posted within 72 hours.", "confidence": "UNVERIFIED" }
+    {
+      "rule": "Ratio between Avios programs is 1:1.",
+      "confidence": "VERIFIED"
+    },
+    {
+      "rule": "Account must be held at least 30 days before moving Avios out (introduced 2026).",
+      "confidence": "LIKELY"
+    },
+    {
+      "rule": "Iberia account must have had Avios credited at least once (be active) before receiving/sending.",
+      "confidence": "LIKELY"
+    },
+    {
+      "rule": "Name on both accounts must match. Moves are done from the BA 'Combine Avios' tool or the Qatar 'Manage your Avios' page.",
+      "confidence": "LIKELY"
+    },
+    {
+      "rule": "Qatar person-to-person transfers: up to 250,000 Avios/year in blocks of 1,000, posted within 72 hours.",
+      "confidence": "UNVERIFIED"
+    }
   ],
   "cheapest_paths_into_iberia": [
-    { "from": "esfera", "path": "Esfera -> Iberia direct", "esfera_points_per_avios": 2.0, "confidence": "LIKELY" },
-    { "from": "livelo", "path": "Livelo -> Qatar (3:1) -> BA -> Iberia", "livelo_points_per_avios": 3.0, "beats": "Livelo -> Iberia direct (3.5:1)", "confidence": "LIKELY" },
-    { "from": "amex_nl_mr", "path": "Amex NL MR -> BA (5:4) -> Iberia", "mr_points_per_avios": 1.25, "beats": "Amex NL MR -> Iberia direct (3:2 = 1.5 MR per Avios)", "confidence": "UNVERIFIED" }
+    {
+      "from": "esfera",
+      "path": "Esfera -> Iberia direct",
+      "esfera_points_per_avios": 2.0,
+      "confidence": "LIKELY"
+    },
+    {
+      "from": "livelo",
+      "path": "Livelo -> Qatar (3:1) -> BA -> Iberia",
+      "livelo_points_per_avios": 3.0,
+      "beats": "Livelo -> Iberia direct (3.5:1)",
+      "confidence": "LIKELY"
+    },
+    {
+      "from": "amex_nl_mr",
+      "path": "Amex NL MR -> BA (5:4) -> Iberia",
+      "mr_points_per_avios": 1.25,
+      "beats": "Amex NL MR -> Iberia direct (3:2 = 1.5 MR per Avios)",
+      "confidence": "UNVERIFIED"
+    }
   ],
   "pooling": {
-    "iberia_family_account": { "members": "2-7", "requirement": "No address or relationship requirement. 12-month commitment reported.", "launched": "2026-02", "confidence": "LIKELY" },
-    "ba_household_account": { "members": "up to 7", "requirement": "Same home address.", "confidence": "LIKELY" }
-  }
+    "iberia_family_account": {
+      "members": "2-7",
+      "requirement": "No address or relationship requirement. 12-month commitment reported.",
+      "launched": "2026-02",
+      "confidence": "LIKELY"
+    },
+    "ba_household_account": {
+      "members": "up to 7",
+      "requirement": "Same home address.",
+      "confidence": "LIKELY"
+    }
+  },
+  "finnair_latam_chart": {
+    "_note": "Finnair Plus fixed chart for flights operated by LATAM. Avios per person, one way, taxes and fees paid in cash on top. Checked on finnair.com on 2026-11-25.",
+    "source": "https://www.finnair.com/us-en/finnair-plus/collect-and-use-avios/use-avios-on-award-flights-with-partners",
+    "latam_brazil": [
+      {
+        "route": "Domestic Brazilian flights",
+        "economy": 6000,
+        "business": 14000,
+        "confidence": "VERIFIED"
+      },
+      {
+        "route": "Brazil to South America",
+        "economy": 13000,
+        "business": 20000,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "Brazil to Central and North America",
+        "economy": 28500,
+        "business": 74500,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "Brazil to Europe",
+        "economy": 33500,
+        "business": 90000,
+        "confidence": "LIKELY"
+      }
+    ],
+    "latam_chile": [
+      {
+        "route": "Flights within Peru",
+        "economy": 6500,
+        "business": null,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "Flights within Chile",
+        "economy": 11000,
+        "business": null,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "Flights within South America",
+        "economy": 18500,
+        "business": 42000,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "South America to Easter Island",
+        "economy": 15000,
+        "business": null,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "South America to Central America",
+        "economy": 18500,
+        "business": 42000,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "South America to North America",
+        "economy": 28000,
+        "business": 75500,
+        "confidence": "LIKELY"
+      },
+      {
+        "route": "South America to Europe",
+        "economy": 33500,
+        "business": 90000,
+        "confidence": "LIKELY"
+      }
+    ],
+    "rules": [
+      {
+        "rule": "Price is per person. One way or round trip. Only flights operated by LATAM, and no mixing two partner airlines on one award.",
+        "confidence": "VERIFIED"
+      },
+      {
+        "rule": "Connections must be the first possible flight and no stopovers are allowed. Whether a connecting domestic itinerary (e.g. GRU-BSB-FOR) still prices as one 6,000 award is not stated.",
+        "confidence": "UNVERIFIED"
+      },
+      {
+        "rule": "Mixed cabins price at the highest cabin. Ticketed within one day of the reservation. Change and cancellation fees apply. No waitlist.",
+        "confidence": "VERIFIED"
+      },
+      {
+        "rule": "LATAM awards cannot be searched or booked on finnair.com. Book through Finnair Plus chat (English) or phone.",
+        "confidence": "LIKELY"
+      },
+      {
+        "rule": "Since about November 2026 the chat agent only checks partner availability if the account already holds enough Avios for the award.",
+        "confidence": "LIKELY"
+      },
+      {
+        "rule": "LATAM business saver space visible in Iberia Club and BA was not offered to Finnair Plus in a July 2026 test. Treat business as unlikely.",
+        "confidence": "UNVERIFIED"
+      },
+      {
+        "rule": "LATAM award space is shared across partners, so find the flight first in Iberia Club or BA search, then ask Finnair to book it.",
+        "confidence": "LIKELY"
+      },
+      {
+        "rule": "No child discount is published. Infant under 2 pricing on LATAM through Finnair is not published.",
+        "confidence": "UNVERIFIED"
+      }
+    ]
+  },
+  "cheapest_paths_into_finnair": [
+    {
+      "from": "rove",
+      "path": "Rove -> Finnair direct 1:1",
+      "points_per_avios": 1.0,
+      "confidence": "LIKELY"
+    },
+    {
+      "from": "amex_nl_mr",
+      "path": "Amex NL MR -> BA (5:4) -> Finnair combine",
+      "points_per_avios": 1.25,
+      "confidence": "UNVERIFIED"
+    },
+    {
+      "from": "esfera",
+      "path": "Esfera -> Iberia (2:1) -> BA -> Finnair combine",
+      "points_per_avios": 2.0,
+      "confidence": "LIKELY"
+    },
+    {
+      "from": "livelo",
+      "path": "Livelo -> Qatar (3:1) -> BA -> Finnair combine",
+      "points_per_avios": 3.0,
+      "confidence": "LIKELY"
+    }
+  ]
 }

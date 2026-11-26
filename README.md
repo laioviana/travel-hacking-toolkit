@@ -203,7 +203,7 @@ Start here: the **orchestration skills** call everything else automatically.
 <!-- BEGIN: readme:loyalty -->
 | Skill | What It Does | API Key |
 |-------|-------------|---------|
-| **avios** | Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR. | None (Seats.aero source qatar as stand-in) |
+| **avios** | Avios and Iberia Club. Off-peak pricing, Combine Avios, cheapest paths in, Qatar stand-in, MAD-FOR, Finnair fixed chart for LATAM Brazil. | None (Seats.aero source qatar as stand-in) |
 | **azul-fidelidade** | Azul Fidelidade awards. Lisbon flights, TAP awards, beneficiary rules. Seats.aero hides seat counts. | None (local data) |
 | **bonificadas** | Current Brazilian transfer bonuses and point purchase promos. Refreshed from Brazilian points blogs. | None (public feeds) |
 | **brazil-shopping** | Cashback and points per R$ for any Brazilian online store via Comparemania, valued at your cost basis. | None (public site) |
