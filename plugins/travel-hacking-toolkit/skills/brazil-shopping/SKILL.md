@@ -33,11 +33,10 @@ Brazilian programs pay many points per R$ during promos: Azul at 18 points per R
    - Not sure of the store's name? `--search <text>` lists the matching pages.
    - `--top` lists the stores whose rates jumped most versus usual today. Useful when the user is flexible about where to buy.
    - Add `--json` when you need to post-process the results.
-4. **Check the points units.**
-   - `pt/R$`, `pt/U$` and `pt/€` are explicit.
-   - `pt(s)` shows no currency. The script assumes per R$ and marks the row "(unit assumed R$)".
-   - If such a row comes out on top, open the program's own partner page for that store to confirm the unit before recommending it.
-   - Use a browser for the program pages, since Livelo and LATAM block plain fetches.
+4. **Check the points units. Always state points rates per R$.**
+   - The script converts every points rate to points per R$ and shows the original in brackets, e.g. "0.678 pt/R$ (4 pts/U$ 1)". Quote that per-R$ figure to the user.
+   - **Livelo:** Comparemania often shows "pt(s)" with no currency, but Livelo pays some partners per US$ (Booking.com, Decolar, AliExpress, Rentcars, car rentals abroad). The script reads the currency from Livelo's own partner list (plain HTTP works) and marks it "currency from Livelo". Comparemania's number is the Clube Livelo rate. Non-members may get less.
+   - Other `pt(s)` rows with no currency are assumed per R$ and marked "unit not shown". If one comes out on top, open the program's own partner page for that store in a browser to confirm the unit before recommending it.
 5. **Filter by what the user can actually use.**
    - Cashback sites listed under `brazil_cashback_sites.needs_brazilian_account` count only if that account is in `br_accounts`.
    - Standalone sites (Méliuz, Cuponomia, My Cashback) only need a free account with a CPF. Payouts go by Pix to a Brazilian account.
